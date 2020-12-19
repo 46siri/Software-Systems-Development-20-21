@@ -1,7 +1,4 @@
 package business;
-import business.Localizacao;
-import org.jetbrains.annotations.NotNull;
-
 
 import java.util.Comparator;
 
