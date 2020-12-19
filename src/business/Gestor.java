@@ -1,6 +1,7 @@
 package business;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * Classe que reprsenta um gestor
@@ -12,6 +13,7 @@ public class Gestor {
 
     private String user;
     private String password;
+    private Collection<String> lstGestores;
 
     public Gestor(String user, String password){
         this.user = user;
@@ -28,8 +30,11 @@ public class Gestor {
     public String getUserName(){return user;}
     public String getPassword(){return password;}
 
+    public void removeGestor(String username){this.lstGestores.remove(username);}
+
     public void solicitaListadeLocalizações(){
 
     }
+
 
 }

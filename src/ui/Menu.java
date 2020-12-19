@@ -87,12 +87,12 @@ public class Menu {
 
     /** Apresentar o menu */
     private void show() {
-        System.out.println("\n********** Bem vindo ao MENU do Armazém **********");
+        System.out.println("\n********** MENU **********");
         System.out.println("\nSelecone o número corresponde à operação que deseja realizar");
         for(int i = 0; i<this.opcoes.size(); i++){
             System.out.print(i+1);
             System.out.print(" - ");
-            System.out.print(this.disponivel.get(i).validate()?this.opcoes.get(i):"indisponível");
+            System.out.println(this.disponivel.get(i).validate()?this.opcoes.get(i):"indisponível");
         }
         System.out.println("0 - Sair");
     }
