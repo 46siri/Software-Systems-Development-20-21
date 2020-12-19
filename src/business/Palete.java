@@ -17,10 +17,9 @@ public class Palete implements Comparable<Palete> {
      * @param altura Altura da palete.
      **/
 
-    public Palete (String id, String produto, int altura, Localizacao local) {
+    public Palete (String id, String produto, Localizacao local) {
         this.id = id;
         this.produto = produto;
-        this.altura = altura;
         this.local = local;
     }
 

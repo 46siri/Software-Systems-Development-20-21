@@ -80,13 +80,36 @@ public class ArmazemFacade {
     public Gestor procuraGestor(String username) { return this.gestores.get(username); }
 
     /**
-     * Método que remove um robot do armazem
+     * Método que remove um gestor do armazem
      *
-     * @param username id do robot
+     * @param username username do gestor
      */
     public void removeGestor(String username) {
         Gestor g = this.gestores.get(username);
         g.removeGestor(username);
         this.gestores.put(username, g);  // Necessário fazer put para actualizar a BD.
+    }
+
+    /**
+     * @param p palete a dicionar
+     */
+    public void adicionaPalete(Palete p){this.paletes.put(p.getId(),p);}
+
+    /**
+     * @param id username da palete a procurar
+     * @return true se a palete existe
+     */
+    public boolean existePalete(String id){return this.paletes.containsKey(id);}
+
+    public void  armazenarPalete(String id){
+        //
+    }
+
+    public boolean passwordCerta(String username, String password) {
+        Gestor g = procuraGestor(username);
+        return !g.getPassword().equals(password);
+    }
+
+    public void listarLocalizacoes() {
     }
 }
