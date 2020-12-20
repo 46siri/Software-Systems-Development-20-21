@@ -1,6 +1,8 @@
 package ui;
 
 import business.*;
+
+import java.sql.SQLException;
 import java.util.Scanner;
 
 
@@ -28,7 +30,7 @@ public class TextUI {
      * Cria os menus e a camada de negócio.
      */
 
-    public TextUI(){
+    public TextUI() throws SQLException {
         this.model = new ArmazemFacade();
         scin = new Scanner(System.in);
     }
@@ -253,8 +255,10 @@ public class TextUI {
             if (!this.model.existePalete(id)) {
                 System.out.println("Produto da palete: ");
                 String produto = scin.nextLine();
-                char a = 'A';
-                this.model.adicionaPalete(new Palete(id, produto, new Localizacao(a,0,0)));
+                char z = 'A';
+                char s = '0';
+                char p = '0';
+                this.model.adicionaPalete(new Palete(id, produto, "A00"));
                 System.out.println("Palete adicionada e colocada a armazenar");
                 this.model.armazenarPalete(id);
             } else {
