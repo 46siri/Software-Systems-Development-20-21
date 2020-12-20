@@ -1,23 +1,30 @@
 package business;
 
 
+import data.*;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 
-public class ArmazemFacade {
+public class ArmazemFacade implements IArmazemFacade {
 
     private Map<String, Robot> robots;
     private Map<String, Gestor> gestores;
     private Map<String, Palete> paletes;
 
-
+    public ArmazemFacade(){
+        this.robots = RobotDAO.getInstance();
+        this.gestores = GestorDAO.getInstance();
+        this.paletes = PaleteDAO.getInstance();
+    }
     //ROBOTS
     /**
      * Método que devolve todos os alunos registados.
      *
      * @return todos os robots registados
      */
+    @Override
     public Collection<Robot> getRobots() {
         return new ArrayList<>(this.robots.values());
     }
@@ -26,7 +33,8 @@ public class ArmazemFacade {
      * @param rid id do robot a procurar
      * @return true se o robot existe
      */
-    public boolean existeRobot(String rid){return this.robots.containsKey(rid);}
+    @Override
+    public boolean existeRobot(String rid){return robots.containsKey(rid);}
 
     /**
      * @param r robot a dicionar
@@ -37,6 +45,7 @@ public class ArmazemFacade {
      * @param id do robota procurar
      * @return true se o robot existe
      */
+    @Override
     public Robot procuraRobot(String id) { return this.robots.get(id); }
 
     /**
@@ -44,6 +53,7 @@ public class ArmazemFacade {
      *
      * @param rid id do robot
      */
+    @Override
     public void removeRobot(String rid) {
         Robot r = this.robots.get(rid);
         r.removeRobot(rid);
@@ -58,6 +68,7 @@ public class ArmazemFacade {
      *
      * @return todos os gestores registados
      */
+    @Override
     public Collection<Gestor> getGestores() {
         return new ArrayList<>(this.gestores.values());
     }
@@ -66,17 +77,20 @@ public class ArmazemFacade {
      * @param username username do gestor a procurar
      * @return true se o gestor existe
      */
+    @Override
     public boolean existeGestor(String username){return this.gestores.containsKey(username);}
 
     /**
      * @param g gestor a dicionar
      */
+    @Override
     public void adicionaGestor(Gestor g){this.gestores.put(g.getUserName(),g);}
 
     /**
      * @param username do gestor a procurar
      * @return true se o gestor existe
      */
+    @Override
     public Gestor procuraGestor(String username) { return this.gestores.get(username); }
 
     /**
@@ -84,6 +98,7 @@ public class ArmazemFacade {
      *
      * @param username username do gestor
      */
+    @Override
     public void removeGestor(String username) {
         Gestor g = this.gestores.get(username);
         g.removeGestor(username);
@@ -93,23 +108,28 @@ public class ArmazemFacade {
     /**
      * @param p palete a dicionar
      */
+    @Override
     public void adicionaPalete(Palete p){this.paletes.put(p.getId(),p);}
 
     /**
      * @param id username da palete a procurar
      * @return true se a palete existe
      */
+    @Override
     public boolean existePalete(String id){return this.paletes.containsKey(id);}
 
+    @Override
     public void  armazenarPalete(String id){
         //
     }
 
+    @Override
     public boolean passwordCerta(String username, String password) {
         Gestor g = procuraGestor(username);
         return !g.getPassword().equals(password);
     }
 
+    @Override
     public void listarLocalizacoes() {
     }
 }

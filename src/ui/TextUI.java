@@ -92,6 +92,25 @@ public class TextUI {
     }
 
     /**
+     *  Estado - Adicionar Robot
+     */
+    private void adicionarRobot() {
+        try {
+            System.out.println("Id do Robot: ");
+            String id = scin.nextLine();
+            if (!this.model.existeRobot(id)){
+                this.model.adicionaRobot(new Robot(id,true));
+                System.out.println("Robot adicionado");
+            } else {
+                System.out.println("Esse id de robot já existe!");
+            }
+        }
+        catch (NullPointerException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    /**
      *  Estado - Consultar Robot
      */
     private void consultarRobot() {
@@ -127,7 +146,7 @@ public class TextUI {
             String rid = scin.nextLine();
             if (this.model.existeRobot(rid)) {
                 this.model.removeRobot(rid);
-                System.out.println("Robot removido da turma");
+                System.out.println("Robot removido");
             } else {
                 System.out.println("Esse id de robot não existe!");
             }
@@ -137,24 +156,7 @@ public class TextUI {
         }
     }
 
-    /**
-     *  Estado - Adicionar Robot
-     */
-    private void adicionarRobot() {
-        try {
-            System.out.println("Id do Robot: ");
-            String id = scin.nextLine();
-            if (!this.model.existeRobot(id)) {
-                this.model.adicionaRobot(new Robot(id,true));
-                System.out.println("Robot adicionado");
-            } else {
-                System.out.println("Esse id de robot já existe!");
-            }
-        }
-        catch (NullPointerException e) {
-            System.out.println(e.getMessage());
-        }
-    }
+
     /**
      *  Estado - Gestão de Gestores
      */
