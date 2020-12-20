@@ -7,14 +7,12 @@ public class Palete implements Comparable<Palete> {
 
     private String id;
     private String produto;
-    private int altura;
     private Localizacao local;
 
     /**
      * Construtor com parâmetros para a classe Palete.
      * @param id Id da palete.
      * @param produto Produto que a palete contem.
-     * @param altura Altura da palete.
      **/
 
     public Palete (String id, String produto, Localizacao local) {
@@ -33,16 +31,6 @@ public class Palete implements Comparable<Palete> {
      */
     public String getProduto(){return produto;}
 
-    /**
-     * Método get para a altura da palete.
-     */
-    public int getAltura(){return altura ;}
-
-    /**
-     * Método get para o local da palete.
-     */
-    public Localizacao getLocalização(){return local;}
-
     //setters
     /**
      * Método set para o id da palete.
@@ -55,12 +43,6 @@ public class Palete implements Comparable<Palete> {
      * @param produto produto que a palete contem.
      */
     private void setProduto(String produto){this.produto = produto;}
-
-    /**
-     * Método set para a altura da palete.
-     * @param altura altura da palete.
-     */
-    private void setAltura(int altura){this.altura = altura;}
 
     /**
      * Método set para a altura da palete.

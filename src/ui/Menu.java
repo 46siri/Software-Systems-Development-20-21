@@ -37,7 +37,6 @@ public class Menu {
      * Constutor para os objetos da classe Menu
      */
 
-
     public Menu(String[] opcoes){
         this.opcoes = Arrays.asList(opcoes);
         this.disponivel = new ArrayList<>();

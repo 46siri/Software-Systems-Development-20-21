@@ -58,15 +58,15 @@ public class TextUI {
         });
 
         // Registar pré-condições das transições
-        menu.setPreCondition(4,()->this.model.haPrateleirasLivres());
-        menu.setPreCondition(5,()->this.model.haPaletes() && this.model.haPrateleriasOcupadas);
+        //menu.setPreCondition(4,()->this.model.haPrateleirasLivres());
+        //menu.setPreCondition(5,()->this.model.haPaletes() && this.model.haPrateleriasOcupadas);
 
 
         // Registar os handlers
         menu.setHandler(1,()->gestaoDeRobots());
         menu.setHandler(2,()->gestaoDeGestores());
         menu.setHandler(3,()->gestaoDeDescargas());
-        menu.setHandler(4,()->gestaoDeRequisicoes());
+        //menu.setHandler(4,()->gestaoDeRequisicoes());
 
         // Falta handler para opção 2 - "Operações sobre Turmas"
 
