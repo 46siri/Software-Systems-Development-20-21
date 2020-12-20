@@ -9,15 +9,19 @@ import java.util.Collection;
  * @author Grupo 09
  * @version 202012
  */
-public class Gestor {
+public class Gestor implements Comparable<Gestor> {
 
     private String user;
     private String password;
+    private String nome;
+    private String email;
     private Collection<String> lstGestores;
 
-    public Gestor(String user, String password){
+    public Gestor(String user, String password,String nome,String mail){
         this.user = user;
         this.password = password;
+        this.nome = nome;
+        this.email = mail;
     }
 
     private void setUsr(String usr) {
@@ -36,5 +40,14 @@ public class Gestor {
 
     }
 
+    @Override
+    public String toString() {
+        return "Gestor("+this.user +", "+this.nome+", "+this.email+")";
+    }
+
+    @Override
+    public int compareTo(Gestor o) {
+        return this.user.compareTo(o.getUserName());
+    }
 
 }

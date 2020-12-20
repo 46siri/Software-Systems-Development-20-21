@@ -3,7 +3,7 @@ package business;
 import java.util.Collection;
 import java.util.TreeSet;
 
-public class Robot{
+public class Robot implements Comparable<Robot>{
     private String id;
     private boolean estadoLivre;
     private Collection<String> lstRobots;
@@ -38,6 +38,10 @@ public class Robot{
 
     public void setEstado(boolean estado){ this.estadoLivre = estado; }
 
+    @Override
+    public int compareTo(Robot o) {
+        return this.id.compareTo(o.getId());
+    }
 
 
 }

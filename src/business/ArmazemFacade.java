@@ -12,6 +12,7 @@ public class ArmazemFacade implements IArmazemFacade {
     private Map<String, Robot> robots;
     private Map<String, Gestor> gestores;
     private Map<String, Palete> paletes;
+    private Map<String, Prateleira> prateleiras;
 
     public ArmazemFacade(){
         this.robots = RobotDAO.getInstance();
@@ -40,13 +41,6 @@ public class ArmazemFacade implements IArmazemFacade {
      * @param r robot a dicionar
      */
     public void adicionaRobot(Robot r){this.robots.put(r.getId(),r);}
-
-    /**
-     * @param id do robota procurar
-     * @return true se o robot existe
-     */
-    @Override
-    public Robot procuraRobot(String id) { return this.robots.get(id); }
 
     /**
      * Método que remove um robot do armazem
@@ -130,6 +124,7 @@ public class ArmazemFacade implements IArmazemFacade {
     }
 
     @Override
-    public void listarLocalizacoes() {
+    public Collection<Prateleira> listarLocalizacoes() {
+        return new ArrayList<>(this.prateleiras.values());
     }
 }

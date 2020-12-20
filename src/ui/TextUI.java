@@ -79,14 +79,12 @@ public class TextUI {
     private void gestaoDeRobots(){
         Menu menu = new Menu(new String[]{
                 "Adicionar Robot",
-                "Consultar Robot",
                 "Listar Robots",
                 "Remover Robot"
         });
 
         menu.setHandler(1,()->adicionarRobot());
-        menu.setHandler(2,()->consultarRobot());
-        menu.setHandler(3,()->listarRobots());
+        menu.setHandler(2,()->listarRobots());
         menu.setHandler(3,()->removerRobot());
         menu.run();
     }
@@ -103,24 +101,6 @@ public class TextUI {
                 System.out.println("Robot adicionado");
             } else {
                 System.out.println("Esse id de robot já existe!");
-            }
-        }
-        catch (NullPointerException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    /**
-     *  Estado - Consultar Robot
-     */
-    private void consultarRobot() {
-        try {
-            System.out.println("Id a consultar: ");
-            String id = scin.nextLine();
-            if (this.model.existeRobot(id)) {
-                System.out.println(this.model.procuraRobot(id).toString());
-            } else {
-                System.out.println("Esse id de Robot não existe!");
             }
         }
         catch (NullPointerException e) {
@@ -176,6 +156,33 @@ public class TextUI {
         menu.run();
     }
 
+    /**
+     *  Estado - Adicionar Gestor
+     */
+    private void adicionarGestor() {
+        try {
+            int i=0;
+            while(i!=1) {
+                System.out.println("Username: ");
+                String username = scin.nextLine();
+                if (!this.model.existeGestor(username)) {
+                    System.out.println("Nome pŕopiro: ");
+                    String nome = scin.nextLine();
+                    System.out.println("email: ");
+                    String email = scin.nextLine();
+                    System.out.println("Password: ");
+                    String password = scin.nextLine();
+                    this.model.adicionaGestor(new Gestor(username, password,nome,email));
+                    System.out.println("Gestor adicionado");
+                    i=1;
+                } else {
+                    System.out.println("Esse username já existe!");
+                }
+            }
+        }catch (NullPointerException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
     /**
      *  Estado - Consultar Gestor
@@ -189,8 +196,7 @@ public class TextUI {
             } else {
                 System.out.println("Esse username de gestor não existe!");
             }
-        }
-        catch (NullPointerException e) {
+        }catch (NullPointerException e) {
             System.out.println(e.getMessage());
         }
     }
@@ -223,26 +229,6 @@ public class TextUI {
         }
     }
 
-    /**
-     *  Estado - Adicionar Robot
-     */
-    private void adicionarGestor() {
-        try {
-            System.out.println("Username: ");
-            String username = scin.nextLine();
-            System.out.println("Password: ");
-            String password = scin.nextLine();
-            if (!this.model.existeGestor(username)) {
-                this.model.adicionaGestor(new Gestor(username,password));
-                System.out.println("Gestor adicionado");
-            } else {
-                System.out.println("Esse username já existe!");
-            }
-        }
-        catch (NullPointerException e) {
-            System.out.println(e.getMessage());
-        }
-    }
 
     private void gestaoDeDescargas() {
         Menu menu = new Menu(new String[]{

@@ -17,10 +17,9 @@ public interface IArmazemFacade{
          * @param rid id do robot a procurar
          * @return true se o robot existe
          */
-        public boolean existeRobot(String rid);
-        public void adicionaRobot(Robot r);
+        boolean existeRobot(String rid);
 
-        Robot procuraRobot(String id);
+        void adicionaRobot(Robot r);
 
         void removeRobot(String rid);
 
@@ -42,5 +41,5 @@ public interface IArmazemFacade{
 
         boolean passwordCerta(String username, String password);
 
-        void listarLocalizacoes();
+        Collection<Prateleira> listarLocalizacoes();
 }
