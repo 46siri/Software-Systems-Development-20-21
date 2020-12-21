@@ -1,54 +1,48 @@
-package business;
-import java.sql.SQLException;
+/*package business;
 import java.util.*;
 
-import business.Palete;
-import business.Descarga;
-import business.Requisicao;
-
 import data.DescargaDAO;
-import data.PedidoDAO;
 import data.PaleteDao;
-import java.util.ArrayList;
 
 public class Armazem {
     private PaleteDao paleteDAO;
     private DescargaDAO descargaDAO;
     private PedidoDAO requisicaoDAO;
 
-    /**
+    **
      * Contrutor sem parametros da classe Armazem.
-     */
+     *
 
     public Armazem(){
         this.paleteDAO = new PaleteDao();
         this.descargaDAO = new DescargaDAO();
         this.requisicaoDAO = new PedidoDAO();
     }
-    /**
+    **
      * Método para obter uma lista com as paletes existentes no armazém.
      * @return Lista com as paletes.
-     */
+     *
 
     public List<Palete> getPaleteList() throws Exception{
         return this.paleteDAO.list();
     }
-    /**
+
+    **
      * Método para verificar uma dada palete já se encontra no sistema.
      * @param cod Chave da palete a procurar.
      * @return Boolean que representa a existência de um elemento no sistema.
-     */
+     *
     public boolean existePalete(int cod){
         return this.paleteDAO.containsKey(cod);
     }
 
-    /*
+    *
     public ArrayList<Palete> addPaleteQueue(String id_palete){
         return null;
     }
 
 
-    //quando chega nova palete - sistema rtem de notificar rbot
+    quando chega nova palete - sistema rtem de notificar rbot
     public void criaNovaPalete(String paleteS){
 
     }
@@ -71,7 +65,7 @@ public class Armazem {
     }
 
     public Rota calculaRota(Localizacao inicio, Localizacao fim){
-        return null;
+        return null;0
     }
 
     public void addPaleteAguardaTrasnporte(int id) throws ClassNotFoundException,SQLException{
@@ -93,5 +87,5 @@ public class Armazem {
     public void adicionaPalete(){
 
     }
-*/
-}
+
+}*/

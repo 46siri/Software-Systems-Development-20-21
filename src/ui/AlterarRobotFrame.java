@@ -17,7 +17,7 @@ public class AlterarRobotFrame extends javax.swing.JFrame {
         try {
             int id = Integer.parseInt(id_txt.getText());
 
-            Robot tmp = new Robot(robot.getId());
+            Robot tmp = new Robot();
 
             if (!(id == -1)) {
                 if (!tmp.equals(robot)) {

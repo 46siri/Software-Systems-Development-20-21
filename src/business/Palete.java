@@ -1,25 +1,25 @@
 package business;
-import business.Localizacao;
 
 import java.util.*;
 
 public class Palete implements Comparable<Palete> {
     public static Comparator<Palete> NumComparator = Comparator.comparing(Palete::getId);
 
-    private int id;
+    private String id;
     private String produto;
-    private Prateleira local;
+    private Localizacao localizacao;
 
     /**
      * Construtor com parâmetros para a classe Palete.
      * @param id Id da palete.
      * @param produto Produto que a palete contem.
+     * @param local
      **/
 
-    public Palete (int id, String produto, Prateleira local) {
+    public Palete (String id, String produto, String local) {
         this.id = id;
         this.produto = produto;
-        this.local = local;
+        this.localizacao.toLocalizacao(local);
     }
 
     //getters
@@ -35,14 +35,14 @@ public class Palete implements Comparable<Palete> {
     /**
      * Método get para o local da palete.
      */
-    public Prateleira getPrateleira(){return local;}
+    public Localizacao getLocalizacao(){return localizacao;}
 
     //setters
     /**
      * Método set para o id da palete.
      * @param id Novo id para a palete.
      */
-    private void setId(int id){this.id = id;}
+    private void setId(String id){this.id = id;}
 
     /**
      * Método set para o produto que a palete contem.
@@ -50,9 +50,12 @@ public class Palete implements Comparable<Palete> {
      */
     private void setProduto(String produto){this.produto = produto;}
 
+    @Override
+    public int compareTo(Palete p) { return this.id.compareTo(p.getId());}
+
     /* Seria util na requisicao
     @Override
-    public String toString(){return "Palete(" + this.id + ", " + this.produto + ", " + this.altura + ")"; }
+    public String toString(){return "Palete(" + this.id + ", " + this.produto + ", " + this.localizacao + ")"; }
      */
 
     }

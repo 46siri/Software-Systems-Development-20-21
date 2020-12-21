@@ -20,8 +20,8 @@ public class PaleteDAO implements Map<String, Palete> {
             String sql;
             sql = "CREATE TABLE IF NOT EXISTS paletes(" +
                     "Id varchar (10) NOT NULL PRIMARY KEY,"+
-                    "Produto varchar(45) DEFAULT NULL)";// +
-                    //"Localizacao varchar(10), foreign key(Localizacao) references localizacoes(Zona,Seccao,Prateleira))";
+                    "Produto varchar(45) DEFAULT NULL)" +
+                    "Localizacao varchar(10), foreign key(Localizacao) references localizacoes(Zona,Seccao,Prateleira))";
             stm.executeUpdate(sql);
         }catch (SQLException e){
             e.printStackTrace();
@@ -123,7 +123,7 @@ public class PaleteDAO implements Map<String, Palete> {
              Statement stm = conn.createStatement();
              ResultSet rs = stm.executeQuery("SELECT * FROM paletes WHERE Id='"+key+"'")) {
             if (rs.next()) {  // A chave existe na tabela
-                p = new Palete(rs.getString("Id"), rs.getString("Produto"), rs.getString("Local"));
+                p = new Palete(rs.getString("Id"), rs.getString("Produto"), rs.getString("Localizacao"));
             }
         } catch (SQLException e) {
             // Database error!

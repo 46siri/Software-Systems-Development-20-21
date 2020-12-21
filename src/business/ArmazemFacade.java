@@ -130,5 +130,9 @@ public class ArmazemFacade implements IArmazemFacade {
     }
 
     public Object getRobots(int id) {
+        return null;
+    }
+
+    public void alteraRobot(String id) {
     }
 }
