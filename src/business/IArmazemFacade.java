@@ -17,11 +17,11 @@ public interface IArmazemFacade{
          * @param rid id do robot a procurar
          * @return true se o robot existe
          */
-        boolean existeRobot(String rid);
+        boolean existeRobot(int rid);
 
         void adicionaRobot(Robot r);
 
-        void removeRobot(String rid);
+        void removeRobot(int rid);
 
         Collection<Gestor> getGestores();
 
@@ -35,9 +35,9 @@ public interface IArmazemFacade{
 
         void adicionaPalete(Palete p);
 
-        boolean existePalete(String id);
+        boolean existePalete(int id);
 
-        void  armazenarPalete(String id);
+        void  armazenarPalete(int id);
 
         boolean passwordCerta(String username, String password);
 

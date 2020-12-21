@@ -2,26 +2,26 @@ package business;
 
 import java.util.Collection;
 import java.util.TreeSet;
-
-public class Robot implements Comparable<Robot>{
-    private String id;
+/*implements Comparable<Robot>*/
+public class Robot {
+    private int id;
     private boolean estadoLivre;
     private Collection<String> lstRobots;
 
     public Robot() {
-        this.id = "";
+        this.id = -1 ;
         this.estadoLivre= true;
         this.lstRobots = new TreeSet<>();
     }
 
-    public Robot(String id, boolean estado){
+    public Robot(int id, boolean estado){
         this.id = id;
         this.estadoLivre = estado;
     }
 
-    public String getId() { return this.id; }
+    public int getId() { return this.id; }
 
-    public void removeRobot(String id){this.lstRobots.remove(id);}
+    public void removeRobot(int id){this.lstRobots.remove(id);}
 
     //alterar localização da palete - em robot
     public void notificaRecolha(){
@@ -33,15 +33,15 @@ public class Robot implements Comparable<Robot>{
 
     }
 
-    private void getRobot(String id_robot) {
+    private void getRobot(int id_robot) {
     }
 
     public void setEstado(boolean estado){ this.estadoLivre = estado; }
-
+/*
     @Override
     public int compareTo(Robot o) {
         return this.id.compareTo(o.getId());
-    }
+    }*/
 
 
 }

@@ -3,8 +3,12 @@ import business.ArmazemFacade;
 import business.Gestor;
 import business.Robot;
 
+import java.lang.String;
 import java.awt.*;
-import java.swing.*;
+import java.awt.event.*;
+import javax.swing.*;
+import javax.swing.GroupLayout;
+import javax.swing.LayoutStyle;
 
 public class ArmazemFrame extends javax.swing.JFrame {
     ArmazemFacade af;
@@ -32,13 +36,13 @@ public class ArmazemFrame extends javax.swing.JFrame {
      * Creates new from ArmazemFrame
      */
 
-    public ArmazemFrame (ArmazemFacade af, Gestor g, Robot r){
+    public armazemFrame(ArmazemFacade af, Gestor g, Robot r){
         initComponents();
         this.af = af;
-        this.gestor = g;
-        this.robot = r;
-        this.login_lbl-setText ("Logged in as " + g.getNome());
-        this.login_lbl-setText ("Logged in as " + r.getId());
+        this.g = g;
+        this.r = r;
+        this.login_lbl.setText ("Logged in as " + g.getUserName());
+        this.login_lbl.setText ("Logged in as " + r.getId());
     }
 
     /**
@@ -50,7 +54,7 @@ public class ArmazemFrame extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
 
     private void initComponents(){
-        jLabel1 = JLabel();
+        jLabel1 = new JLabel();
         descargas_btn = new JButton();
         requisicoes_btn = new JButton();
         paletes_btn = new JButton();
@@ -116,8 +120,9 @@ public class ArmazemFrame extends javax.swing.JFrame {
                         .addGroup(contentPaneLayout.createSequentialGroup()
                                 .addGap(81, 81, 81)
                                 .addGroup(contentPaneLayout.createParallelGroup()
-                                        .addComponent(encomendas_btn, GroupLayout.PREFERRED_SIZE, 176, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(stock_btn, GroupLayout.PREFERRED_SIZE, 176, GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(descargas_btn, GroupLayout.PREFERRED_SIZE, 176, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(requisicoes_btn, GroupLayout.PREFERRED_SIZE, 176, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(paletes_btn, GroupLayout.PREFERRED_SIZE, 176, GroupLayout.PREFERRED_SIZE))
                                 .addContainerGap(76, Short.MAX_VALUE))
                         .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
@@ -136,9 +141,11 @@ public class ArmazemFrame extends javax.swing.JFrame {
                                 .addGap(24, 24, 24)
                                 .addComponent(jLabel1, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                                .addComponent(encomendas_btn, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(descargas_btn, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
                                 .addGap(6, 6, 6)
-                                .addComponent(stock_btn, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(requisicoes_btn, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
+                                .addGap(6, 6, 6)
+                                .addComponent(paletes_btn, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
                                 .addGroup(contentPaneLayout.createParallelGroup()
                                         .addGroup(contentPaneLayout.createSequentialGroup()
                                                 .addGap(51, 51, 51)

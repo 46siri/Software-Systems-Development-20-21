@@ -1,5 +1,4 @@
 package ui;
-import business.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -32,7 +31,7 @@ public class LoginFrame extends javax.swing.JFrame {
             this.dispose();
             ServidorProd sp = app.getServidorProd(id);
             info(1, sp.getNome());
-            new ArmazemFrame(this.app, sp).setVisible(true);
+            new armazemFrame(this.app, sp).setVisible(true);
         } else if (tipo == 2) {
             this.dispose();
             info(3, "");
