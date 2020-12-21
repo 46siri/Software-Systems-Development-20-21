@@ -1,7 +1,4 @@
 package business;
-import business.Localizacao;
-import org.jetbrains.annotations.NotNull;
-
 
 import java.util.Comparator;
 
@@ -10,21 +7,19 @@ public class Palete implements Comparable<Palete> {
 
     private String id;
     private String produto;
-    private int altura;
     private Localizacao local;
 
     /**
      * Construtor com parâmetros para a classe Palete.
      * @param id Id da palete.
      * @param produto Produto que a palete contem.
-     * @param altura Altura da palete.
+     * @param local localizacao de uma palete
      **/
 
-    public Palete (String id, String produto, int altura, Localizacao local) {
+    public Palete (String id, String produto, String local) {
         this.id = id;
         this.produto = produto;
-        this.altura = altura;
-        this.local = local;
+        this.local.toLocalizacao(local);
     }
 
     //getters
@@ -38,14 +33,10 @@ public class Palete implements Comparable<Palete> {
     public String getProduto(){return produto;}
 
     /**
-     * Método get para a altura da palete.
+     * Método get para o local onde a palete se encontra
      */
-    public int getAltura(){return altura ;}
+    public Localizacao getLocalizacao(){return local;}
 
-    /**
-     * Método get para o local da palete.
-     */
-    public Localizacao getLocalização(){return local;}
 
     //setters
     /**
@@ -59,12 +50,6 @@ public class Palete implements Comparable<Palete> {
      * @param produto produto que a palete contem.
      */
     private void setProduto(String produto){this.produto = produto;}
-
-    /**
-     * Método set para a altura da palete.
-     * @param altura altura da palete.
-     */
-    private void setAltura(int altura){this.altura = altura;}
 
     /**
      * Método set para a altura da palete.
