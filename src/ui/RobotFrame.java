@@ -123,11 +123,11 @@ public class RobotFrame extends javax.swing.JFrame {
                             {null, null, null},
                     },
                     new String[] {
-                            "ID", "Nome", "Telem\u00f3vel"
+                            "ID"
                     }
             ) {
                 boolean[] columnEditable = new boolean[] {
-                        false, false, false
+                        false
                 };
                 @Override
                 public boolean isCellEditable(int rowIndex, int columnIndex) {
