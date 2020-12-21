@@ -2,7 +2,9 @@ package business;
 
 
 import data.*;
+import business.*;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
@@ -22,7 +24,7 @@ public class ArmazemFacade implements IArmazemFacade {
     }
     //ROBOTS
     /**
-     * Método que devolve todos os alunos registados.
+     * Método que devolve todos os robots registados.
      *
      * @return todos os robots registados
      */
@@ -31,17 +33,28 @@ public class ArmazemFacade implements IArmazemFacade {
         return new ArrayList<>(this.robots.values());
     }
 
+
     /**
      * @param rid id do robot a procurar
      * @return true se o robot existe
      */
     @Override
-    public boolean existeRobot(int rid){return robots.containsKey(rid);}
+    public boolean existeRobot(String rid){return robots.containsKey(rid);}
+
+    public void registaRobot(String rid)throws SQLException, ClassNotFoundException {{
+        rid = this.robotDAO.nextString;
+
+        Robot r = new Robot(rid);
+
+        this.robotDAO.put(rid,r);
+    }
 
     /**
      * @param r robot a dicionar
      */
-    public void adicionaRobot(Robot r){this.robots.put(r.getId(),r);}
+    public void adicionaRobot(Robot r){
+        this.robots.put(r.getId(),r);
+        }
 
     /**
      * Método que remove um robot do armazem
@@ -49,7 +62,7 @@ public class ArmazemFacade implements IArmazemFacade {
      * @param rid id do robot
      */
     @Override
-    public void removeRobot(int rid) {
+    public void removeRobot(String rid) {
         Robot r = this.robots.get(rid);
         r.removeRobot(rid);
         this.robots.put(rid, r);  // Necessário fazer put para actualizar a BD.
@@ -111,10 +124,10 @@ public class ArmazemFacade implements IArmazemFacade {
      * @return true se a palete existe
      */
     @Override
-    public boolean existePalete(int id){return this.paletes.containsKey(id);}
+    public boolean existePalete(String id){return this.paletes.containsKey(id);}
 
     @Override
-    public void  armazenarPalete(int id){
+    public void  armazenarPalete(String id){
         //
     }
 
@@ -129,6 +142,4 @@ public class ArmazemFacade implements IArmazemFacade {
         return new ArrayList<>(this.prateleiras.values());
     }
 
-    public Object getRobots(int id) {
-    }
 }

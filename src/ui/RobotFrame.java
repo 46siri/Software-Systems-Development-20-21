@@ -35,12 +35,12 @@ public class RobotFrame extends javax.swing.JFrame {
         }
     }
     private void novo_robot_btnActionPerformed(ActionEvent e) {
-        new NovoRobotFrame(this.af,this,null).setVisible(true);
+        new NovoRobotFrame(this.af,this).setVisible(true);
     }
     private void display_tblMouseClicked(MouseEvent e) throws Exception {
         if(e.getClickCount()==2){
             int row = this.display_tbl.getSelectedRow();
-            int id = (int) this.display_tbl.getModel().getValueAt(row, 0);
+            String id = (String) this.display_tbl.getModel().getValueAt(row, 0).toString();
 
             Robot selected = (Robot) this.af.getRobots(id);
 
