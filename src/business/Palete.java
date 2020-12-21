@@ -1,25 +1,25 @@
 package business;
+import business.Localizacao;
 
-import java.util.Comparator;
+import java.util.*;
 
 public class Palete implements Comparable<Palete> {
     public static Comparator<Palete> NumComparator = Comparator.comparing(Palete::getId);
 
-    private String id;
+    private int id;
     private String produto;
-    private Localizacao local;
+    private Prateleira local;
 
     /**
      * Construtor com parâmetros para a classe Palete.
      * @param id Id da palete.
      * @param produto Produto que a palete contem.
-     * @param local localizacao de uma palete
      **/
 
-    public Palete (String id, String produto, String local) {
+    public Palete (int id, String produto, Prateleira local) {
         this.id = id;
         this.produto = produto;
-        this.local.toLocalizacao(local);
+        this.local = local;
     }
 
     //getters
@@ -33,17 +33,16 @@ public class Palete implements Comparable<Palete> {
     public String getProduto(){return produto;}
 
     /**
-     * Método get para o local onde a palete se encontra
+     * Método get para o local da palete.
      */
-    public Localizacao getLocalizacao(){return local;}
-
+    public Prateleira getPrateleira(){return local;}
 
     //setters
     /**
      * Método set para o id da palete.
      * @param id Novo id para a palete.
      */
-    private void setID(String id){this.id = id;}
+    private void setId(int id){this.id = id;}
 
     /**
      * Método set para o produto que a palete contem.
@@ -51,17 +50,9 @@ public class Palete implements Comparable<Palete> {
      */
     private void setProduto(String produto){this.produto = produto;}
 
-    /**
-     * Método set para a altura da palete.
-     * @param local local da palete.
-     */
-    private void setAltura(Localizacao local){this.local = local;}
-
     /* Seria util na requisicao
     @Override
     public String toString(){return "Palete(" + this.id + ", " + this.produto + ", " + this.altura + ")"; }
      */
 
-    @Override
-    public int compareTo(Palete p){return this.id.compareTo(p.getId());}
-}
+    }

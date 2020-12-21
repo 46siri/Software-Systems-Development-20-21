@@ -1,10 +1,13 @@
 package business;
 
 public class Rota{
-    private Localizacao inicio;
-    private Localizacao fim;
+    private double locDescarga;
+    private double parteCima;
+    private double parteBaixo;
+    private double locEntrega;
 
-    public Rota getRota(){
-        return null;
+    public void Rota(){
+    ;
+
     }
 }
