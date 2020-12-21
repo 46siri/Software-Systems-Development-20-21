@@ -2,6 +2,10 @@ package data;
 
 import business.Robot;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
@@ -9,6 +13,21 @@ import java.util.Set;
 public class RobotDAO implements Map<String, Robot> {
 
     private static RobotDAO singleton = null;
+
+    private RobotDAO(){
+        try(Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
+            Statement stm = conn.createStatement()) {
+            String sql;
+            sql = "CREATE TABLE IF NOT EXISTS robots(" +
+                    "Id varchar (10) NOT NULL PRIMARY KEY,"+
+                    "Estado varchar(5) DEFAULT NULL)";
+            stm.executeUpdate(sql);
+        }catch (SQLException e){
+            e.printStackTrace();
+            throw new NullPointerException(e.getMessage());
+        }
+    }
+
 
     public static RobotDAO getInstance() {
         if (RobotDAO.singleton == null) {

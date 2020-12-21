@@ -14,13 +14,14 @@ import java.util.*;
 public class PaleteDAO implements Map<String, Palete> {
     private static PaleteDAO singleton = null;
 
-    private PaleteDAO() throws SQLException {
-        try(Connection conn = DriverManager.getConnection(DAOconfig.URL,DAOconfig.USERNAME,DAOconfig.PASSWORD);
+    private PaleteDAO(){
+        try(Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
             Statement stm = conn.createStatement()) {
-            String sql = "CREAT TABLE IF NOT EXITS paletes (" +
-                    "Id varchar(10) NOT NULL PRIMARY KEY,"+
-                    "Produto varchar(45) DEFAULT NULL," +
-                    "Local varchar(), foreign key(Localizacao) refrences localizacao(A,s,p))";
+            String sql;
+            sql = "CREATE TABLE IF NOT EXISTS paletes(" +
+                    "Id varchar (10) NOT NULL PRIMARY KEY,"+
+                    "Produto varchar(45) DEFAULT NULL)";// +
+                    //"Localizacao varchar(10), foreign key(Localizacao) references localizacoes(Zona,Seccao,Prateleira))";
             stm.executeUpdate(sql);
         }catch (SQLException e){
             e.printStackTrace();
@@ -34,7 +35,7 @@ public class PaleteDAO implements Map<String, Palete> {
      *
      * @return devolve a instância única desta classe
      */
-    public static PaleteDAO getInstance() throws SQLException {
+    public static PaleteDAO getInstance(){
         if (PaleteDAO.singleton == null) {
             PaleteDAO.singleton = new PaleteDAO();
         }
@@ -213,7 +214,7 @@ public class PaleteDAO implements Map<String, Palete> {
 
     @Override
     public Set<String> keySet() {
-        return null;
+        throw new NullPointerException("Not implemented!");
     }
 
     /**
@@ -238,6 +239,6 @@ public class PaleteDAO implements Map<String, Palete> {
 
     @Override
     public Set<Entry<String, Palete>> entrySet() {
-        return null;
+        throw new NullPointerException("public Set<Map.Entry<String,Palete>> entrySet() not implemented!");
     }
 }
