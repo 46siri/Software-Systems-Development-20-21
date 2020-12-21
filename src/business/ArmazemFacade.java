@@ -3,7 +3,6 @@ package business;
 
 import data.*;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
@@ -15,7 +14,7 @@ public class ArmazemFacade implements IArmazemFacade {
     private Map<String, Palete> paletes;
     private Map<String, Prateleira> prateleiras;
 
-    public ArmazemFacade() throws SQLException {
+    public ArmazemFacade(){
         this.robots = RobotDAO.getInstance();
         this.gestores = GestorDAO.getInstance();
         this.paletes = PaleteDAO.getInstance();

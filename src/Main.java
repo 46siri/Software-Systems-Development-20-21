@@ -8,7 +8,7 @@ public class Main {
         try{
             new TextUI().run();
         }catch(Exception e){
-            System.out.print("Não foi possivel arrancar" +e.getMessage());
+            System.out.print("Não foi possivel arrancar " +e.getMessage());
         }
     }
 }
