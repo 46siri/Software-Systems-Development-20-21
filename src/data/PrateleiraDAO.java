@@ -1,6 +1,6 @@
 package data;
 
-import business.Prateleira;
+import business.gArmazem.Prateleira;
 
 import java.sql.*;
 import java.util.*;

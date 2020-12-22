@@ -1,6 +1,9 @@
 package ui;
 
 import business.*;
+import business.gArmazem.Palete;
+import business.gConta.Gestor;
+import business.gConta.Robot;
 
 import java.sql.SQLException;
 import java.util.Scanner;

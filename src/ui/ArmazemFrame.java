@@ -1,9 +1,8 @@
 package ui;
 import business.ArmazemFacade;
-import business.Gestor;
-import business.Robot;
+import business.gConta.Gestor;
+import business.gConta.Robot;
 
-import java.lang.String;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -24,13 +23,7 @@ public class ArmazemFrame extends javax.swing.JFrame {
         new TabelaPaletes(this.af).setVisible(true);
     }
 
-    private void descargas_btnActionPerformed (ActionEvent e) throws Exception {
-        new RegistaDescargaFrame (this.af).setVisible(true);
-    }
 
-    private void requisicoes_btnActionPerformed (ActionEvent e) throws Exception {
-        new RegistaPedidoFrame (this.af).setVisible(true);
-    }
 
     /**
      * Creates new from ArmazemFrame
@@ -71,27 +64,9 @@ public class ArmazemFrame extends javax.swing.JFrame {
         jLabel1.setIcon(new ImageIcon(getClass().getResource("logo.png")));
         jLabel1.setText("- ARMAZÉM");
 
-        //---- descargas_btn ----
-        descargas_btn.setFont(new Font("Tahoma", Font.PLAIN, 12));
-        descargas_btn.setText("Visualizar Descargas");
-        descargas_btn.addActionListener(e -> {
-            try {
-                descargas_btnActionPerformed(e);
-            } catch (Exception e1) {
-                e1.printStackTrace();
-            }
-        });
 
-        //---- requisicoes_btn ----
-        requisicoes_btn.setFont(new Font("Tahoma", Font.PLAIN, 12));
-        requisicoes_btn.setText("Visualizar Requisicões");
-        requisicoes_btn.addActionListener(e -> {
-            try {
-                requisicoes_btnActionPerformed(e);
-            } catch (Exception e1) {
-                e1.printStackTrace();
-            }
-        });
+
+
 
         //---- paletes_btn ----
         paletes_btn.setFont(new Font("Tahoma", Font.PLAIN, 12));

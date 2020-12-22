@@ -1,6 +1,10 @@
 package business;
 
 
+import business.gArmazem.Palete;
+import business.gArmazem.Prateleira;
+import business.gConta.Gestor;
+import business.gConta.Robot;
 import data.*;
 
 import java.sql.SQLException;
@@ -27,10 +31,9 @@ public class ArmazemFacade implements IArmazemFacade {
      * Método que devolve todos os robots registados.
      *
      * @return todos os robots registados
-     * @param id
      */
     @Override
-    public Collection<Robot> getRobots(String id) {
+    public Collection<Robot> getRobots() {
         return new ArrayList<>(this.robots.values());
     }
 
@@ -86,7 +89,7 @@ public class ArmazemFacade implements IArmazemFacade {
      * @return todos os gestores registados
      */
     @Override
-    public Collection<Gestor> getGestores(String userName) {
+    public Collection<Gestor> getGestores() {
         return new ArrayList<>(this.gestores.values());
     }
 
@@ -117,9 +120,9 @@ public class ArmazemFacade implements IArmazemFacade {
      * @throws SQLException
      * @throws ClassNotFoundException
      */
-    public void registaGestor(String userName, String password,String nome, String email) throws SQLException, ClassNotFoundException{
+    public void registaGestor(String userName,String nome, String email) throws SQLException, ClassNotFoundException{
         Gestor g ;
-        g = new Gestor(userName, password, nome, email);
+        g = new Gestor(userName, nome, email);
         this.gestores.put(userName, g);
     }
     /**
@@ -174,11 +177,4 @@ public class ArmazemFacade implements IArmazemFacade {
     public Collection<Prateleira> listarLocalizacoes() {
         return new ArrayList<>(this.prateleiras.values());
     }
-
-    public Object getRobots(int id) {
-        return null;
     }
-
-    public void alteraRobot(String id) {
-    }
-}

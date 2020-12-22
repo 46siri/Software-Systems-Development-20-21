@@ -1,5 +1,4 @@
-package business;
-import java.util.ArrayList;
+package business.gConta;
 import java.util.Collection;
 
 /**
@@ -21,6 +20,9 @@ public class Gestor implements Comparable<Gestor> {
         this.password = password;
         this.nome = nome;
         this.email = mail;
+    }
+
+    public Gestor(String userName, String nome, String email) {
     }
 
     public String getUserName(){return user;}

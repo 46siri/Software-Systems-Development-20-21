@@ -1,6 +1,6 @@
 package data;
 
-import business.Palete;
+import business.gArmazem.Palete;
 
 import java.sql.*;
 import java.util.*;

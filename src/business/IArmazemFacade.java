@@ -1,5 +1,10 @@
 package business;
 
+import business.gArmazem.Palete;
+import business.gArmazem.Prateleira;
+import business.gConta.Gestor;
+import business.gConta.Robot;
+
 import java.util.Collection;
 
 /**
@@ -9,7 +14,7 @@ import java.util.Collection;
  * @version 202012
  */
 public interface IArmazemFacade{
-        Collection<Robot> getRobots(String id);
+        Collection<Robot> getRobots();
 
         /**
          * Método que verifica se um robot existe
@@ -23,7 +28,7 @@ public interface IArmazemFacade{
 
         void removeRobot(String rid);
 
-        Collection<Gestor> getGestores(String userName);
+        Collection<Gestor> getGestores();
 
         boolean existeGestor(String username);
 

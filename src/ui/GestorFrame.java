@@ -1,7 +1,6 @@
 package ui;
 import business.ArmazemFacade;
-import business.Gestor;
-import business.Robot;
+import business.gConta.Gestor;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -41,9 +40,9 @@ public class GestorFrame extends javax.swing.JFrame {
     private void display_tblMouseClicked (MouseEvent e) throws Exception{
         if(e.getClickCount()==2){
             int row = this.display_tbl.getSelectedRow();
-            String userName = (String) this.display_tbl.getModel().getValueAt(row, 0).toString();
+            //String userName = (String) this.display_tbl.getModel().getValueAt(row, 0).toString();
 
-            Gestor selected = (Gestor) this.af.getGestores(userName);
+            Gestor selected = (Gestor) this.af.getGestores();
 
             new AlteraGestorFrame (selected, af, this).setVisible(true);
         }

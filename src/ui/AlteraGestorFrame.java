@@ -2,7 +2,7 @@ package ui;
 import java.awt.event.*;
 
 import business.ArmazemFacade;
-import business.Gestor;
+import business.gConta.Gestor;
 
 import java.awt.*;
 import java.util.List;

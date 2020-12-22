@@ -1,6 +1,6 @@
 package data;
 
-import business.Robot;
+import business.gConta.Robot;
 
 import java.sql.*;
 import java.util.Collection;

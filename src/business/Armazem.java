@@ -1,6 +1,6 @@
-/*package business;
+package business;
 import java.util.*;
-
+/*
 import data.DescargaDAO;
 import data.PaleteDao;
 
@@ -9,9 +9,7 @@ public class Armazem {
     private DescargaDAO descargaDAO;
     private PedidoDAO requisicaoDAO;
 
-    **
-     * Contrutor sem parametros da classe Armazem.
-     *
+
 
     public Armazem(){
         this.paleteDAO = new PaleteDao();

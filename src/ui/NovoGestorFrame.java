@@ -1,9 +1,8 @@
 package ui;
-import business.Gestor;
+import business.gConta.Gestor;
 import business.ArmazemFacade;
 import java.awt.*;
 import java.awt.event.*;
-import java.sql.SQLException;
 import java.util.Collection;
 import java.util.List;
 import javax.swing.*;
@@ -12,19 +11,19 @@ import javax.swing.GroupLayout;
 public class NovoGestorFrame extends javax.swing.JFrame {
     ArmazemFacade af;
     GestorFrame to_update;
-    private Label password_txt; //----------------
+    //private Label password_txt; //----------------
     /* RegistaDescargaFrame to_update2;*/
 
     private void registar_btnActionPerformed(ActionEvent e) throws Exception {
         String userName = this.user_txt.getText();
-        String password = this.password_txt.getText();
+        //String password = this.password_txt.getText();
         String nome = this.nome_txt.getText();
         String email = this.email_txt.getText();
 
             if (!userName.equals("") && !email.equals("")){
-                this.af.registaGestor(userName,password,nome, email);
+                this.af.registaGestor(userName,nome, email);
 
-                Collection<Gestor> list = this.af.getGestores(userName);
+                Collection<Gestor> list = this.af.getGestores();
                 if (to_update != null){
                     this.to_update.updateTable(list);
                     this.to_update.updateList((List<Gestor>) list);
