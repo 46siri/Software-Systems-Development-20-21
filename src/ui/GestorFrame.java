@@ -12,6 +12,7 @@ import javax.swing.*;
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 
 public class GestorFrame extends javax.swing.JFrame {
     ArmazemFacade af;
@@ -40,9 +41,9 @@ public class GestorFrame extends javax.swing.JFrame {
     private void display_tblMouseClicked (MouseEvent e) throws Exception{
         if(e.getClickCount()==2){
             int row = this.display_tbl.getSelectedRow();
-            int id = (int) this.display_tbl.getModel().getValueAt(row, 0);
+            String userName = (String) this.display_tbl.getModel().getValueAt(row, 0).toString();
 
-            Gestor selected = this.af.getGestores(userName);
+            Gestor selected = (Gestor) this.af.getGestores(userName);
 
             new AlteraGestorFrame (selected, af, this).setVisible(true);
         }
@@ -65,7 +66,7 @@ public class GestorFrame extends javax.swing.JFrame {
     public GestorFrame(ArmazemFacade af) throws Exception {
         initComponents();
         this.af = af;
-        this.gestores = af.getGestores();
+        this.gestores = (List<Gestor>) af.getGestores();
         updateTable(this.gestores);
     }
     /**
@@ -128,7 +129,7 @@ public class GestorFrame extends javax.swing.JFrame {
             });
             {
                 TableColumnModel cm = display_tbl.getColumnModel();
-                cm.getColumn(0).setPreferredWidth(10);
+                ((TableColumnModel) cm).getColumn(0).setPreferredWidth(10);
                 cm.getColumn(2).setPreferredWidth(40);
             }
             display_tbl.addMouseListener(new MouseAdapter() {

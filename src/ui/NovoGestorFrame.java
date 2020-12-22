@@ -22,16 +22,12 @@ public class NovoGestorFrame extends javax.swing.JFrame {
             if (!userName.equals("") && !email.equals("")){
                 this.af.registaGestor(userName,nome, email);
 
-                Collection<Gestor> list = this.af.getGestores();
+                Collection<Gestor> list = this.af.getGestores(userName);
                 if (to_update != null){
                     this.to_update.updateTable(list);
-                    this.to_update.updateList(list);
+                    this.to_update.updateList((List<Gestor>) list);
                 }
-                /*
-                if (to_update2 != null){
-                    this.to_update2.updateGestoresTable(list);
-                    this.to_update2.updateList(list);
-                }*/
+
                 JOptionPane.showMessageDialog(new JFrame(), "Gestor registado com sucesso", "Gestor Registado", JOptionPane.PLAIN_MESSAGE);
                 this.dispose();
             }
@@ -50,7 +46,6 @@ public class NovoGestorFrame extends javax.swing.JFrame {
         initComponents();
         this.af = af;
         this.to_update=f;
-       /* this.to_update2=f2;*/
     }
     /**
      * This method is called from within the constructor to initialize the form.

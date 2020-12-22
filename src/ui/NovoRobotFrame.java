@@ -2,15 +2,13 @@ package ui;
 
 import business.ArmazemFacade;
 import business.Robot;
+import data.RobotDAO;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.sql.SQLException;
-import java.util.Collection;
 import java.util.List;
 import javax.swing.*;
 import javax.swing.GroupLayout;
-import javax.swing.table.DefaultTableModel;
 
 public class NovoRobotFrame extends javax.swing.JFrame{
     ArmazemFacade af;
@@ -18,11 +16,10 @@ public class NovoRobotFrame extends javax.swing.JFrame{
 
     private void registar_btnActionPerformed (ActionEvent e) throws Exception {
             String id = id_txt.getText();
-            Boolean estadoLivre;
-
-            if(!id.equals("")){
-                this.af.registaRobot(id);
-                List<Robot> list = this.af.getRobots();
+            Boolean estado = Boolean.valueOf(estado_txt.getText());
+            if(!id.equals("") && !estado.equals("")){
+                this.af.registaRobot(id,estado);
+                List<Robot> list = (List<Robot>) this.af.getRobots(id);
                 this.to_update.updateTable(list);
                 this.to_update.updateList(list);
 
@@ -57,6 +54,7 @@ public class NovoRobotFrame extends javax.swing.JFrame{
     // Generated using JFormDesigner Evaluation license
     private void initComponents() {
         id_txt = new JTextField();
+        estado_txt = new JTextField();
         registar_btn = new JButton();
         label1 = new JLabel();
         error_txt = new JLabel();
@@ -78,6 +76,8 @@ public class NovoRobotFrame extends javax.swing.JFrame{
 
         //---- label1 ----
         label1.setText("Id");
+        //---- label2 ----
+        label2.setText("Estado");
 
         //---- error_txt ----
         error_txt.setText(" ");
@@ -99,6 +99,11 @@ public class NovoRobotFrame extends javax.swing.JFrame{
                                                 .addComponent(label1)
                                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(id_txt, GroupLayout.PREFERRED_SIZE, 160, GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                        .addGroup(contentPaneLayout.createSequentialGroup()
+                                                .addComponent(label2)
+                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(estado_txt, GroupLayout.PREFERRED_SIZE, 160, GroupLayout.PREFERRED_SIZE)))
                                 .addGap(35, 45, Short.MAX_VALUE))
                         .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
                                 .addContainerGap()
@@ -116,6 +121,9 @@ public class NovoRobotFrame extends javax.swing.JFrame{
                                 .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                         .addComponent(label1)
                                         .addComponent(id_txt, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                        .addComponent(label2)
+                                        .addComponent(estado_txt, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                                 .addGroup(contentPaneLayout.createParallelGroup()
                                         .addGroup(contentPaneLayout.createSequentialGroup()
                                                 .addGap(18, 18, 18)
@@ -134,8 +142,10 @@ public class NovoRobotFrame extends javax.swing.JFrame{
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // Generated using JFormDesigner Evaluation license
     private JTextField id_txt;
+    private JTextField estado_txt;
     private JButton registar_btn;
     private JLabel label1;
+    private JLabel label2;
     private JLabel error_txt;
     private JButton sair_btn;
     // End of variables declaration//GEN-END:variables

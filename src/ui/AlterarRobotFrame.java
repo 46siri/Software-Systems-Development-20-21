@@ -15,7 +15,7 @@ public class AlterarRobotFrame extends javax.swing.JFrame {
     private void  atualizar_btnActionPerformed(ActionEvent e) {
         this.dispose();
         try {
-            String id = Integer.parseInt(id_txt.getText());
+            int id = Integer.parseInt(id_txt.getText());
 
             Robot tmp = new Robot();
 

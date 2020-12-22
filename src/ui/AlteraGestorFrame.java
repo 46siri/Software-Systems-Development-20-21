@@ -11,7 +11,7 @@ import javax.swing.GroupLayout;
 
 public class AlteraGestorFrame extends javax.swing.JFrame {
     Gestor gestor;
-    ArmazemFrame af;
+    ArmazemFacade af;
     GestorFrame to_update;
 
     private void atualizar_btnActionPerformed(ActionEvent e){
@@ -21,12 +21,12 @@ public class AlteraGestorFrame extends javax.swing.JFrame {
             String nome = this.nome_txt.getText();
             String email = this.email_txt.getText();
 
-            Gestor temp = new Gestor(gestor.getUserName(), nome, email);
+            Gestor temp = new Gestor(userName, nome, email);
             if (!userName.equals("")){
                 if(!temp.equals(gestor)){
-                    this.af.alteraGestor(gestor.getUserName(), nome,email);
+                    this.af.alteraGestor(userName, nome,email);
 
-                    List<Gestor> list = this.af.getGestores();
+                    List<Gestor> list = (List<Gestor>) this.af.getGestores();
                     this.to_update.updateTable(list);
                     this.to_update.updateList(list);
                 JOptionPane.showMessageDialog(new JFrame(), "Gestor alterado com sucesso.","Gestor Alterado", JOptionPane.INFORMATION_MESSAGE);

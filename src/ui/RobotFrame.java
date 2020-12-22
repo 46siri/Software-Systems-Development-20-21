@@ -67,10 +67,10 @@ public class RobotFrame extends javax.swing.JFrame {
     /**
      * Creates new form RobotsFrame
      */
-    public RobotFrame(ArmazemFacade af) throws Exception {
+    public RobotFrame(ArmazemFacade af, String id) throws Exception {
         initComponents();
         this.af = af;
-        this.robots = (List<Robot>) af.getRobots();
+        this.robots = (List<Robot>) af.getRobots(id);
         updateTable(this.robots);
     }
 
@@ -82,7 +82,6 @@ public class RobotFrame extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     // Generated using JFormDesigner Evaluation license
-
     private void initComponents() {
         sair_btn = new JButton();
         novo_robot_btn = new JButton();
@@ -100,30 +99,26 @@ public class RobotFrame extends javax.swing.JFrame {
         sair_btn.addActionListener(e -> sair_btnActionPerformed(e));
 
         //---- novo_robot_btn ----
-        novo_robot_btn.setText("Adicionar Robot");
-        novo_robot_btn.addActionListener(e -> {
-            novo_robot_btnActionPerformed(e);
-        });
+        novo_robot_btn.setText("Adicionar funcion\u00e1rio");
+        novo_robot_btn.addActionListener(e -> novo_robot_btnActionPerformed(e));
 
         //---- robot_txt ----
-        robot_txt.setToolTipText("Procurar Robot");
         robot_txt.addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent e) {
                 robot_txtKeyReleased(e);
             }
         });
-
         //======== jScrollPane1 ========
         {
 
             //---- display_tbl ----
             display_tbl.setModel(new DefaultTableModel(
                     new Object[][] {
-                            {null, null, null},
+                            {null},
                     },
                     new String[] {
-                            "ID"
+                            "id"
                     }
             ) {
                 boolean[] columnEditable = new boolean[] {
@@ -134,52 +129,46 @@ public class RobotFrame extends javax.swing.JFrame {
                     return columnEditable[columnIndex];
                 }
             });
-            {
-                TableColumnModel cm = display_tbl.getColumnModel();
-                cm.getColumn(0).setPreferredWidth(10);
-                cm.getColumn(2).setPreferredWidth(40);
-            }
             display_tbl.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     try {
                         display_tblMouseClicked(e);
-                    } catch (Exception e1) {
-                        e1.printStackTrace();
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
                     }
                 }
             });
             jScrollPane1.setViewportView(display_tbl);
         }
-
         GroupLayout contentPaneLayout = new GroupLayout(contentPane);
         contentPane.setLayout(contentPaneLayout);
         contentPaneLayout.setHorizontalGroup(
                 contentPaneLayout.createParallelGroup()
                         .addGroup(contentPaneLayout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(sair_btn, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 208, Short.MAX_VALUE)
+                                .addComponent(sair_btn, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 187, Short.MAX_VALUE)
                                 .addComponent(novo_robot_btn)
                                 .addContainerGap())
                         .addGroup(contentPaneLayout.createSequentialGroup()
                                 .addGap(37, 37, 37)
                                 .addGroup(contentPaneLayout.createParallelGroup()
                                         .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 326, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(robot_txt, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(robot_txt, GroupLayout.PREFERRED_SIZE, 124, GroupLayout.PREFERRED_SIZE))
                                 .addContainerGap(35, Short.MAX_VALUE))
         );
         contentPaneLayout.setVerticalGroup(
                 contentPaneLayout.createParallelGroup()
                         .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
                                 .addGap(27, 27, 27)
-                                .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(robot_txt, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                        .addComponent(sair_btn)
-                                        .addComponent(novo_robot_btn))
+                                        .addComponent(novo_robot_btn)
+                                        .addComponent(sair_btn))
                                 .addContainerGap())
         );
         pack();
@@ -187,14 +176,19 @@ public class RobotFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license 
+    // Generated using JFormDesigner Evaluation license
     private JButton sair_btn;
     private JButton novo_robot_btn;
     private JTextField robot_txt;
     private JScrollPane jScrollPane1;
     private JTable display_tbl;
+
+
     // End of variables declaration//GEN-END:variables
 
 
 
-}
+
+
+
+    }

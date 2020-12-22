@@ -4,12 +4,12 @@ import java.util.Collection;
 import java.util.TreeSet;
 /*implements Comparable<Robot>*/
 public class Robot {
-    private String id;
+    private int id;
     private boolean estadoLivre;
     private Collection<String> lstRobots;
 
     public Robot() {
-        this.id = " ";
+        this.id = -1 ;
         this.estadoLivre= true;
         this.lstRobots = new TreeSet<>();
     }
