@@ -53,3 +53,5 @@ public class Rota<L extends Localizacao> implements Comparable<Rota> {
         }
     }
 }
+
+
