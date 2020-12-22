@@ -1,19 +1,44 @@
 package business;
 
-public class Rota<Localizacao> implements Comparable<Rota> {
-    private final Localizacao current;
-    private Localizacao previous;
+public class Rota<L extends Localizacao> implements Comparable<Rota> {
+    private final L current;
+    private L previous;
     private double routeScore;
     private double estimatedScore;
 
-    Rota(Localizacao current) {
+    Rota(L current) {
         this(current, null, Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY);
     }
 
-    Rota(Localizacao current, Localizacao previous, double routeScore, double estimatedScore) {
+    Rota(L current, L previous, double routeScore, double estimatedScore) {
         this.current = current;
         this.previous = previous;
         this.routeScore = routeScore;
+        this.estimatedScore = estimatedScore;
+    }
+
+    public L getCurrent() {
+        return current;
+    }
+
+    public L getPrevious() {
+        return previous;
+    }
+    public void setPrevious(L previous) {
+        this.previous = previous;
+    }
+
+    public double getRouteScore() {
+        return routeScore;
+    }
+    public void setRouteScore(double routeScore) {
+        this.routeScore = routeScore;
+    }
+
+    public double getEstimatedScore() {
+        return estimatedScore;
+    }
+    public void setEstimatedScore(double estimatedScore) {
         this.estimatedScore = estimatedScore;
     }
 
@@ -27,4 +52,5 @@ public class Rota<Localizacao> implements Comparable<Rota> {
             return 0;
         }
     }
+
 }
