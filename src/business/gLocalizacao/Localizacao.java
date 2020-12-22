@@ -1,4 +1,4 @@
-package business;
+package business.gLocalizacao;
 
 import java.util.ArrayList;
 import java.util.List;

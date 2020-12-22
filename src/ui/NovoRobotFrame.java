@@ -1,8 +1,7 @@
 package ui;
 
 import business.ArmazemFacade;
-import business.Robot;
-import data.RobotDAO;
+import business.gConta.Robot;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -19,7 +18,7 @@ public class NovoRobotFrame extends javax.swing.JFrame{
             Boolean estado = Boolean.valueOf(estado_txt.getText());
             if(!id.equals("") && !estado.equals("")){
                 this.af.registaRobot(id,estado);
-                List<Robot> list = (List<Robot>) this.af.getRobots(id);
+                List<Robot> list = (List<Robot>) this.af.getRobots();
                 this.to_update.updateTable(list);
                 this.to_update.updateList(list);
 

@@ -1,6 +1,6 @@
 package data;
 
-import business.Gestor;
+import business.gConta.Gestor;
 
 import java.sql.*;
 import java.util.Collection;

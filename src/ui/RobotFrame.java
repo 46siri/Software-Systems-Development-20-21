@@ -1,8 +1,7 @@
 package ui;
-import business.Robot;
+import business.gConta.Robot;
 import business.ArmazemFacade;
 
-import javax.swing.table.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Collection;
@@ -42,7 +41,7 @@ public class RobotFrame extends javax.swing.JFrame {
             int row = this.display_tbl.getSelectedRow();
             String id = (String) this.display_tbl.getModel().getValueAt(row, 0).toString();
 
-            Robot selected = (Robot) this.af.getRobots(id);
+            Robot selected = (Robot) this.af.getRobots();
 
             new AlterarRobotFrame(selected,af,this).setVisible(true);
         }
@@ -70,7 +69,7 @@ public class RobotFrame extends javax.swing.JFrame {
     public RobotFrame(ArmazemFacade af, String id) throws Exception {
         initComponents();
         this.af = af;
-        this.robots = (List<Robot>) af.getRobots(id);
+        this.robots = (List<Robot>) af.getRobots();
         updateTable(this.robots);
     }
 

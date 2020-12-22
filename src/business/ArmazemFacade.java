@@ -1,6 +1,10 @@
 package business;
 
 
+import business.gArmazem.Palete;
+import business.gArmazem.Prateleira;
+import business.gConta.Gestor;
+import business.gConta.Robot;
 import data.*;
 
 import java.sql.SQLException;
@@ -15,15 +19,16 @@ public class ArmazemFacade implements IArmazemFacade {
     private Map<String, Palete> paletes;
     private Map<String, Prateleira> prateleiras;
 
-    public ArmazemFacade() throws SQLException {
+
+    public ArmazemFacade(){
         this.robots = RobotDAO.getInstance();
         this.gestores = GestorDAO.getInstance();
         this.paletes = PaleteDAO.getInstance();
-        this.prateleiras = PrateleiraDAO.getInstance();
+        this.prateleiras = (Map<String, Prateleira>) PrateleiraDAO.getInstance();
     }
     //ROBOTS
     /**
-     * Método que devolve todos os alunos registados.
+     * Método que devolve todos os robots registados.
      *
      * @return todos os robots registados
      */
@@ -32,12 +37,14 @@ public class ArmazemFacade implements IArmazemFacade {
         return new ArrayList<>(this.robots.values());
     }
 
+
     /**
      * @param rid id do robot a procurar
      * @return true se o robot existe
      */
     @Override
-    public boolean existeRobot(int rid){return robots.containsKey(rid);}
+    public boolean existeRobot(String rid){return robots.containsKey(rid);}
+
 
     /**
      * @param r robot a dicionar
@@ -50,12 +57,29 @@ public class ArmazemFacade implements IArmazemFacade {
      * @param rid id do robot
      */
     @Override
-    public void removeRobot(int rid) {
+    public void removeRobot(String rid) {
         Robot r = this.robots.get(rid);
         r.removeRobot(rid);
         this.robots.put(rid, r);  // Necessário fazer put para actualizar a BD.
     }
 
+
+
+    /**
+     * Método que altera um robot do armazem
+     *
+     * @param rid id do robot
+     */
+    public void alteraRobot (String rid, Boolean estado){
+        Robot r = new Robot(rid, estado);
+        this.robots.put(rid,r);
+    }
+
+    public void registaRobot(String rid, Boolean estado)throws SQLException, ClassNotFoundException{
+        Robot r;
+        r = new Robot(rid, estado);
+        this.robots.put(rid, r);
+    }
 
     //GESTOR
 
@@ -88,7 +112,19 @@ public class ArmazemFacade implements IArmazemFacade {
      */
     @Override
     public Gestor procuraGestor(String username) { return this.gestores.get(username); }
-
+    /**
+     * Método para registar um gestor no sistema.
+     * @param nome Nome do gestor.
+     * @param userName user name do gestor.
+     * @param email Email do gestor.
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
+    public void registaGestor(String userName,String nome, String email) throws SQLException, ClassNotFoundException{
+        Gestor g ;
+        g = new Gestor(userName, nome, email);
+        this.gestores.put(userName, g);
+    }
     /**
      * Método que remove um gestor do armazem
      *
@@ -100,6 +136,16 @@ public class ArmazemFacade implements IArmazemFacade {
         g.removeGestor(username);
         this.gestores.put(username, g);  // Necessário fazer put para actualizar a BD.
     }
+    /**
+     * Método que altera um gestor do armazem
+     *
+     * @param userName userName do gestor
+     */
+    public void alteraGestor (String userName,String password, String nome, String email){
+        Gestor g = new Gestor(userName, password ,nome, email);
+        this.gestores.put(userName,g);
+    }
+
 
     /**
      * @param p palete a dicionar
@@ -107,16 +153,18 @@ public class ArmazemFacade implements IArmazemFacade {
     @Override
     public void adicionaPalete(Palete p){this.paletes.put(p.getId(),p);}
 
+
+
     /**
      * @param id username da palete a procurar
      * @return true se a palete existe
      */
     @Override
-    public boolean existePalete(int id){return this.paletes.containsKey(id);}
+    public boolean existePalete(String id){return this.paletes.containsKey(id);}
 
     @Override
-    public void  armazenarPalete(int id){
-        //
+    public void  armazenarPalete(String id){
+        return;
     }
 
     @Override
@@ -129,7 +177,4 @@ public class ArmazemFacade implements IArmazemFacade {
     public Collection<Prateleira> listarLocalizacoes() {
         return new ArrayList<>(this.prateleiras.values());
     }
-
-    public Object getRobots(int id) {
     }
-}

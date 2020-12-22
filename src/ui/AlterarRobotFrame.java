@@ -1,9 +1,11 @@
 package ui;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Collection;
+import java.util.List;
 
 import business.ArmazemFacade;
-import business.Robot;
+import business.gConta.Robot;
 
 import javax.swing.*;
 
@@ -15,24 +17,23 @@ public class AlterarRobotFrame extends javax.swing.JFrame {
     private void  atualizar_btnActionPerformed(ActionEvent e) {
         this.dispose();
         try {
-            int id = Integer.parseInt(id_txt.getText());
+            String id = id_txt.getText();
 
             Robot tmp = new Robot(robot.getId());
 
-            if (!(id == -1)) {
+            if (!(id.equals(""))) {
                 if (!tmp.equals(robot)) {
                     this.af.alteraRobot(robot.getId());
 
-                    List<Robot> list = this.af.getRobots();
-                    this.to_update.updateTable(list);
-                    this.to_update.updateList(list);
+                    List<Robot> list = (List<Robot>) this.af.getRobots();
+                    this.to_update.updateTable((Collection<Robot>) list);
+                    this.to_update.updateList((java.util.List<Robot>) list);
 
                     JOptionPane.showMessageDialog(new JFrame(), "Robot alterado com sucesso", "Robot alterado", JOptionPane.INFORMATION_MESSAGE);
-                    this.dispose();
                 } else {
                     JOptionPane.showMessageDialog(new JFrame(), "Robot não sofreu alteração nenhuma.", "Robot inalterado", JOptionPane.INFORMATION_MESSAGE);
-                    this.dispose();
                 }
+                this.dispose();
             }
         } catch (Exception a) {
             JOptionPane.showMessageDialog(new JFrame(), "ERROR", "", JOptionPane.INFORMATION_MESSAGE);

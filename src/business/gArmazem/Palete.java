@@ -1,4 +1,6 @@
-package business;
+package business.gArmazem;
+
+import business.gLocalizacao.Localizacao;
 
 import java.util.*;
 
