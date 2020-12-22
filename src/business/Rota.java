@@ -44,9 +44,9 @@ public class Rota<L extends Localizacao> implements Comparable<Rota> {
 
     @Override
     public int compareTo(Rota other) {
-        if (this.estimatedScore > other.estimatedScore) {
+        if (this.estimatedScore > other.getEstimatedScore()) {
             return 1;
-        } else if (this.estimatedScore < other.estimatedScore) {
+        } else if (this.estimatedScore < other.getEstimatedScore()) {
             return -1;
         } else {
             return 0;

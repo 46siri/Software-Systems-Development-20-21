@@ -20,8 +20,8 @@ public class GeradorRota<L extends Localizacao> {
         Rota<L> start = new Rota<>(from, null, 0d, targetScore.computeCost(from, to));
         openSet.add(start);
         allNodes.put(from, start);
-        Rota<L> next = openSet.poll();
         while (!openSet.isEmpty()) {
+            Rota<L> next = openSet.poll();
             if (next.getCurrent().equals(to)) {
                 List<L> route = new ArrayList<>();
                 Rota<L> current = next;
@@ -31,20 +31,20 @@ public class GeradorRota<L extends Localizacao> {
                 } while (current != null);
                 return route;
             }
-        }
-        assert next != null;
-        mapa.getConnections(next.getCurrent()).forEach(connection -> {
-            Rota<L> nextNode = allNodes.getOrDefault(connection, new Rota<>(connection));
-            allNodes.put(connection, nextNode);
+            mapa.getConnections(next.getCurrent()).forEach(connection -> {
+                Rota<L> nextNode = allNodes.getOrDefault(connection, new Rota<>(connection));
+                allNodes.put(connection, nextNode);
 
-            double newScore = next.getRouteScore() + nextNodeScore.computeCost(next.getCurrent(), connection);
-            if (newScore < nextNode.getRouteScore()) {
-                nextNode.setPrevious(next.getCurrent());
-                nextNode.setRouteScore(newScore);
-                nextNode.setEstimatedScore(newScore + targetScore.computeCost(connection, to));
-                openSet.add(nextNode);
-            }
-        });
+                double newScore = next.getRouteScore() + nextNodeScore.computeCost(next.getCurrent(), connection);
+                if (newScore < nextNode.getRouteScore()) {
+                    nextNode.setPrevious(next.getCurrent());
+                    nextNode.setRouteScore(newScore);
+                    nextNode.setEstimatedScore(newScore + targetScore.computeCost(connection, to));
+                    openSet.add(nextNode);
+                }
+            });
+        }
+
 
         throw new IllegalStateException("No route found");
     }
