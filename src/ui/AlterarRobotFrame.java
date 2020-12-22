@@ -1,11 +1,9 @@
 package ui;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.Collection;
-import java.util.List;
 
 import business.ArmazemFacade;
-import business.gConta.Robot;
+import business.Robot;
 
 import javax.swing.*;
 
@@ -17,23 +15,24 @@ public class AlterarRobotFrame extends javax.swing.JFrame {
     private void  atualizar_btnActionPerformed(ActionEvent e) {
         this.dispose();
         try {
-            String id = id_txt.getText();
+            int id = Integer.parseInt(id_txt.getText());
 
-            Robot tmp = new Robot(robot.getId());
+            Robot tmp = new Robot();
 
-            if (!(id.equals(""))) {
+            if (!(id == -1)) {
                 if (!tmp.equals(robot)) {
                     this.af.alteraRobot(robot.getId());
 
-                    List<Robot> list = (List<Robot>) this.af.getRobots();
-                    this.to_update.updateTable((Collection<Robot>) list);
-                    this.to_update.updateList((java.util.List<Robot>) list);
+                    List<Robot> list = this.af.getRobots();
+                    this.to_update.updateTable(list);
+                    this.to_update.updateList(list);
 
                     JOptionPane.showMessageDialog(new JFrame(), "Robot alterado com sucesso", "Robot alterado", JOptionPane.INFORMATION_MESSAGE);
+                    this.dispose();
                 } else {
                     JOptionPane.showMessageDialog(new JFrame(), "Robot não sofreu alteração nenhuma.", "Robot inalterado", JOptionPane.INFORMATION_MESSAGE);
+                    this.dispose();
                 }
-                this.dispose();
             }
         } catch (Exception a) {
             JOptionPane.showMessageDialog(new JFrame(), "ERROR", "", JOptionPane.INFORMATION_MESSAGE);
@@ -43,7 +42,7 @@ public class AlterarRobotFrame extends javax.swing.JFrame {
      * Creates new form NovoRobotFrame
      */
     public AlterarRobotFrame(Robot r,ArmazemFacade af, RobotFrame f) {
-        initComponents();0
+        initComponents();
         this.af = af;
         this.to_update=f;
         this.robot = r;
@@ -122,4 +121,4 @@ public class AlterarRobotFrame extends javax.swing.JFrame {
     private JLabel label1;
     // End of variables declaration//GEN-END:variables
 }
-    }
+
