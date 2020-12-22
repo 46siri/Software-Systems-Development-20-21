@@ -1,5 +1,5 @@
 package ui;
-import business.Robot;
+import business.RobotManager;
 import business.ArmazemFacade;
 
 import javax.swing.table.*;
@@ -15,13 +15,13 @@ import javax.swing.table.DefaultTableModel;
 
 public class RobotFrame extends javax.swing.JFrame {
     ArmazemFacade af;
-    List<Robot> robots;
+    List<RobotManager> robots;
 
     /**
      * Método que atualiza a tabela dos robots
      * @param robots nova lista de robots a exibir
      */
-    public void updateTable (Collection<Robot> robots){
+    public void updateTable (Collection<RobotManager> robots){
         DefaultTableModel model = (DefaultTableModel) display_tbl.getModel();
         Object row_data[] = new Object[1];
 
@@ -29,7 +29,7 @@ public class RobotFrame extends javax.swing.JFrame {
         model.setRowCount(0);
 
         //Adiciona novos
-        for(Robot r : robots){
+        for(RobotManager r : robots){
             row_data[0] = r.getId();
             model.addRow(row_data);
         }
@@ -42,7 +42,7 @@ public class RobotFrame extends javax.swing.JFrame {
             int row = this.display_tbl.getSelectedRow();
             int id = (int) this.display_tbl.getModel().getValueAt(row, 0);
 
-            Robot selected = (Robot) this.af.getRobots(id);
+            RobotManager selected = (RobotManager) this.af.getRobots(id);
 
             new AlterarRobotFrame(selected,af,this).setVisible(true);
         }
@@ -50,7 +50,7 @@ public class RobotFrame extends javax.swing.JFrame {
     private void robot_txtKeyReleased(KeyEvent e) {
         String to_search = robot_txt.getText();
 
-        Collection<Robot> robots = this.robots.stream().filter(r -> r.getId().contains(to_search))
+        Collection<RobotManager> robots = this.robots.stream().filter(r -> r.getId().contains(to_search))
                 .collect(Collectors.toList());
 
         updateTable(robots);
@@ -60,7 +60,7 @@ public class RobotFrame extends javax.swing.JFrame {
         this.dispose();
     }
 
-    public void updateList(List<Robot> list) {
+    public void updateList(List<RobotManager> list) {
         this.robots = list;
     }
 
@@ -70,7 +70,7 @@ public class RobotFrame extends javax.swing.JFrame {
     public RobotFrame(ArmazemFacade af) throws Exception {
         initComponents();
         this.af = af;
-        this.robots = (List<Robot>) af.getRobots();
+        this.robots = (List<RobotManager>) af.getRobots();
         updateTable(this.robots);
     }
 

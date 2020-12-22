@@ -1,9 +1,8 @@
 package ui;
 import business.ArmazemFacade;
 import business.Gestor;
-import business.Robot;
+import business.RobotManager;
 
-import java.lang.String;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -13,7 +12,7 @@ import javax.swing.LayoutStyle;
 public class ArmazemFrame extends javax.swing.JFrame {
     ArmazemFacade af;
     Gestor g;
-    Robot r;
+    RobotManager r;
 
     private void sair_btnActionPerformed (ActionEvent e){
         this.dispose();
@@ -36,7 +35,7 @@ public class ArmazemFrame extends javax.swing.JFrame {
      * Creates new from ArmazemFrame
      */
 
-    public armazemFrame(ArmazemFacade af, Gestor g, Robot r){
+    public armazemFrame(ArmazemFacade af, Gestor g, RobotManager r){
         initComponents();
         this.af = af;
         this.g = g;

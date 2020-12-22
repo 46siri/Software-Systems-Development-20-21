@@ -1,24 +1,44 @@
 package business;
 
-import java.util.Collection;
-import java.util.Scanner;
-import java.util.TreeSet;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 public class Localizacao {
-    private char zona;
-    private char seccao;
-    private char prateleira;
+    private int id;
 
-    public Localizacao() {
-        this.zona = ' '; // A-descarga  B-prateleiras C
-        this.seccao = ' ';
-        this.prateleira = ' ';
+    public Localizacao(int id) {
+        this.id = id;
     }
 
-    public Localizacao(char zona, char seccao, char prateleira){
-        this.zona = zona;
-        this.seccao = seccao;
-        this.prateleira = prateleira;
+    public int getId() { return this.id; }
+    public void setId(int id) { this.id = id; }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Localizacao)) return false;
+        Localizacao that = (Localizacao) o;
+        return getId() == that.getId();
+    }
+
+    /*
+    public List<Localizacao> getPercurso(Localizacao destino) {
+        List<Localizacao> result = new ArrayList<>(){};
+        if(this.equals(destino)) {
+            result.add(destino);
+        }else{
+            int size = this.mapa.size();
+            while (size > 0){ // verificar isto
+                result.a (mapa.get(size).getNodo().getPercurso(destino));
+            }
+        }
+        return result;
+    }
+
+    public int percurso(Localizacao destino){
+        int result = 0;
+        return result;
     }
 
     public void toLocalizacao(String local){
@@ -29,4 +49,6 @@ public class Localizacao {
 
     @Override
     public String toString(){return "Localização:" +this.zona + this.seccao + this.zona; }
+*/
+
 }

@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class ArmazemFacade implements IArmazemFacade {
 
-    private Map<String, Robot> robots;
+    private Map<String, RobotManager> robots;
     private Map<String, Gestor> gestores;
     private Map<String, Palete> paletes;
     private Map<String, Prateleira> prateleiras;
@@ -28,7 +28,7 @@ public class ArmazemFacade implements IArmazemFacade {
      * @return todos os robots registados
      */
     @Override
-    public Collection<Robot> getRobots() {
+    public Collection<RobotManager> getRobots() {
         return new ArrayList<>(this.robots.values());
     }
 
@@ -42,7 +42,7 @@ public class ArmazemFacade implements IArmazemFacade {
     /**
      * @param r robot a dicionar
      */
-    public void adicionaRobot(Robot r){this.robots.put(r.getId(),r);}
+    public void adicionaRobot(RobotManager r){this.robots.put(r.getId(),r);}
 
     /**
      * Método que remove um robot do armazem
@@ -51,7 +51,7 @@ public class ArmazemFacade implements IArmazemFacade {
      */
     @Override
     public void removeRobot(int rid) {
-        Robot r = this.robots.get(rid);
+        RobotManager r = this.robots.get(rid);
         r.removeRobot(rid);
         this.robots.put(rid, r);  // Necessário fazer put para actualizar a BD.
     }
