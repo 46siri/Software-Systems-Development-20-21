@@ -15,7 +15,6 @@ public class Mapa<L extends Localizacao> {
         this.connections = connections;
     }
 
-
     public L getNode(int id) {
         return nodes.stream()
                 .filter(node -> node.getId() == (id))
@@ -27,6 +26,10 @@ public class Mapa<L extends Localizacao> {
         return connections.get(node.getId()).keySet().stream()
                 .map(this::getNode)
                 .collect(Collectors.toSet());
+    }
+
+    public double getDistance(L from, L to) {
+        return connections.get(from.getId()).get(to.getId());
     }
 
 }

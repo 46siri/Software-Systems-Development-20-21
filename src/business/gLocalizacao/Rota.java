@@ -1,56 +1,46 @@
 package business.gLocalizacao;
 
-public class Rota<L extends Localizacao> implements Comparable<Rota> {
-    private final L current;
-    private L previous;
-    private double routeScore;
-    private double estimatedScore;
+public class Rota implements Comparable<Rota> {
+    private final Localizacao current;
+    private Rota previous;
+    private double value;
 
-    Rota(L current) {
-        this(current, null, Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY);
+    Rota(Localizacao current) {
+        this.current = current;
+        this.previous = null;
+        this.value = 0d;
     }
 
-    Rota(L current, L previous, double routeScore, double estimatedScore) {
+    Rota(Localizacao current, Rota previous, double value) {
         this.current = current;
         this.previous = previous;
-        this.routeScore = routeScore;
-        this.estimatedScore = estimatedScore;
+        this.value = value;
     }
 
-    public L getCurrent() {
+    public Localizacao getCurrent() {
         return current;
     }
 
-    public L getPrevious() {
+    public Rota getPrevious() {
         return previous;
     }
-    public void setPrevious(L previous) {
+    public void setPrevious(Rota previous) {
         this.previous = previous;
     }
 
-    public double getRouteScore() {
-        return routeScore;
+    public double getValue() {
+        return value;
     }
-    public void setRouteScore(double routeScore) {
-        this.routeScore = routeScore;
+    public void setValue(double value) {
+        this.value = value;
     }
-
-    public double getEstimatedScore() {
-        return estimatedScore;
-    }
-    public void setEstimatedScore(double estimatedScore) {
-        this.estimatedScore = estimatedScore;
+    public void incrementValue(double value){
+        this.value = this.value+value;
     }
 
     @Override
-    public int compareTo(Rota other) {
-        if (this.estimatedScore > other.getEstimatedScore()) {
-            return 1;
-        } else if (this.estimatedScore < other.getEstimatedScore()) {
-            return -1;
-        } else {
-            return 0;
-        }
+    public int compareTo(Rota other) { //não sei se o comparador tem de ficar assim ou ao contrario
+        return Double.compare(this.value, other.getValue());
     }
 }
 

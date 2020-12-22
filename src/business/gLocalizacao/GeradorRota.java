@@ -1,51 +1,45 @@
 package business.gLocalizacao;
 
+import java.security.cert.CollectionCertStoreParameters;
 import java.util.*;
 
-public class GeradorRota<L extends Localizacao> {
-    private final Mapa<L> mapa;
-    private final Custos<L> nextNodeScore;
-    private final Custos<L> targetScore;
+public class GeradorRota {
+    private final Mapa<Localizacao> mapa;
 
-    public GeradorRota(Mapa<L> mapa, Custos<L> nextNodeScorer, Custos<L> targetScorer) {
+    public GeradorRota(Mapa<Localizacao> mapa) {
         this.mapa = mapa;
-        this.nextNodeScore = nextNodeScorer;
-        this.targetScore = targetScorer;
     }
 
-    public List<L> findRoute(L from, L to) {
-        Queue<Rota<L>> openSet = new PriorityQueue<>();
-        Map<L, Rota<L>> allNodes = new HashMap<>();
+    public List<Localizacao> findRoute(Localizacao from, Localizacao to) {
+        Queue<Rota> openSet = new PriorityQueue<>();//rotas a procurar ordenadas pela menor primeiro
+        List<Localizacao> allNodes = new ArrayList<>();//Set com todas as Localizacoes usadas
 
-        Rota<L> start = new Rota<>(from, null, 0d, targetScore.computeCost(from, to));
+        Rota start = new Rota(from);
         openSet.add(start);
-        allNodes.put(from, start);
+        allNodes.add(from);
         while (!openSet.isEmpty()) {
-            Rota<L> next = openSet.poll();
+            Rota next = openSet.poll();
+            // Verifica se esta no nodo de destino e retorna o caminho desejado
             if (next.getCurrent().equals(to)) {
-                List<L> route = new ArrayList<>();
-                Rota<L> current = next;
+                List<Localizacao> route = new ArrayList<>();
+                Rota current = next;
                 do {
                     route.add(0, current.getCurrent());
-                    current = allNodes.get(current.getPrevious());
+                    current = current.getPrevious();
                 } while (current != null);
                 return route;
             }
-            mapa.getConnections(next.getCurrent()).forEach(connection -> {
-                Rota<L> nextNode = allNodes.getOrDefault(connection, new Rota<>(connection));
-                allNodes.put(connection, nextNode);
+            //procurar
+            for (Localizacao connection : mapa.getConnections(next.getCurrent())) {//forEach ligacao ao nodo em que estamos
+                if (!allNodes.contains(connection)) { //impede de procurar em nodos anteriores
+                    Rota nextNode = new Rota(connection, next, next.getValue());
+                    nextNode.incrementValue(mapa.getDistance(next.getCurrent(), connection));
 
-                double newScore = next.getRouteScore() + nextNodeScore.computeCost(next.getCurrent(), connection);
-                if (newScore < nextNode.getRouteScore()) {
-                    nextNode.setPrevious(next.getCurrent());
-                    nextNode.setRouteScore(newScore);
-                    nextNode.setEstimatedScore(newScore + targetScore.computeCost(connection, to));
+                    allNodes.add(connection);
                     openSet.add(nextNode);
                 }
-            });
+            }
         }
-
-
         throw new IllegalStateException("No route found");
     }
 }
