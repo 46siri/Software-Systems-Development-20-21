@@ -10,7 +10,7 @@ import java.util.Scanner;
  * Interface em modo texto.
  * Comunicação com o leitor e os robots
  *
- * @author Grupo 09
+ * @author Grupo09
  * @version 202012
  */
 public class TextUI {

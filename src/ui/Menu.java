@@ -87,7 +87,7 @@ public class Menu {
     /** Apresentar o menu */
     private void show() {
         System.out.println("\n********** MENU **********");
-        System.out.println("\nSelecone o número corresponde à operação que deseja realizar");
+        System.out.println("\nSelecione o número corresponde à operação que deseja realizar");
         for(int i = 0; i<this.opcoes.size(); i++){
             System.out.print(i+1);
             System.out.print(" - ");
