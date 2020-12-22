@@ -73,7 +73,7 @@ public class PaleteDAO implements Map<String, Palete> {
     }
 
     /**
-     * Método que cerifica se um id de turma existe na base de dados
+     * Método que cerifica se um id de palete existe na base de dados
      *
      * @param key id da palete
      * @return true se a palete existe
@@ -167,7 +167,7 @@ public class PaleteDAO implements Map<String, Palete> {
      */
     @Override
     public Palete remove(Object key) {
-        Palete t = this.get(key);
+        Palete p = this.get(key);
         try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
              Statement stm = conn.createStatement()) {
             stm.executeUpdate("DELETE FROM paletes WHERE Num='"+key+"'");
@@ -176,7 +176,7 @@ public class PaleteDAO implements Map<String, Palete> {
             e.printStackTrace();
             throw new NullPointerException(e.getMessage());
         }
-        return t;
+        return p;
     }
 
     /**

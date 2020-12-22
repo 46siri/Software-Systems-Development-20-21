@@ -66,9 +66,9 @@ public class PrateleiraDAO implements Map<String, Prateleira>{
     }
 
     /**
-     * Método que cerifica se um id de turma existe na base de dados
+     * Método que cerifica se um num de prateleira existe na base de dados
      *
-     * @param key id da Prateleira
+     * @param key num da Prateleira
      * @return true se a Prateleira existe
      * @throws NullPointerException Em caso de erro - deveriam ser criadas exepções do projecto
      */
@@ -78,7 +78,7 @@ public class PrateleiraDAO implements Map<String, Prateleira>{
         try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
              Statement stm = conn.createStatement();
              ResultSet rs =
-                     stm.executeQuery("SELECT id FROM prateleiras WHERE num='"+key.toString()+"'")) {
+                     stm.executeQuery("SELECT num FROM prateleiras WHERE num='"+key.toString()+"'")) {
              r = rs.next();
         } catch (SQLException e) {
             // Database error!
@@ -91,7 +91,7 @@ public class PrateleiraDAO implements Map<String, Prateleira>{
     /**
      * Verifica se uma Prateleira existe na base de dados
      *
-     * @param value id da Prateleira
+     * @param value num da Prateleira
      * @return true se Prateleira existe
      * @throws NullPointerException Em caso de erro - deveriam ser criadas exepções do projecto
      */
@@ -102,9 +102,9 @@ public class PrateleiraDAO implements Map<String, Prateleira>{
     }
 
     /**
-     * Obter uma Prateleira, dado o seu id
+     * Obter uma Prateleira, dado o seu num
      *
-     * @param key id da Prateleira
+     * @param key num da Prateleira
      * @return o prateleira caso exista (null noutro caso)
      * @throws NullPointerException Em caso de erro - deveriam ser criadas exepções do projecto
      */
@@ -113,7 +113,7 @@ public class PrateleiraDAO implements Map<String, Prateleira>{
         Prateleira p = null;
         try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
              Statement stm = conn.createStatement();
-             ResultSet rs = stm.executeQuery("SELECT * FROM prateleiras WHERE Id='"+key+"'")) {
+             ResultSet rs = stm.executeQuery("SELECT * FROM prateleiras WHERE num='"+key+"'")) {
             if (rs.next()) {  // A chave existe na tabela
                 p = new Prateleira(rs.getString("Num"), rs.getString("Localizacao"), rs.getBoolean("Estado"));
             }
@@ -130,7 +130,7 @@ public class PrateleiraDAO implements Map<String, Prateleira>{
      *
      * ATENÇÂO: Falta devolver o valor existente (caso exista um)
      *
-     * @param key o id da Prateleira
+     * @param key o num da Prateleira
      * @param p a Prateleira
      * @return devolve o valor existente, caso exista um
      * @throws NullPointerException Em caso de erro - deveriam ser criadas exepções do projecto
@@ -152,17 +152,17 @@ public class PrateleiraDAO implements Map<String, Prateleira>{
     }
 
     /**
-     * Remover uma Prateleira, dado o seu id
+     * Remover uma Prateleira, dado o seu num
      *
      * NOTA: Não estamos a apagar a sala...
      *
-     * @param key id da Prateleira a remover
+     * @param key num da Prateleira a remover
      * @return a Prateleira removida
      * @throws NullPointerException Em caso de erro - deveriam ser criadas exepções do projecto
      */
     @Override
     public Prateleira remove(Object key) {
-        Prateleira t = this.get(key);
+        Prateleira p = this.get(key);
         try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
              Statement stm = conn.createStatement()) {
             stm.executeUpdate("DELETE FROM prateleiras WHERE Num='"+key+"'");
@@ -171,7 +171,7 @@ public class PrateleiraDAO implements Map<String, Prateleira>{
             e.printStackTrace();
             throw new NullPointerException(e.getMessage());
         }
-        return t;
+        return p;
     }
 
     /**
@@ -217,7 +217,7 @@ public class PrateleiraDAO implements Map<String, Prateleira>{
         Collection<Prateleira> col = new HashSet<>();
         try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
              Statement stm = conn.createStatement();
-             ResultSet rs = stm.executeQuery("SELECT Id FROM prateleiras")) {
+             ResultSet rs = stm.executeQuery("SELECT num FROM prateleiras")) {
             while (rs.next()) {   // Utilizamos o get para construir as alunos
                 col.add(this.get(rs.getString("Num")));
             }

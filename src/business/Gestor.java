@@ -1,12 +1,11 @@
 package business;
-import java.String.*;
-import java.util.ArrayList;
+
 import java.util.Collection;
 
 /**
  * Classe que reprsenta um gestor
  *
- * @author Grupo 09
+ * @author Grupo09
  * @version 202012
  */
 public class Gestor implements Comparable<Gestor> {
@@ -24,6 +23,11 @@ public class Gestor implements Comparable<Gestor> {
         this.email = mail;
     }
 
+    public String getUserName(){return user;}
+    public String getPassword(){return password;}
+    public String getNome(){return nome;}
+    public String getEmail(){return email;}
+
     private void setUsr(String usr) {
         this.user = usr;
     }
@@ -31,8 +35,7 @@ public class Gestor implements Comparable<Gestor> {
         this.password = pass;
     }
 
-    public String getUserName(){return user;}
-    public String getPassword(){return password;}
+
 
     public void removeGestor(String username){this.lstGestores.remove(username);}
 

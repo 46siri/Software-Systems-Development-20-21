@@ -66,10 +66,10 @@ public class RobotDAO implements Map<String, Robot> {
     }
 
     /**
-     * Método que cerifica se um id de turma existe na base de dados
+     * Método que cerifica se um id de robot existe na base de dados
      *
-     * @param key id da Robot
-     * @return true se a Robot existe
+     * @param key id do Robot
+     * @return true se o Robot existe
      * @throws NullPointerException Em caso de erro - deveriam ser criadas exepções do projecto
      */
     @Override
