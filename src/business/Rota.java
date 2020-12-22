@@ -1,29 +1,30 @@
 package business;
 
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
+public class Rota<Localizacao> implements Comparable<Rota> {
+    private final Localizacao current;
+    private Localizacao previous;
+    private double routeScore;
+    private double estimatedScore;
 
-public class Rota{
-    private final Set<Localizacao> nodes;
-    private final Map<Integer, Set<Integer>> connections; // Os ints são ids de localizacoes
-
-    public Rota(Set<Localizacao> nodes, Map<Integer, Set<Integer>> connections) {
-        this.nodes = nodes;
-        this.connections = connections;
+    Rota(Localizacao current) {
+        this(current, null, Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY);
     }
 
-    public Localizacao getNode(int id) {
-        return nodes.stream()
-                .filter(node -> node.getId() == (id))
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("No node found with ID"));
+    Rota(Localizacao current, Localizacao previous, double routeScore, double estimatedScore) {
+        this.current = current;
+        this.previous = previous;
+        this.routeScore = routeScore;
+        this.estimatedScore = estimatedScore;
     }
 
-    public Set<Localizacao> getConnections(Localizacao node) {
-        return connections.get(node.getId()).stream()
-                .map(this::getNode)
-                .collect(Collectors.toSet());
+    @Override
+    public int compareTo(Rota other) {
+        if (this.estimatedScore > other.estimatedScore) {
+            return 1;
+        } else if (this.estimatedScore < other.estimatedScore) {
+            return -1;
+        } else {
+            return 0;
+        }
     }
-
 }
