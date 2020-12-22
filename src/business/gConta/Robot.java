@@ -1,47 +1,46 @@
 package business.gConta;
 
+import business.gLocalizacao.Localizacao;
+
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.TreeSet;
 /*implements Comparable<Robot>*/
 public class Robot {
-    private String id;
-    private boolean estadoLivre;
-    private Collection<String> lstRobots;
+    private int id;
+    private Localizacao localizacao;
 
-    public Robot() {
-        this.id = "" ;
-        this.estadoLivre= true;
-        this.lstRobots = new TreeSet<>();
-    }
-
-    public Robot(String id, boolean estado){
+    public Robot(int id, Localizacao localizacao){
         this.id = id;
-        this.estadoLivre = estado;
+        this.localizacao = localizacao;
     }
 
-    public String getId() { return this.id; }
+    public int getId() { return this.id; }
+    public void setId(int id) {
+        this.id = id;
+    }
 
-    public void removeRobot(String id){this.lstRobots.remove(id);}
+    public Localizacao getLocalizacao() {
+        return localizacao;
+    }
+    public void setLocalizacao(Localizacao localizacao) {
+        this.localizacao = localizacao;
+    }
 
     //alterar localização da palete - em robot
     public void notificaRecolha(){
 
     }
 
+    // o robot vai receber um arraylist com localizacoes e vai para eles uma por uma
+    public void deslocacao(){
+
+    }
+
     //alterar localização da palete - em preteleira
     public void notificaEntrega(){
-
     }
 
     private void getRobot(int id_robot) {
     }
-
-    public void setEstado(boolean estado){ this.estadoLivre = estado; }
-/*
-    @Override
-    public int compareTo(Robot o) {
-        return this.id.compareTo(o.getId());
-    }*/
-
-
 }
