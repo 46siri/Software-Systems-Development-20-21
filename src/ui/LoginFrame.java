@@ -1,11 +1,13 @@
 package ui;
 
+import business.ArmazemFacade;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
 public class LoginFrame extends javax.swing.JFrame {
-    private static App app;
+    private static ArmazemFacade af;
 
     private void info(int tipo, String nome) {
         StringBuilder s = new StringBuilder();
@@ -26,16 +28,11 @@ public class LoginFrame extends javax.swing.JFrame {
             this.error_txt.setText("Insira os campos");
         }
 
-        int tipo = app.logIn(id, password);
+        int tipo = af.logIn(id, password);
         if (tipo == 1) {
             this.dispose();
-            ServidorProd sp = app.getServidorProd(id);
-            info(1, sp.getNome());
-            new armazemFrame(this.app, sp).setVisible(true);
-        } else if (tipo == 2) {
-            this.dispose();
             info(3, "");
-            new GestorFrame(this.app).setVisible(true);
+            new GestorFrame(this.af).setVisible(true);
         } else this.error_txt.setText("Credenciais Inválidas");
     }
 
@@ -184,7 +181,7 @@ public class LoginFrame extends javax.swing.JFrame {
 
         /* INICIA APLICAÇÃO */
 
-        app = new App();
+        af = new ArmazemFacade();
 
 
         /* Create and display the form */

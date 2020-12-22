@@ -1,45 +1,47 @@
 package business;
 
+import java.util.Collection;
+import java.util.TreeSet;
+/*implements Comparable<Robot>*/
 public class Robot {
     private int id;
     private boolean estadoLivre;
-    private Localizacao partida;
-    private double velocidade = 0.2; // velocidade do robot em metros por segundo
+    private Collection<String> lstRobots;
 
-    public Robot(int id, Localizacao partida) {
+    public Robot() {
+        this.id = -1 ;
+        this.estadoLivre= true;
+        this.lstRobots = new TreeSet<>();
+    }
+
+    public Robot(int id, boolean estado){
         this.id = id;
-        this.estadoLivre = true;
-        this.partida = partida;
+        this.estadoLivre = estado;
     }
 
-    public int getId() {
-        return id;
+    public int getId() { return this.id; }
+
+    public void removeRobot(int id){this.lstRobots.remove(id);}
+
+    //alterar localização da palete - em robot
+    public void notificaRecolha(){
+
     }
 
-    public void setId(int id) {
-        this.id = id;
+    //alterar localização da palete - em preteleira
+    public void notificaEntrega(){
+
     }
 
-    public boolean isEstadoLivre() {
-        return estadoLivre;
+    private void getRobot(int id_robot) {
     }
 
-    public void setEstadoLivre(boolean estadoLivre) {
-        this.estadoLivre = estadoLivre;
-    }
-
-    public Localizacao getPartida() {
-        return partida;
-    }
-
-    public void setPartida(Localizacao partida) {
-        this.partida = partida;
-    }
-
-    public void fazEntrega(Localizacao destino) throws InterruptedException {
-        //wait((long) (this.partida.percurso(this.partida.getPercurso(destino)) * this.velocidade));
-        this.partida = destino;
-    }
+    public void setEstado(boolean estado){ this.estadoLivre = estado; }
+/*
+    @Override
+    public int compareTo(Robot o) {
+        return this.id.compareTo(o.getId());
+    }*/
 
 
 }

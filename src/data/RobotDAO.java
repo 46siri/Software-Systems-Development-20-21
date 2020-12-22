@@ -1,12 +1,12 @@
 package data;
 
-import business.RobotManager;
+import business.Robot;
 
 import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 
-public class RobotDAO implements Map<String, RobotManager> {
+public class RobotDAO implements Map<String, Robot> {
 
     private static RobotDAO singleton = null;
 
@@ -38,22 +38,22 @@ public class RobotDAO implements Map<String, RobotManager> {
     }
 
     @Override
-    public RobotManager get(Object key) {
+    public Robot get(Object key) {
         return null;
     }
 
     @Override
-    public RobotManager put(String key, RobotManager value) {
+    public Robot put(String key, Robot value) {
         return null;
     }
 
     @Override
-    public RobotManager remove(Object key) {
+    public Robot remove(Object key) {
         return null;
     }
 
     @Override
-    public void putAll(Map<? extends String, ? extends RobotManager> m) {
+    public void putAll(Map<? extends String, ? extends Robot> m) {
 
     }
 
@@ -68,12 +68,12 @@ public class RobotDAO implements Map<String, RobotManager> {
     }
 
     @Override
-    public Collection<RobotManager> values() {
+    public Collection<Robot> values() {
         return null;
     }
 
     @Override
-    public Set<Entry<String, RobotManager>> entrySet() {
+    public Set<Entry<String, Robot>> entrySet() {
         return null;
     }
 }

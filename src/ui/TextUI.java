@@ -10,7 +10,7 @@ import java.util.Scanner;
  * Interface em modo texto.
  * Comunicação com o leitor e os robots
  *
- * @author Grupo 09
+ * @author Grupo09
  * @version 202012
  */
 public class TextUI {
@@ -115,7 +115,7 @@ public class TextUI {
      */
     private void listarRobots() {
         try {
-            System.out.println(this.model.getRobots().toString());
+            System.out.println(this.model.getRobots(id).toString());
         }
         catch (NullPointerException e) {
             System.out.println(e.getMessage());

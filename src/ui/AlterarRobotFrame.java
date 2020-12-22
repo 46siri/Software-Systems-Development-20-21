@@ -3,12 +3,12 @@ import java.awt.*;
 import java.awt.event.*;
 
 import business.ArmazemFacade;
-import business.RobotManager;
+import business.Robot;
 
 import javax.swing.*;
 
 public class AlterarRobotFrame extends javax.swing.JFrame {
-    RobotManager robot;
+    Robot robot;
     ArmazemFacade af;
     RobotFrame to_update;
 
@@ -17,13 +17,13 @@ public class AlterarRobotFrame extends javax.swing.JFrame {
         try {
             int id = Integer.parseInt(id_txt.getText());
 
-            RobotManager tmp = new RobotManager(robot.getId());
+            Robot tmp = new Robot(robot.getId());
 
             if (!(id == -1)) {
                 if (!tmp.equals(robot)) {
                     this.af.alteraRobot(robot.getId());
 
-                    List<RobotManager> list = this.af.getRobots();
+                    List<Robot> list = this.af.getRobots();
                     this.to_update.updateTable(list);
                     this.to_update.updateList(list);
 
@@ -41,7 +41,7 @@ public class AlterarRobotFrame extends javax.swing.JFrame {
     /**
      * Creates new form NovoRobotFrame
      */
-    public AlterarRobotFrame(RobotManager r, ArmazemFacade af, RobotFrame f) {
+    public AlterarRobotFrame(Robot r,ArmazemFacade af, RobotFrame f) {
         initComponents();0
         this.af = af;
         this.to_update=f;

@@ -9,7 +9,7 @@ import java.util.Collection;
  * @version 202012
  */
 public interface IArmazemFacade{
-        Collection<RobotManager> getRobots();
+        Collection<Robot> getRobots();
 
         /**
          * Método que verifica se um robot existe
@@ -19,7 +19,7 @@ public interface IArmazemFacade{
          */
         boolean existeRobot(int rid);
 
-        void adicionaRobot(RobotManager r);
+        void adicionaRobot(Robot r);
 
         void removeRobot(int rid);
 

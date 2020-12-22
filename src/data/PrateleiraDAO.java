@@ -1,25 +1,21 @@
 package data;
 
-import business.Gestor;
+import business.Prateleira;
 
 import java.sql.*;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
-public class GestorDAO implements Map<String, Gestor> {
-    private static GestorDAO singleton = null;
+public class PrateleiraDAO implements Map<String, Prateleira>{
+    private static PrateleiraDAO singleton = null;
 
-    private GestorDAO(){
+    private PrateleiraDAO(){
         try(Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
             Statement stm = conn.createStatement()) {
             String sql;
-            sql = "CREATE TABLE IF NOT EXISTS gestores(" +
-                    "Username varchar (10) NOT NULL PRIMARY KEY,"+
-                    "Password varchar(45) DEFAULT NULL," +
-                    "Nome varchar(45) DEFAULT NULL," +
-                    "Email varchar(45) DEFAULT NULL)";
+            sql = "CREATE TABLE IF NOT EXISTS prateleiras(" +
+                    "Num varchar(45) DEFAULT NULL," +
+                    "Localizacao " +
+                    "Estado )";
             stm.executeUpdate(sql);
         }catch (SQLException e){
             e.printStackTrace();
@@ -32,27 +28,26 @@ public class GestorDAO implements Map<String, Gestor> {
      *
      * @return devolve a instância única desta classe
      */
-    public static GestorDAO getInstance(){
-        if (GestorDAO.singleton == null) {
-            GestorDAO.singleton = new GestorDAO();
+    public static PrateleiraDAO getInstance(){
+        if (PrateleiraDAO.singleton == null) {
+            PrateleiraDAO.singleton = new PrateleiraDAO();
         }
-        return GestorDAO.singleton;
+        return PrateleiraDAO.singleton;
     }
 
     /**
-     * @return número de gestores na base de dados
+     * @return número de prateleiras na base de dados
      */
     @Override
     public int size() {
         int i = 0;
         try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
              Statement stm = conn.createStatement();
-             ResultSet rs = stm.executeQuery("SELECT count(*) FROM gestores")) {
+             ResultSet rs = stm.executeQuery("SELECT count(*) FROM prateleiras")) {
             if(rs.next()) {
                 i = rs.getInt(1);
             }
-        }
-        catch (Exception e) {
+        }catch (Exception e) {
             // Erro a criar tabela...
             e.printStackTrace();
             throw new NullPointerException(e.getMessage());
@@ -61,9 +56,9 @@ public class GestorDAO implements Map<String, Gestor> {
     }
 
     /**
-     * Método que verifica se existem gestores
+     * Método que verifica se existem prateleiras
      *
-     * @return true se existirem 0 gestores
+     * @return true se existirem 0 prateleiras
      */
     @Override
     public boolean isEmpty() {
@@ -71,10 +66,10 @@ public class GestorDAO implements Map<String, Gestor> {
     }
 
     /**
-     * Método que cerifica se um user de gestor existe na base de dados
+     * Método que cerifica se um num de prateleira existe na base de dados
      *
-     * @param key user do Gestor
-     * @return true se o Gestor existe
+     * @param key num da Prateleira
+     * @return true se a Prateleira existe
      * @throws NullPointerException Em caso de erro - deveriam ser criadas exepções do projecto
      */
     @Override
@@ -83,8 +78,8 @@ public class GestorDAO implements Map<String, Gestor> {
         try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
              Statement stm = conn.createStatement();
              ResultSet rs =
-                     stm.executeQuery("SELECT user FROM gestores WHERE user='"+key.toString()+"'")) {
-            r = rs.next();
+                     stm.executeQuery("SELECT num FROM prateleiras WHERE num='"+key.toString()+"'")) {
+             r = rs.next();
         } catch (SQLException e) {
             // Database error!
             e.printStackTrace();
@@ -94,60 +89,60 @@ public class GestorDAO implements Map<String, Gestor> {
     }
 
     /**
-     * Verifica se uma Gestor existe na base de dados
+     * Verifica se uma Prateleira existe na base de dados
      *
-     * @param value user da Gestor
-     * @return true se Gestor existe
+     * @param value num da Prateleira
+     * @return true se Prateleira existe
      * @throws NullPointerException Em caso de erro - deveriam ser criadas exepções do projecto
      */
     @Override
     public boolean containsValue(Object value) {
-        Gestor g = (Gestor) value;
-        return this.containsKey(g.getUserName());
+        Prateleira p = (Prateleira) value;
+        return this.containsKey(p.getNum());
     }
 
     /**
-     * Obter uma Gestor, dado o seu user
+     * Obter uma Prateleira, dado o seu num
      *
-     * @param key user da Gestor
-     * @return o Gestor caso exista (null noutro caso)
+     * @param key num da Prateleira
+     * @return o prateleira caso exista (null noutro caso)
      * @throws NullPointerException Em caso de erro - deveriam ser criadas exepções do projecto
      */
     @Override
-    public Gestor get(Object key) {
-        Gestor g = null;
+    public Prateleira get(Object key) {
+        Prateleira p = null;
         try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
              Statement stm = conn.createStatement();
-             ResultSet rs = stm.executeQuery("SELECT * FROM gestores WHERE Username='"+key+"'")) {
+             ResultSet rs = stm.executeQuery("SELECT * FROM prateleiras WHERE num='"+key+"'")) {
             if (rs.next()) {  // A chave existe na tabela
-                g = new Gestor(rs.getString("Username"), rs.getString("Password"), rs.getString("Nome"),rs.getString("Email"));
+                p = new Prateleira(rs.getString("Num"), rs.getString("Localizacao"), rs.getBoolean("Estado"));
             }
         } catch (SQLException e) {
             // Database error!
             e.printStackTrace();
             throw new NullPointerException(e.getMessage());
         }
-        return g;
+        return p;
     }
 
     /**
-     * Insere uma Gestor na base de dados
+     * Insere uma Prateleira na base de dados
      *
      * ATENÇÂO: Falta devolver o valor existente (caso exista um)
      *
-     * @param key o user da Gestor
-     * @param g a Gestor
+     * @param key o num da Prateleira
+     * @param p a Prateleira
      * @return devolve o valor existente, caso exista um
      * @throws NullPointerException Em caso de erro - deveriam ser criadas exepções do projecto
      */
     @Override
-    public Gestor put(String key, Gestor g) {
-        Gestor res = g;
+    public Prateleira put(String key, Prateleira p) {
+        Prateleira res = null;
         try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
              Statement stm = conn.createStatement()) {
             stm.executeUpdate(
-                    "INSERT INTO gestores VALUES ('"+g.getUserName()+"', '"+g.getPassword()+"', '"+g.getNome()+"','"+g.getEmail()+"' NULL) " +
-                            "ON DUPLICATE KEY UPDATE user=VALUES(user)");
+                    "INSERT INTO prateleiras VALUES ('"+p.getNum()+"', '"+p.getLocalizacao()+"', '"+p.getEstado()+"') " +
+                            "ON DUPLICATE KEY UPDATE Num=VALUES(Num)");
         } catch (SQLException e) {
             // Database error!
             e.printStackTrace();
@@ -157,18 +152,20 @@ public class GestorDAO implements Map<String, Gestor> {
     }
 
     /**
-     * Remover uma Gestor, dado o seu user
+     * Remover uma Prateleira, dado o seu num
      *
-     * @param key user da Gestor a remover
-     * @return a Gestor removida
+     * NOTA: Não estamos a apagar a sala...
+     *
+     * @param key num da Prateleira a remover
+     * @return a Prateleira removida
      * @throws NullPointerException Em caso de erro - deveriam ser criadas exepções do projecto
      */
     @Override
-    public Gestor remove(Object key) {
-        Gestor p = this.get(key);
+    public Prateleira remove(Object key) {
+        Prateleira p = this.get(key);
         try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
              Statement stm = conn.createStatement()) {
-            stm.executeUpdate("DELETE FROM gestores WHERE Num='"+key+"'");
+            stm.executeUpdate("DELETE FROM prateleiras WHERE Num='"+key+"'");
         } catch (Exception e) {
             // Database error!
             e.printStackTrace();
@@ -178,20 +175,20 @@ public class GestorDAO implements Map<String, Gestor> {
     }
 
     /**
-     * Adicionar um conjunto de gestores à base de dados
+     * Adicionar um conjunto de prateleiras à base de dados
      *
-     * @param gestores a adicionar
+     * @param prateleiras a adicionar
      * @throws NullPointerException Em caso de erro - deveriam ser criadas exepções do projecto
      */
     @Override
-    public void putAll(Map<? extends String, ? extends Gestor> gestores) {
-        for(Gestor g : gestores.values()) {
-            this.put(g.getUserName(), g);
+    public void putAll(Map<? extends String, ? extends Prateleira> prateleiras) {
+        for(Prateleira p : prateleiras.values()) {
+            this.put(p.getNum(), p);
         }
     }
 
     /**
-     * Apagar todas as gestores
+     * Apagar todas as prateleiras
      *
      * @throws NullPointerException Em caso de erro - deveriam ser criadas exepções do projecto
      */
@@ -199,7 +196,7 @@ public class GestorDAO implements Map<String, Gestor> {
     public void clear() {
         try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
              Statement stm = conn.createStatement()) {
-            stm.executeUpdate("TRUNCATE gestores");
+            stm.executeUpdate("TRUNCATE prateleiras");
         } catch (SQLException e) {
             // Database error!
             e.printStackTrace();
@@ -213,15 +210,15 @@ public class GestorDAO implements Map<String, Gestor> {
     }
 
     /**
-     * @return Todos as gestores da base de dados
+     * @return Todos as prateleiras da base de dados
      */
     @Override
-    public Collection<Gestor> values() {
-        Collection<Gestor> col = new HashSet<>();
-        try(Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
-            Statement stm = conn.createStatement();
-            ResultSet rs = stm.executeQuery("SELECT user FROM gestores")) {
-            while (rs.next()) {   // Utilizamos o get para construir as gestores
+    public Collection<Prateleira> values() {
+        Collection<Prateleira> col = new HashSet<>();
+        try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
+             Statement stm = conn.createStatement();
+             ResultSet rs = stm.executeQuery("SELECT num FROM prateleiras")) {
+            while (rs.next()) {   // Utilizamos o get para construir as alunos
                 col.add(this.get(rs.getString("Num")));
             }
         } catch (Exception e) {
@@ -233,7 +230,7 @@ public class GestorDAO implements Map<String, Gestor> {
     }
 
     @Override
-    public Set<Entry<String, Gestor>> entrySet() {
-        throw new NullPointerException("public Set<Map.Entry<String,Gestor>> entrySet() not implemented!");
+    public Set<Map.Entry<String, Prateleira>> entrySet() {
+        throw new NullPointerException("public Set<Map.Entry<String,Prateleira>> entrySet() not implemented!");
     }
 }
