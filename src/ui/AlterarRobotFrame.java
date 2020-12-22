@@ -42,7 +42,7 @@ public class AlterarRobotFrame extends javax.swing.JFrame {
      * Creates new form NovoRobotFrame
      */
     public AlterarRobotFrame(Robot r,ArmazemFacade af, RobotFrame f) {
-        initComponents();0
+        initComponents();
         this.af = af;
         this.to_update=f;
         this.robot = r;
@@ -121,4 +121,4 @@ public class AlterarRobotFrame extends javax.swing.JFrame {
     private JLabel label1;
     // End of variables declaration//GEN-END:variables
 }
-    }
+

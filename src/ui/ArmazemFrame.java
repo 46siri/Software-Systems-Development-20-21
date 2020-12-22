@@ -36,7 +36,7 @@ public class ArmazemFrame extends javax.swing.JFrame {
      * Creates new from ArmazemFrame
      */
 
-    public armazemFrame(ArmazemFacade af, Gestor g, Robot r){
+    public void armazemFrame(ArmazemFacade af, Gestor g, Robot r){
         initComponents();
         this.af = af;
         this.g = g;

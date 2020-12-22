@@ -3,13 +3,14 @@ package business;
 import java.util.Collection;
 import java.util.TreeSet;
 /*implements Comparable<Robot>*/
+
 public class Robot {
-    private int id;
+    private String id;
     private boolean estadoLivre;
     private Collection<String> lstRobots;
 
     public Robot() {
-        this.id = -1 ;
+        this.id = " " ;
         this.estadoLivre= true;
         this.lstRobots = new TreeSet<>();
     }
@@ -35,6 +36,8 @@ public class Robot {
 
     private void getRobot(int id_robot) {
     }
+
+    public boolean getEstado(){return estadoLivre;}
 
     public void setEstado(boolean estado){ this.estadoLivre = estado; }
 /*

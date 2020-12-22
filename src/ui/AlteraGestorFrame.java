@@ -18,13 +18,14 @@ public class AlteraGestorFrame extends javax.swing.JFrame {
         this.dispose();
         try {
             String userName = this.user_txt.getText();
+            String password = this.password_txt.getText();
             String nome = this.nome_txt.getText();
             String email = this.email_txt.getText();
 
-            Gestor temp = new Gestor(userName, nome, email);
+            Gestor temp = new Gestor(userName, password ,nome, email);
             if (!userName.equals("")){
                 if(!temp.equals(gestor)){
-                    this.af.alteraGestor(userName, nome,email);
+                    this.af.alteraGestor(userName,password ,nome,email);
 
                     List<Gestor> list = (List<Gestor>) this.af.getGestores();
                     this.to_update.updateTable(list);
@@ -53,6 +54,7 @@ public class AlteraGestorFrame extends javax.swing.JFrame {
         this.to_update=f;
         this.gestor = g;
         this.user_txt.setText(g.getUserName());
+        this.password_txt.setText(g.getPassword());
         this.nome_txt.setText(g.getNome());
         this.email_txt.setText(g.getEmail());
     }
@@ -71,6 +73,7 @@ public class AlteraGestorFrame extends javax.swing.JFrame {
         label2 = new JLabel();
         user_txt = new JTextField();
         nome_txt = new JTextField();
+        password_txt = new JTextField();
         label1 = new JLabel();
 
         //======== this ========

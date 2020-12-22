@@ -117,9 +117,9 @@ public class ArmazemFacade implements IArmazemFacade {
      * @throws SQLException
      * @throws ClassNotFoundException
      */
-    public void registaGestor(String userName,String nome, String email) throws SQLException, ClassNotFoundException{
+    public void registaGestor(String userName, String password,String nome, String email) throws SQLException, ClassNotFoundException{
         Gestor g ;
-        g = new Gestor(userName, nome, email);
+        g = new Gestor(userName, password, nome, email);
         this.gestores.put(userName, g);
     }
     /**
@@ -138,8 +138,8 @@ public class ArmazemFacade implements IArmazemFacade {
      *
      * @param userName userName do gestor
      */
-    public void alteraGestor (String userName, String nome, String email){
-        Gestor g = new Gestor(userName, nome, email);
+    public void alteraGestor (String userName,String password, String nome, String email){
+        Gestor g = new Gestor(userName, password ,nome, email);
         this.gestores.put(userName,g);
     }
 

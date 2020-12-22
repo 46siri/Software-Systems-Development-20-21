@@ -12,15 +12,17 @@ import javax.swing.GroupLayout;
 public class NovoGestorFrame extends javax.swing.JFrame {
     ArmazemFacade af;
     GestorFrame to_update;
-   /* RegistaDescargaFrame to_update2;*/
+    private Label password_txt; //----------------
+    /* RegistaDescargaFrame to_update2;*/
 
     private void registar_btnActionPerformed(ActionEvent e) throws Exception {
         String userName = this.user_txt.getText();
+        String password = this.password_txt.getText();
         String nome = this.nome_txt.getText();
         String email = this.email_txt.getText();
 
             if (!userName.equals("") && !email.equals("")){
-                this.af.registaGestor(userName,nome, email);
+                this.af.registaGestor(userName,password,nome, email);
 
                 Collection<Gestor> list = this.af.getGestores(userName);
                 if (to_update != null){

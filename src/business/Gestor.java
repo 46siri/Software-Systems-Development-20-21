@@ -1,5 +1,4 @@
 package business;
-import java.String.*;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -24,15 +23,17 @@ public class Gestor implements Comparable<Gestor> {
         this.email = mail;
     }
 
+    public String getUserName(){return user;}
+    public String getPassword(){return password;}
+    public String getNome(){return nome;}
+    public String getEmail(){return email;}
+
     private void setUsr(String usr) {
         this.user = usr;
     }
     private void setPass(String pass) {
         this.password = pass;
     }
-
-    public String getUserName(){return user;}
-    public String getPassword(){return password;}
 
     public void removeGestor(String username){this.lstGestores.remove(username);}
 
