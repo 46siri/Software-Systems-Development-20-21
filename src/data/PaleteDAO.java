@@ -29,7 +29,6 @@ public class PaleteDAO implements Map<String, Palete> {
         }
     }
 
-
     /**
      * Implementação do padrão Singleton
      *
@@ -66,7 +65,7 @@ public class PaleteDAO implements Map<String, Palete> {
     /**
      * Método que verifica se existem paletes
      *
-     * @return true se existirem 0 alunos
+     * @return true se existirem 0 paletes
      */
     @Override
     public boolean isEmpty() {
@@ -113,7 +112,7 @@ public class PaleteDAO implements Map<String, Palete> {
      * Obter uma palete, dado o seu id
      *
      * @param key id da palete
-     * @return o aluno caso exista (null noutro caso)
+     * @return o palete caso exista (null noutro caso)
      * @throws NullPointerException Em caso de erro - deveriam ser criadas exepções do projecto
      */
     @Override
@@ -145,12 +144,12 @@ public class PaleteDAO implements Map<String, Palete> {
      */
     @Override
     public Palete put(String key, Palete p) {
-        Palete res = null;
+        Palete res = p;
         try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
              Statement stm = conn.createStatement()) {
              stm.executeUpdate(
                     "INSERT INTO paletes VALUES ('"+p.getId()+"', '"+p.getProduto()+"', '"+p.getLocalizacao()+"', NULL) " +
-                            "ON DUPLICATE KEY UPDATE Nome=VALUES(Nome), Email=VALUES(Email)");
+                            "ON DUPLICATE KEY UPDATE Id=VALUES(Id)");
         } catch (SQLException e) {
             // Database error!
             e.printStackTrace();
@@ -161,8 +160,6 @@ public class PaleteDAO implements Map<String, Palete> {
 
     /**
      * Remover uma palete, dado o seu id
-     *
-     * NOTA: Não estamos a apagar a sala...
      *
      * @param key id da palete a remover
      * @return a palete removida
@@ -185,7 +182,7 @@ public class PaleteDAO implements Map<String, Palete> {
     /**
      * Adicionar um conjunto de paletes à base de dados
      *
-     * @param paletes as alunos a adicionar
+     * @param paletes a adicionar
      * @throws NullPointerException Em caso de erro - deveriam ser criadas exepções do projecto
      */
     @Override
@@ -223,10 +220,10 @@ public class PaleteDAO implements Map<String, Palete> {
     @Override
     public Collection<Palete> values() {
         Collection<Palete> col = new HashSet<>();
-        try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
+        try(Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
              Statement stm = conn.createStatement();
              ResultSet rs = stm.executeQuery("SELECT Id FROM paletes")) {
-            while (rs.next()) {   // Utilizamos o get para construir as alunos
+            while (rs.next()) {   // Utilizamos o get para construir as paletes
                 col.add(this.get(rs.getString("Num")));
             }
         } catch (Exception e) {

@@ -21,6 +21,8 @@ public class Robot {
 
     public String getId() { return this.id; }
 
+    public boolean getEstado(){return this.estadoLivre;}
+
     public void removeRobot(String id){this.lstRobots.remove(id);}
 
     //alterar localização da palete - em robot

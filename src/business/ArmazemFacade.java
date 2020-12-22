@@ -36,7 +36,7 @@ public class ArmazemFacade implements IArmazemFacade {
      * @return true se o robot existe
      */
     @Override
-    public boolean existeRobot(int rid){return robots.containsKey(rid);}
+    public boolean existeRobot(String rid){return robots.containsKey(rid);}
 
     /**
      * @param r robot a dicionar
@@ -49,7 +49,7 @@ public class ArmazemFacade implements IArmazemFacade {
      * @param rid id do robot
      */
     @Override
-    public void removeRobot(int rid) {
+    public void removeRobot(String rid) {
         Robot r = this.robots.get(rid);
         r.removeRobot(rid);
         this.robots.put(rid, r);  // Necessário fazer put para actualizar a BD.
@@ -111,10 +111,10 @@ public class ArmazemFacade implements IArmazemFacade {
      * @return true se a palete existe
      */
     @Override
-    public boolean existePalete(int id){return this.paletes.containsKey(id);}
+    public boolean existePalete(String id){return this.paletes.containsKey(id);}
 
     @Override
-    public void  armazenarPalete(int id){
+    public void  armazenarPalete(String id){
         //
     }
 
@@ -129,7 +129,7 @@ public class ArmazemFacade implements IArmazemFacade {
         return new ArrayList<>(this.prateleiras.values());
     }
 
-    public Object getRobots(int id) {
+    public Object getRobots(String id) {
         return null;
     }
 
