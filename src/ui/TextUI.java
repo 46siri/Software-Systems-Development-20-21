@@ -259,10 +259,7 @@ public class TextUI {
             if (!this.model.existePalete(id)) {
                 System.out.println("Produto da palete: ");
                 String produto = scin.nextLine();
-                char z = 'A';
-                char s = '0';
-                char p = '0';
-                this.model.adicionaPalete(new Palete(id, produto, "A00"));
+                this.model.adicionaPalete(new Palete(id, produto,0));
                 System.out.println("Palete adicionada e colocada a armazenar");
                 this.model.armazenarPalete(id);
             } else {

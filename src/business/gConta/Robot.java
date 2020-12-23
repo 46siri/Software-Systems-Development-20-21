@@ -12,9 +12,9 @@ public class Robot {
         this.localizacao = null;
     }
 
-    public Robot(String id, Localizacao localizacao){
+    public Robot(String id, int localizacao){
         this.id = id;
-        this.localizacao = localizacao;
+        this.localizacao.setId(localizacao);
     }
 
     public String getId() { return this.id; }
