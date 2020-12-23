@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class ArmazemFacade implements IArmazemFacade {
 
-    private Map<String, Robot> robots;
+    private GestorRobot robots;
     private Map<String, Gestor> gestores;
     private Map<String, Palete> paletes;
     private Collection<String> lstGestores;
@@ -32,7 +32,7 @@ public class ArmazemFacade implements IArmazemFacade {
      */
     @Override
     public Collection<Robot> getRobots() {
-        return new ArrayList<>(this.robots.values());
+        return this.robots.getRobots();
     }
 
     /**

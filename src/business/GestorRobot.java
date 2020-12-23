@@ -9,19 +9,21 @@ import business.gLocalizacao.Rota;
 import java.util.*;
 
 /*implements Comparable<Robot>*/
-public class RobotManager {
+public class GestorRobot {
     private Map<Integer, Robot> robotsOcupados;
     private Map<Integer, Robot> robotsDisponiveis;
     private GeradorRota geradorRota;
 
-    public RobotManager(Mapa mapa) {
+    public GestorRobot(Mapa mapa) {
         this.robotsOcupados = new HashMap<>();
         this.robotsDisponiveis = new HashMap<>();
         geradorRota = new GeradorRota(mapa);
     }
 
-    public Map<Integer, Robot> getRobotsOcupados() {
-        return robotsOcupados;
+    public Collection<Robot> getRobots() {
+        Collection<Robot> result = this.robotsDisponiveis.values();
+        result.addAll(this.robotsOcupados.values());
+        return result;
     }
 
     public Map<Integer, Robot> getRobotsDisponiveis() {
@@ -37,6 +39,12 @@ public class RobotManager {
         Set<Integer> ids = this.robotsDisponiveis.keySet();
         ids.addAll(this.robotsOcupados.keySet());
         Robot robot = new Robot(freeKey(ids),localizacao, this.geradorRota.getMapa());
+        this.robotsDisponiveis.put(robot.getId(), robot);
+    }
+    public void addRobot() {
+        Set<Integer> ids = this.robotsDisponiveis.keySet();
+        ids.addAll(this.robotsOcupados.keySet());
+        Robot robot = new Robot(freeKey(ids), geradorRota.getMapa().getNode(0) , this.geradorRota.getMapa());
         this.robotsDisponiveis.put(robot.getId(), robot);
     }
 
