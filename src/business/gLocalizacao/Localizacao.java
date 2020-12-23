@@ -6,13 +6,26 @@ import java.util.Objects;
 
 public class Localizacao {
     private int id;
+    private String descricao; // String com descricao da localizacao
 
     public Localizacao(int id) {
         this.id = id;
     }
 
+    public Localizacao(int id, String descricao) {
+        this.id = id;
+        this.descricao = descricao;
+    }
+
     public int getId() { return this.id; }
     public void setId(int id) { this.id = id; }
+
+    public String getDescricao() {
+        return descricao;
+    }
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
 
     /*
     public List<Localizacao> getPercurso(Localizacao destino) {

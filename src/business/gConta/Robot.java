@@ -1,24 +1,26 @@
 package business.gConta;
 
 import business.gLocalizacao.Localizacao;
+import business.gLocalizacao.Mapa;
 
+import java.time.LocalDate;
+import java.util.Collection;
+import java.util.Stack;
+import java.util.TreeSet;
 /*implements Comparable<Robot>*/
 public class Robot {
-    private String id;
+    private int id;
     private Localizacao localizacao;
+    private Mapa mapa;
 
-    public Robot(){
-        this.id = "";
-        this.localizacao = null;
-    }
-
-    public Robot(String id, int localizacao){
+    public Robot(int id, Localizacao localizacao, Mapa mapa){
         this.id = id;
-        this.localizacao.setId(localizacao);
+        this.localizacao = localizacao;
+        this.mapa = mapa;
     }
 
-    public String getId() { return this.id; }
-    public void setId(String id) {
+    public int getId() { return this.id; }
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -35,8 +37,11 @@ public class Robot {
     }
 
     // o robot vai receber um arraylist com localizacoes e vai para eles uma por uma
-    public void deslocacao(){
-
+    public void deslocacao(Stack<Localizacao> percurso) {
+        while (!percurso.isEmpty()) {
+            //o robot só recebe a nova localizacao uma de cada vez
+            this.localizacao = percurso.pop();
+        }
     }
 
     //alterar localização da palete - em preteleira

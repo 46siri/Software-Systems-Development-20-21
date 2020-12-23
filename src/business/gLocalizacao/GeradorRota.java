@@ -3,9 +3,16 @@ package business.gLocalizacao;
 import java.util.*;
 
 public class GeradorRota {
-    private final Mapa<Localizacao> mapa;
+    private Mapa mapa;
 
-    public GeradorRota(Mapa<Localizacao> mapa) {
+    public GeradorRota(Mapa mapa) {
+        this.mapa = mapa;
+    }
+
+    public Mapa getMapa() {
+        return mapa;
+    }
+    public void setMapa(Mapa mapa) {
         this.mapa = mapa;
     }
 

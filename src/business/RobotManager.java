@@ -14,17 +14,11 @@ public class RobotManager {
     private Map<Integer, Robot> robotsDisponiveis;
     private GeradorRota geradorRota;
 
-    public RobotManager(){
-        this.robotsDisponiveis = null;
-        this.robotsOcupados = null;
-        this.geradorRota = null;
-    }
-    public RobotManager(Mapa<Localizacao> mapa) {
+    public RobotManager(Mapa mapa) {
         this.robotsOcupados = new HashMap<>();
         this.robotsDisponiveis = new HashMap<>();
         geradorRota = new GeradorRota(mapa);
     }
-
 
     public Map<Integer, Robot> getRobotsOcupados() {
         return robotsOcupados;
@@ -36,9 +30,27 @@ public class RobotManager {
     public void setRobotsDisponiveis(Map<Integer, Robot> robotsDisponiveis) {
         this.robotsDisponiveis = robotsDisponiveis;
     }
-  /*  public void addRobot(Robot robot) {
+    public void addRobot(Robot robot) {
         this.robotsDisponiveis.put(robot.getId(), robot);
-    }*/
+    }
+    public void addRobot(Localizacao localizacao) {
+        Set<Integer> ids = this.robotsDisponiveis.keySet();
+        ids.addAll(this.robotsOcupados.keySet());
+        Robot robot = new Robot(freeKey(ids),localizacao, this.geradorRota.getMapa());
+        this.robotsDisponiveis.put(robot.getId(), robot);
+    }
+
+    // Percorre um set com todas as keys existentes e retorna a key mais pequena disponivel
+    public int freeKey (Set<Integer> keyset) {
+        int result = 0;
+        if(keyset.size() <= 1) return result;
+        for(int i = 0; i < keyset.size(); i++){
+            if(!keyset.contains(i)){
+                return i;
+            }
+        }
+        return keyset.size()+1;
+    }
 
     public void removeRobot(int id) {
         this.robotsDisponiveis.remove(id);
@@ -52,9 +64,10 @@ public class RobotManager {
         this.robotsDisponiveis.put(idRobot, this.robotsOcupados.remove(idRobot));
     }
 
-    public void escolheRobot (Localizacao to) {
+    // Escolhe o robot mais perto de uma localizacao e envia-o para essa localizacao
+    public boolean escolheRobot (Localizacao to) {
         Rota best = null;
-        String robot;
+        int robot = -1;
         for (Integer integer : this.robotsDisponiveis.keySet()) {
             Rota novo = this.geradorRota.findBestRout(this.robotsDisponiveis.get(integer).getLocalizacao(), to);
             if (best == null || best.compareTo(novo) < 0) {
@@ -62,8 +75,12 @@ public class RobotManager {
                 robot = this.robotsDisponiveis.get(integer).getId();
             }
         }
-        this.geradorRota.getTrajeto(best);
-        // falta dar este trajeto ao robot e ele executar o trajeto
+        // dar este trajeto ao robot e ele executar o trajeto
+        if(robot > -1) {
+            this.robotsDisponiveis.get(robot).deslocacao(this.geradorRota.getTrajeto(best));
+            return true;
+        }
+        return false;
     }
 
     //alterar localização da palete - em robot
