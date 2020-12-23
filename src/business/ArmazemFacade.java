@@ -17,6 +17,7 @@ public class ArmazemFacade implements IArmazemFacade {
     private Map<String, Robot> robots;
     private Map<String, Gestor> gestores;
     private Map<String, Palete> paletes;
+    private Collection<String> lstGestores;
 
     public ArmazemFacade(){
         this.robots = RobotDAO.getInstance();
@@ -95,14 +96,18 @@ public class ArmazemFacade implements IArmazemFacade {
      * @param g gestor a dicionar
      */
     @Override
-    public void adicionaGestor(Gestor g){this.gestores.put(g.getUserName(),g);}
-
+    public void adicionaGestor(Gestor g){
+        this.gestores.put(g.getUserName(),g);
+        this.lstGestores.add(g.getUserName());
+    }
+    
     /**
      * @param username do gestor a procurar
      * @return true se o gestor existe
      */
     @Override
     public Gestor procuraGestor(String username) { return this.gestores.get(username); }
+
 
     /**
      * Método que remove um gestor do armazem
@@ -112,9 +117,10 @@ public class ArmazemFacade implements IArmazemFacade {
     @Override
     public void removeGestor(String username) {
         Gestor g = this.gestores.get(username);
-        g.removeGestor(username);
+        this.lstGestores.remove(username);
         this.gestores.put(username, g);  // Necessário fazer put para actualizar a BD.
     }
+
     /**
      * Método que altera um gestor do armazem
      *

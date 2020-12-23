@@ -18,7 +18,9 @@ public class RobotDAO implements Map<String, Robot> {
             String sql;
             sql = "CREATE TABLE IF NOT EXISTS robots(" +
                     "Id varchar (10) NOT NULL PRIMARY KEY,"+
-                    "Estado bit DEFAULT NULL)";
+                    "Id_Localizacao int NOT NULL," +
+                    "FOREIGN KEY (Id_Localizacao) REFERENCES localizacao(Id)" +
+                    ")";
             stm.executeUpdate(sql);
         }catch (SQLException e){
             e.printStackTrace();
