@@ -47,7 +47,4 @@ public class Robot {
     //alterar localização da palete - em preteleira
     public void notificaEntrega(){
     }
-
-    private void getRobot(int id_robot) {
-    }
 }
