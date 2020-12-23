@@ -1,7 +1,5 @@
 package business.gArmazem;
 
-import business.gLocalizacao.Localizacao;
-
 import java.util.*;
 
 public class Palete implements Comparable<Palete> {
@@ -9,7 +7,7 @@ public class Palete implements Comparable<Palete> {
 
     private String id;
     private String produto;
-    private Localizacao localizacao;
+    private int localizacao;
 
     /**
      * Construtor com parâmetros para a classe Palete.
@@ -21,7 +19,7 @@ public class Palete implements Comparable<Palete> {
     public Palete (String id, String produto, int localizacao) {
         this.id = id;
         this.produto = produto;
-        this.localizacao.setId(localizacao);
+        this.localizacao = localizacao;
     }
 
     //getters
@@ -37,7 +35,7 @@ public class Palete implements Comparable<Palete> {
     /**
      * Método get para o local da palete.
      */
-    public Localizacao getLocalizacao(){return localizacao;}
+    public int getLocalizacao(){return localizacao;}
 
     //setters
     /**

@@ -15,8 +15,7 @@ import java.util.Collection;
  */
 public interface IArmazemFacade{
     Collection<Robot> getRobots();
-    boolean existeRobot(String rid);
-    void adicionaRobot(Robot r);
+    void adicionaRobot();
     void removeRobot(String rid);
     void alteraRobot(String rid, Boolean estado);
     void registaRobot(String rid, Boolean estado);

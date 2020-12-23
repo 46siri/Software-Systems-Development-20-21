@@ -117,7 +117,7 @@ public class RobotDAO implements Map<String, Robot> {
              Statement stm = conn.createStatement();
              ResultSet rs = stm.executeQuery("SELECT * FROM robots WHERE Id='"+key+"'")) {
             if (rs.next()) {  // A chave existe na tabela
-                r = new Robot(rs.getString("Id"), rs.getInt("Localizacao"));
+                r = new Robot(rs.getInt("Id"), rs.getInt("Localizacao"));
             }
         } catch (SQLException e) {
             // Database error!
@@ -183,7 +183,7 @@ public class RobotDAO implements Map<String, Robot> {
     @Override
     public void putAll(Map<? extends String, ? extends Robot> robots) {
         for(Robot r : robots.values()) {
-            this.put(r.getId(), r);
+            this.put(Integer.toString(r.getId()), r);
         }
     }
 

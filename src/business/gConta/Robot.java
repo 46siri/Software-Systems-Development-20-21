@@ -1,19 +1,16 @@
 package business.gConta;
 
-import business.gLocalizacao.Localizacao;
 import business.gLocalizacao.Mapa;
 
-import java.time.LocalDate;
-import java.util.Collection;
 import java.util.Stack;
-import java.util.TreeSet;
+
 /*implements Comparable<Robot>*/
 public class Robot {
     private int id;
-    private Localizacao localizacao;
+    private int localizacao;
     private Mapa mapa;
 
-    public Robot(int id, Localizacao localizacao, Mapa mapa){
+    public Robot(int id, int localizacao, Mapa mapa){
         this.id = id;
         this.localizacao = localizacao;
         this.mapa = mapa;
@@ -24,10 +21,10 @@ public class Robot {
         this.id = id;
     }
 
-    public Localizacao getLocalizacao() {
+    public int getLocalizacao() {
         return localizacao;
     }
-    public void setLocalizacao(Localizacao localizacao) {
+    public void setLocalizacao(int localizacao) {
         this.localizacao = localizacao;
     }
 
@@ -37,7 +34,7 @@ public class Robot {
     }
 
     // o robot vai receber um arraylist com localizacoes e vai para eles uma por uma
-    public void deslocacao(Stack<Localizacao> percurso) {
+    public void deslocacao(Stack<Integer> percurso) {
         while (!percurso.isEmpty()) {
             //o robot só recebe a nova localizacao uma de cada vez
             this.localizacao = percurso.pop();

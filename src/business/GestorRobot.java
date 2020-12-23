@@ -2,9 +2,9 @@ package business;
 
 import business.gConta.Robot;
 import business.gLocalizacao.GeradorRota;
-import business.gLocalizacao.Localizacao;
 import business.gLocalizacao.Mapa;
 import business.gLocalizacao.Rota;
+import data.RobotDAO;
 
 import java.util.*;
 
@@ -15,7 +15,7 @@ public class GestorRobot {
     private GeradorRota geradorRota;
 
     public GestorRobot(Mapa mapa) {
-        this.robotsOcupados = new HashMap<>();
+        this.robotsOcupados = RobotDAO.getInstance();
         this.robotsDisponiveis = new HashMap<>();
         geradorRota = new GeradorRota(mapa);
     }
@@ -73,7 +73,7 @@ public class GestorRobot {
     }
 
     // Escolhe o robot mais perto de uma localizacao e envia-o para essa localizacao
-    public boolean escolheRobot (Localizacao to) {
+    public boolean escolheRobot (int to) {
         Rota best = null;
         int robot = -1;
         for (Integer integer : this.robotsDisponiveis.keySet()) {

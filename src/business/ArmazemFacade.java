@@ -5,6 +5,7 @@ import business.gArmazem.Palete;
 import business.gArmazem.Prateleira;
 import business.gConta.Gestor;
 import business.gConta.Robot;
+import business.gLocalizacao.Mapa;
 import data.*;
 
 import java.sql.SQLException;
@@ -20,7 +21,7 @@ public class ArmazemFacade implements IArmazemFacade {
     private Collection<String> lstGestores;
 
     public ArmazemFacade(){
-        this.robots = RobotDAO.getInstance();
+        this.robots = new GestorRobot(new Mapa());
         this.gestores = GestorDAO.getInstance();
         this.paletes = PaleteDAO.getInstance();
     }

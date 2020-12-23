@@ -1,23 +1,23 @@
 package business.gLocalizacao;
 
 public class Rota implements Comparable<Rota> {
-    private final Localizacao current;
+    private final int current;
     private Rota previous;
     private double value;
 
-    Rota(Localizacao current) {
+    Rota(int current) {
         this.current = current;
         this.previous = null;
         this.value = 0;
     }
 
-    Rota(Localizacao current, Rota previous, double value) {
+    Rota(int current, Rota previous, double value) {
         this.current = current;
         this.previous = previous;
         this.value = value;
     }
 
-    public Localizacao getCurrent() {
+    public int getCurrent() {
         return current;
     }
 

@@ -1,10 +1,8 @@
 package business.gArmazem;
 
-import business.gLocalizacao.Localizacao;
-
 public class Prateleira{
     private String num;
-    private Localizacao localizacao;
+    private int localizacao;
     private boolean estadoLivre;
 
    public Prateleira(String num, String local, Boolean estado) {
@@ -14,6 +12,6 @@ public class Prateleira{
    }
 
    public String getNum(){return num;}
-   public Localizacao getLocalizacao(){return localizacao;}
+   public int getLocalizacao(){return localizacao;}
    public boolean getEstado(){return estadoLivre;}
 }
