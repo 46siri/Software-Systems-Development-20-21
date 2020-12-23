@@ -90,14 +90,8 @@ public class TextUI {
      */
     private void adicionarRobot() {
         try {
-            System.out.println("Id do Robot: ");
-            String id = scin.nextLine();
-            if (!this.model.existeRobot(id)){
-                this.model.adicionaRobot(new Robot(id,0));
-                System.out.println("Robot adicionado");
-            } else {
-                System.out.println("Esse id de robot já existe!");
-            }
+            this.model.addRobot(new Robot());
+            System.out.println("Robot adicionado");
         }
         catch (NullPointerException e) {
             System.out.println(e.getMessage());

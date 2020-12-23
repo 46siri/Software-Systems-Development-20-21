@@ -63,15 +63,9 @@ public class ArmazemFacade implements IArmazemFacade {
     }
 
     @Override
-    public Collection<Gestor> getGestores(String userName) {
-        return null;
-    }
-
-    @Override
     public void registaGestor(String userName, String password, String nome, String email) {
 
     }
-
 
     //GESTOR
 
@@ -100,7 +94,7 @@ public class ArmazemFacade implements IArmazemFacade {
         this.gestores.put(g.getUserName(),g);
         this.lstGestores.add(g.getUserName());
     }
-    
+
     /**
      * @param username do gestor a procurar
      * @return true se o gestor existe
@@ -138,8 +132,6 @@ public class ArmazemFacade implements IArmazemFacade {
     @Override
     public void adicionaPalete(Palete p){this.paletes.put(p.getId(),p);}
 
-
-
     /**
      * @param id username da palete a procurar
      * @return true se a palete existe
@@ -149,7 +141,7 @@ public class ArmazemFacade implements IArmazemFacade {
 
     @Override
     public void  armazenarPalete(String id){
-        return;
+
     }
 
     @Override
