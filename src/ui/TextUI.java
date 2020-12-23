@@ -214,11 +214,11 @@ public class TextUI {
         try {
             System.out.println("Username do gestor ");
             String rid = scin.nextLine();
-            if (this.model.existeRobot(rid)) {
-                this.model.removeRobot(rid);
+            if (this.model.existeGestor(rid)) {
+                this.model.removeGestor(rid);
                 System.out.println("Gestor removido");
             } else {
-                System.out.println("Esse id de robot não existe!");
+                System.out.println("Esse id de Gestor não existe!");
             }
         }
         catch (NullPointerException e) {
@@ -236,7 +236,6 @@ public class TextUI {
         // Registar os handlers
         menu.setHandler(1, () -> adicionarPalete());
         menu.setHandler(2, () -> consultarLstLocalizacoes());
-
         menu.run();
     }
 
@@ -282,7 +281,7 @@ public class TextUI {
                         System.out.println("Password errada");
                     }
                 }
-            } else {
+            }else {
                 System.out.println("Esse username de gestor não existe!");
             }
         }

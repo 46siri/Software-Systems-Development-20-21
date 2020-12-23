@@ -13,7 +13,6 @@ public class Gestor implements Comparable<Gestor> {
     private String password;
     private String nome;
     private String email;
-    private Collection<String> lstGestores;
 
     /**
      * Construtor sem parametros da class Gestor
@@ -32,7 +31,7 @@ public class Gestor implements Comparable<Gestor> {
      * @param password Password do Gestor.
      * @param email Email do Gestor.
      */
-    public Gestor(String user, String nome, String password, String email){
+    public Gestor(String user, String password, String nome , String email){
         this.user = user;
         this.nome = nome;
         this.password = password;
@@ -51,8 +50,6 @@ public class Gestor implements Comparable<Gestor> {
         this.password = pass;
     }
 
-    public void removeGestor(String username){this.lstGestores.remove(username);}
-
     public void solicitaListadeLocalizações(){
 
     }
@@ -66,6 +63,5 @@ public class Gestor implements Comparable<Gestor> {
     public int compareTo(Gestor o) {
         return this.user.compareTo(o.getUserName());
     }
-
 
 }
