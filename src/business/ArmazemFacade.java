@@ -19,11 +19,13 @@ public class ArmazemFacade implements IArmazemFacade {
     private Map<String, Gestor> gestores;
     private Map<String, Palete> paletes;
     private Collection<String> lstGestores;
+    private Map<String, Prateleira> prateleiras;
 
     public ArmazemFacade(){
         this.robots = new GestorRobot(new Mapa());
         this.gestores = GestorDAO.getInstance();
         this.paletes = PaleteDAO.getInstance();
+        this.prateleiras = PrateleiraDAO.getInstance();
     }
     //ROBOTS
     /**

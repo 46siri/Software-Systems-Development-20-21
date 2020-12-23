@@ -1,6 +1,7 @@
 package data;
 
 import business.gConta.Robot;
+import business.gLocalizacao.Mapa;
 
 import java.sql.*;
 import java.util.Collection;
@@ -8,7 +9,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class RobotDAO implements Map<String, Robot> {
+public class RobotDAO implements Map<Integer, Robot> {
 
     private static RobotDAO singleton = null;
 
@@ -117,7 +118,7 @@ public class RobotDAO implements Map<String, Robot> {
              Statement stm = conn.createStatement();
              ResultSet rs = stm.executeQuery("SELECT * FROM robots WHERE Id='"+key+"'")) {
             if (rs.next()) {  // A chave existe na tabela
-                r = new Robot(rs.getInt("Id"), rs.getInt("Localizacao"));
+                r = new Robot(rs.getInt("Id"), rs.getInt("Localizacao"),new Mapa());
             }
         } catch (SQLException e) {
             // Database error!
@@ -138,7 +139,7 @@ public class RobotDAO implements Map<String, Robot> {
      * @throws NullPointerException Em caso de erro - deveriam ser criadas exepções do projecto
      */
     @Override
-    public Robot put(String key, Robot r) {
+    public Robot put(Integer key, Robot r) {
         Robot res = r;
         try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
              Statement stm = conn.createStatement()) {
@@ -181,9 +182,9 @@ public class RobotDAO implements Map<String, Robot> {
      * @throws NullPointerException Em caso de erro - deveriam ser criadas exepções do projecto
      */
     @Override
-    public void putAll(Map<? extends String, ? extends Robot> robots) {
+    public void putAll(Map<? extends Integer, ? extends Robot> robots) {
         for(Robot r : robots.values()) {
-            this.put(Integer.toString(r.getId()), r);
+            this.put((r.getId()), r);
         }
     }
 
@@ -205,7 +206,7 @@ public class RobotDAO implements Map<String, Robot> {
     }
 
     @Override
-    public Set<String> keySet() {
+    public Set<Integer> keySet() {
         throw new NullPointerException("Not implemented!");
     }
 
@@ -230,7 +231,7 @@ public class RobotDAO implements Map<String, Robot> {
     }
 
     @Override
-    public Set<Entry<String, Robot>> entrySet() {
+    public Set<Entry<Integer, Robot>> entrySet() {
         throw new NullPointerException("public Set<Map.Entry<String,Robot>> entrySet() not implemented!");
     }}
 

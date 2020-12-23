@@ -18,14 +18,10 @@ public class PaleteDAO implements Map<String, Palete> {
         try(Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
             Statement stm = conn.createStatement()) {
             String sql;
-            sql = "CREATE TABLE IF NOT EXISTS localizacao(" +
-                    "Id int NOT NULL PRIMARY KEY)";
-            stm.executeUpdate(sql);
             sql = "CREATE TABLE IF NOT EXISTS paletes(" +
                     "Id varchar (10) NOT NULL PRIMARY KEY,"+
                     "Produto varchar(45) DEFAULT NULL," +
-                    "Id_Localizacao int NOT NULL, " +
-                    "FOREIGN KEY (Id_Localizacao) REFERENCES localizacao(Id)" +
+                    "Id_Localizacao int NOT NULL " +
                     ")";
             stm.executeUpdate(sql);
         }catch (SQLException e){
@@ -153,7 +149,7 @@ public class PaleteDAO implements Map<String, Palete> {
         try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
              Statement stm = conn.createStatement()) {
              stm.executeUpdate(
-                    "INSERT INTO paletes VALUES ('"+p.getId()+"', '"+p.getProduto()+"', '"+p.getLocalizacao()+"', NULL) " +
+                    "INSERT INTO paletes VALUES ('"+p.getId()+"', '"+p.getProduto()+"', 0) " +
                             "ON DUPLICATE KEY UPDATE Id=VALUES(Id)");
         } catch (SQLException e) {
             // Database error!

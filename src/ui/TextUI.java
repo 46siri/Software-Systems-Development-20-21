@@ -4,6 +4,7 @@ import business.*;
 import business.gArmazem.Palete;
 import business.gConta.Gestor;
 import business.gConta.Robot;
+import business.gLocalizacao.Mapa;
 
 import java.sql.SQLException;
 import java.util.Scanner;
@@ -90,7 +91,7 @@ public class TextUI {
      */
     private void adicionarRobot() {
         try {
-            this.model.addRobot(new Robot());
+            this.model.adicionaRobot();
             System.out.println("Robot adicionado");
         }
         catch (NullPointerException e) {
@@ -114,13 +115,10 @@ public class TextUI {
     private void removerRobot(){
         try {
             System.out.println("Id do robot: ");
-            String rid = scin.nextLine();
-            if (this.model.existeRobot(rid)) {
+            int rid = Integer.parseInt(scin.nextLine());
                 this.model.removeRobot(rid);
                 System.out.println("Robot removido");
-            } else {
-                System.out.println("Esse id de robot não existe!");
-            }
+
         }
         catch (NullPointerException e) {
             System.out.println(e.getMessage());
