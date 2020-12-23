@@ -33,6 +33,24 @@ public class RobotManager {
     public void addRobot(Robot robot) {
         this.robotsDisponiveis.put(robot.getId(), robot);
     }
+    public void addRobot(Localizacao localizacao) {
+        Set<Integer> ids = this.robotsDisponiveis.keySet();
+        ids.addAll(this.robotsOcupados.keySet());
+        Robot robot = new Robot(freeKey(ids),localizacao, this.geradorRota.getMapa());
+        this.robotsDisponiveis.put(robot.getId(), robot);
+    }
+
+    // Percorre um set com todas as keys existentes e retorna a key mais pequena disponivel
+    public int freeKey (Set<Integer> keyset) {
+        int result = 0;
+        if(keyset.size() <= 1) return result;
+        for(int i = 0; i < keyset.size(); i++){
+            if(!keyset.contains(i)){
+                return i;
+            }
+        }
+        return keyset.size()+1;
+    }
 
     public void removeRobot(int id) {
         this.robotsDisponiveis.remove(id);
@@ -46,7 +64,8 @@ public class RobotManager {
         this.robotsDisponiveis.put(idRobot, this.robotsOcupados.remove(idRobot));
     }
 
-    public void escolheRobot (Localizacao to) throws InterruptedException {
+    // Escolhe o robot mais perto de uma localizacao e envia-o para essa localizacao
+    public boolean escolheRobot (Localizacao to) {
         Rota best = null;
         int robot = -1;
         for (Integer integer : this.robotsDisponiveis.keySet()) {
@@ -59,7 +78,9 @@ public class RobotManager {
         // dar este trajeto ao robot e ele executar o trajeto
         if(robot > -1) {
             this.robotsDisponiveis.get(robot).deslocacao(this.geradorRota.getTrajeto(best));
+            return true;
         }
+        return false;
     }
 
     //alterar localização da palete - em robot

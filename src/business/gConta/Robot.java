@@ -13,9 +13,10 @@ public class Robot {
     private Localizacao localizacao;
     private Mapa mapa;
 
-    public Robot(int id, Localizacao localizacao){
+    public Robot(int id, Localizacao localizacao, Mapa mapa){
         this.id = id;
         this.localizacao = localizacao;
+        this.mapa = mapa;
     }
 
     public int getId() { return this.id; }
@@ -36,11 +37,10 @@ public class Robot {
     }
 
     // o robot vai receber um arraylist com localizacoes e vai para eles uma por uma
-    public void deslocacao(Stack<Localizacao> percurso) throws InterruptedException {
+    public void deslocacao(Stack<Localizacao> percurso) {
         while (!percurso.isEmpty()) {
-            Localizacao next = percurso.pop();
-            wait((long) mapa.getDistance(this.localizacao, next)) ;
-            this.localizacao = next;
+            //o robot só recebe a nova localizacao uma de cada vez
+            this.localizacao = percurso.pop();
         }
     }
 
