@@ -36,16 +36,9 @@ public class ArmazemFacade implements IArmazemFacade {
     }
 
     /**
-     * @param rid id do robot a procurar
-     * @return true se o robot existe
-     */
-    @Override
-    public boolean existeRobot(String rid){return robots.containsKey(rid);}
-
-    /**
      * @param r robot a dicionar
      */
-    public void adicionaRobot(Robot r){this.robots.put(r.getId(),r);}
+    public void adicionaRobot(){this.robots.addRobot();}
 
     @Override
     public void removeRobot(String rid) {
