@@ -35,7 +35,7 @@ public class GestorRobot {
     public void addRobot(Robot robot) {
         this.robotsDisponiveis.put(robot.getId(), robot);
     }
-    public void addRobot(Localizacao localizacao) {
+    public void addRobot(int localizacao) {
         Set<Integer> ids = this.robotsDisponiveis.keySet();
         ids.addAll(this.robotsOcupados.keySet());
         Robot robot = new Robot(freeKey(ids),localizacao, this.geradorRota.getMapa());
