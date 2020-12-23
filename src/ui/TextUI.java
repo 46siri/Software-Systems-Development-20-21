@@ -118,7 +118,8 @@ public class TextUI {
      */
     private void listarRobots() {
         try {
-            System.out.println(this.model.getRobots(id).toString());
+            ;
+            System.out.println(this.model.getRobots().toString());
         }
         catch (NullPointerException e) {
             System.out.println(e.getMessage());

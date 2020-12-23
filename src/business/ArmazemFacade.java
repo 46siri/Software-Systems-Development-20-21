@@ -1,10 +1,12 @@
 package business;
 
+
 import business.gArmazem.Palete;
 import business.gArmazem.Prateleira;
 import business.gConta.Gestor;
 import business.gConta.Robot;
 import data.*;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -24,17 +26,16 @@ public class ArmazemFacade implements IArmazemFacade {
         this.paletes = PaleteDAO.getInstance();
         this.prateleiras = (Map<String, Prateleira>) PrateleiraDAO.getInstance();
     }
+    //ROBOTS
     /**
      * Método que devolve todos os robots registados.
      *
      * @return todos os robots registados
-     * @param id
      */
     @Override
-    public Collection<Robot> getRobots(String id) {
+    public Collection<Robot> getRobots() {
         return new ArrayList<>(this.robots.values());
     }
-    //ROBOTS
 
 
     /**
@@ -62,18 +63,18 @@ public class ArmazemFacade implements IArmazemFacade {
         this.robots.put(rid, r);  // Necessário fazer put para actualizar a BD.
     }
 
+
+
     /**
      * Método que altera um robot do armazem
      *
      * @param rid id do robot
      */
-    @Override
     public void alteraRobot (String rid, Boolean estado){
         Robot r = new Robot(rid, estado);
         this.robots.put(rid,r);
     }
 
-    @Override
     public void registaRobot(String rid, Boolean estado)throws SQLException, ClassNotFoundException{
         Robot r;
         r = new Robot(rid, estado);
@@ -88,7 +89,7 @@ public class ArmazemFacade implements IArmazemFacade {
      * @return todos os gestores registados
      */
     @Override
-    public Collection<Gestor> getGestores(String userName) {
+    public Collection<Gestor> getGestores() {
         return new ArrayList<>(this.gestores.values());
     }
 
@@ -119,10 +120,9 @@ public class ArmazemFacade implements IArmazemFacade {
      * @throws SQLException
      * @throws ClassNotFoundException
      */
-    @Override
-    public void registaGestor(String userName, String password,String nome, String email) throws SQLException, ClassNotFoundException{
+    public void registaGestor(String userName,String nome, String email) throws SQLException, ClassNotFoundException{
         Gestor g ;
-        g = new Gestor(userName, password, nome, email);
+        g = new Gestor(userName, nome, email);
         this.gestores.put(userName, g);
     }
     /**
@@ -141,7 +141,6 @@ public class ArmazemFacade implements IArmazemFacade {
      *
      * @param userName userName do gestor
      */
-    @Override
     public void alteraGestor (String userName,String password, String nome, String email){
         Gestor g = new Gestor(userName, password ,nome, email);
         this.gestores.put(userName,g);
@@ -178,4 +177,4 @@ public class ArmazemFacade implements IArmazemFacade {
     public Collection<Prateleira> listarLocalizacoes() {
         return new ArrayList<>(this.prateleiras.values());
     }
-}
+    }
