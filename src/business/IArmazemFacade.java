@@ -20,7 +20,6 @@ public interface IArmazemFacade{
     void removeRobot(String rid);
     void alteraRobot(String rid, Boolean estado);
     void registaRobot(String rid, Boolean estado);
-    Collection<Gestor> getGestores(String userName);
     void registaGestor(String userName, String password,String nome, String email);
     void alteraGestor (String userName,String password, String nome, String email);
     Collection<Gestor> getGestores();
