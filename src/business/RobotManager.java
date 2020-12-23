@@ -14,7 +14,7 @@ public class RobotManager {
     private Map<Integer, Robot> robotsDisponiveis;
     private GeradorRota geradorRota;
 
-    public RobotManager(Mapa<Localizacao> mapa) {
+    public RobotManager(Mapa mapa) {
         this.robotsOcupados = new HashMap<>();
         this.robotsDisponiveis = new HashMap<>();
         geradorRota = new GeradorRota(mapa);
