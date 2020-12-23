@@ -10,12 +10,18 @@ public class Robot {
     private int localizacao;
     private Mapa mapa;
 
+    /**
+     * Constructor da Class
+     */
     public Robot(int id, int localizacao, Mapa mapa){
         this.id = id;
         this.localizacao = localizacao;
         this.mapa = mapa;
     }
 
+    /**
+     * Getters e Setters
+     */
     public int getId() { return this.id; }
     public void setId(int id) {
         this.id = id;
@@ -28,12 +34,11 @@ public class Robot {
         this.localizacao = localizacao;
     }
 
-    //alterar localização da palete - em robot
-    public void notificaRecolha(){
-
-    }
-
-    // o robot vai receber um arraylist com localizacoes e vai para eles uma por uma
+    /**
+     * Método que simula a deslocacao do robot pelas diferente localizacoes.
+     *
+     * @param percurso Stack com o percurso
+     */
     public void deslocacao(Stack<Integer> percurso) {
         while (!percurso.isEmpty()) {
             //o robot só recebe a nova localizacao uma de cada vez
@@ -41,7 +46,4 @@ public class Robot {
         }
     }
 
-    //alterar localização da palete - em preteleira
-    public void notificaEntrega(){
-    }
 }
