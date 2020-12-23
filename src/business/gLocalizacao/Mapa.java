@@ -9,14 +9,18 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Mapa {
+    /**
+     * @param nodes Set com todos os nodes existentes no armazem
+     */
     private Set<Integer> nodes;
-    private Map<Integer, Map<Integer, Double>> connections; // Map<ID do node origem, Map<ID do node destino, preço>>
+    /**
+     * @param connection Map com todos as ligacoes e respetivos custos dos nodes do armazem
+     */
+    private Map<Integer, Map<Integer, Double>> connections;
 
-    public Mapa(Set<Integer> nodes, Map<Integer, Map<Integer, Double>> connections) {
-        this.nodes = nodes;
-        this.connections = connections;
-    }
-
+    /**
+     * Constructor da Class
+     */
     public Mapa() {
         this.nodes = new HashSet<>();
         int i = 17;
@@ -90,19 +94,23 @@ public class Mapa {
         this.connections.get(16).put(4,3d);
     }
 
-    public int getNode(int id) {
-        return nodes.stream()
-                .filter(node -> node == (id))
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("No node found with ID"));
-    }
-
+    /**
+     * Método que obtem todos as connections de um nodo.
+     *
+     * @param node nodo a procurar
+     * @return Set com todos as connection do nodo
+     */
     public Set<Integer> getConnections(int node) {
-        return connections.get(node).keySet().stream()
-                .map(this::getNode)
-                .collect(Collectors.toSet());
+        return new HashSet<>(connections.get(node).keySet());
     }
 
+    /**
+     * Método que obtem a distancia entre dois nodos.
+     *
+     * @param from nodo para procurar a distancia
+     * @param to nodo para procurar a distancia
+     * @return distancia entre os operators
+     */
     public double getDistance(int from, int to) {
         return connections.get(from).get(to);
     }

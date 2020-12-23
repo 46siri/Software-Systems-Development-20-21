@@ -5,10 +5,16 @@ import java.util.*;
 public class GeradorRota {
     private Mapa mapa;
 
+    /**
+     * Constructor da Class
+     */
     public GeradorRota(Mapa mapa) {
         this.mapa = mapa;
     }
 
+    /**
+     * Getters e Setters
+     */
     public Mapa getMapa() {
         return mapa;
     }
@@ -16,10 +22,17 @@ public class GeradorRota {
         this.mapa = mapa;
     }
 
-    // recebe um ponto inicial e um final e retorna a melhor rota
+    /**
+     * Método que encontra o melhor percurso.
+     *
+     * @param from localizacao origem
+     * @param to localizacao destino
+     */
     public Rota findBestRout(int from, int to) {
-        Queue<Rota> openSet = new PriorityQueue<>();//rotas a procurar ordenadas pela menor primeiro
-        List<Integer> allNodes = new ArrayList<>();//Set com todas as Localizacoes usadas
+        // Rotas a procurar ordenadas pela de menor custo.
+        Queue<Rota> openSet = new PriorityQueue<>();
+        // Set com todas as Localizacoes usadas.
+        List<Integer> allNodes = new ArrayList<>();
 
         Rota start = new Rota(from);
         openSet.add(start);
@@ -30,7 +43,6 @@ public class GeradorRota {
             if (next.getCurrent() == to) {
                 return next;
             }
-            //procurar
             for (int connection : mapa.getConnections(next.getCurrent())) {//forEach ligacao ao nodo em que estamos
                 if (!allNodes.contains(connection)) { //impede de procurar em nodos já usados
                     Rota nextNode = new Rota(connection, next, next.getValue());
@@ -44,7 +56,12 @@ public class GeradorRota {
         throw new IllegalStateException("No route found");
     }
 
-    // transfroma a rota numa lista de locolizacoes
+    /**
+     * Método que transfroma a rota numa lista de locolizacoes.
+     *
+     * @param trajeto Rota a ser transformada em stack
+     * @return Stack a ser enviada para o robot
+     */
     public Stack<Integer> getTrajeto(Rota trajeto) {
         Stack<Integer> route = new Stack<>();
         Rota current = trajeto;

@@ -21,6 +21,9 @@ public class ArmazemFacade implements IArmazemFacade {
     private GestorPaletes paletes;
     private Map<String, Prateleira> prateleiras;
 
+    /**
+     * Constructor da Class
+     */
     public ArmazemFacade(){
         this.robots = new GestorRobot(new Mapa());
         this.gestores = GestorDAO.getInstance();
@@ -28,10 +31,6 @@ public class ArmazemFacade implements IArmazemFacade {
         this.prateleiras = PrateleiraDAO.getInstance();
     }
 
-    @Override
-    public void closeSystem(){
-        robots.desativaRobots();
-    }
     //ROBOTS
     /**
      * Método que devolve todos os robots registados.
@@ -43,38 +42,40 @@ public class ArmazemFacade implements IArmazemFacade {
         return this.robots.getRobots();
     }
 
+    /**
+     * Método usado antes de encerrar o sistema
+     */
+    @Override
+    public void closeSystem(){
+        robots.desativaRobots();
+    }
+
+    /**
+     * Método que devolve todos os robots registados.
+     *
+     * @return todos os robots registados em string
+     */
     @Override
     public String getAllRobots() {
         return this.robots.getRobots().toString();
     }
 
     /**
-     *  cria robot e diciona
+     * Método que cria um robot e diciona-o ao gestor
      */
     public void adicionaRobot(){this.robots.addRobot();}
 
+    /**
+     * Método que remove um robot do gestor
+     *
+     * @param id identificador do robot
+     */
     @Override
     public void removeRobot(int id) {
         this.robots.removeRobot(id);
     }
 
-    @Override
-    public void alteraRobot(int id, Boolean estado) {
-
-    }
-
-    @Override
-    public void registaRobot(int id, Boolean estado) {
-
-    }
-
-    @Override
-    public void registaGestor(String userName, String password, String nome, String email) {
-
-    }
-
     //GESTOR
-
     /**
      * Método que devolve todos os gestores registados.
      *
@@ -86,6 +87,8 @@ public class ArmazemFacade implements IArmazemFacade {
     }
 
     /**
+     * Método que verifica a existencia de um gestor.
+     *
      * @param username username do gestor a procurar
      * @return true se o gestor existe
      */
@@ -93,6 +96,8 @@ public class ArmazemFacade implements IArmazemFacade {
     public boolean existeGestor(String username){return this.gestores.containsKey(username);}
 
     /**
+     * Método que regista um gestor.
+     *
      * @param g gestor a dicionar
      */
     @Override
@@ -101,6 +106,8 @@ public class ArmazemFacade implements IArmazemFacade {
     }
 
     /**
+     * Método que procura um gestor.
+     *
      * @param username do gestor a procurar
      * @return true se o gestor existe
      */
@@ -109,7 +116,7 @@ public class ArmazemFacade implements IArmazemFacade {
 
 
     /**
-     * Método que remove um gestor do armazem
+     * Método que remove um gestor do registo.
      *
      * @param username username do gestor
      */
@@ -118,7 +125,6 @@ public class ArmazemFacade implements IArmazemFacade {
         Gestor g = this.gestores.get(username);
         this.gestores.put(username, g);  // Necessário fazer put para actualizar a BD.
     }
-
 
     /**
      * Método que altera um gestor do armazem
@@ -130,20 +136,29 @@ public class ArmazemFacade implements IArmazemFacade {
         this.gestores.put(userName,g);
     }
 
-    // Paletes
+    // PALETES
     /**
+     * Método que adiciona uma palete.
+     *
      * @param p palete a dicionar
      */
     @Override
     public void adicionaPalete(Palete p){this.paletes.adicionaPalete(p);}
 
     /**
-     * @param id username da palete a procurar
+     * Método que verifica se uma palete existe.
+     *
+     * @param id identificador da palete a procurar
      * @return true se a palete existe
      */
     @Override
     public boolean existePalete(String id){return this.paletes.existePalete(id);}
 
+    /**
+     * Método que armazena uma palete numa prateleira.
+     *
+     * @param id identificador da palete a procurar
+     */
     @Override
     public void armazenarPalete(String id){
         int to = this.getPrateleiraLivre();
@@ -153,6 +168,11 @@ public class ArmazemFacade implements IArmazemFacade {
         this.paletes.movePalete(id, to);
     }
 
+    /**
+     * Método que procura uma palete livre.
+     *
+     * @return uma prateleira livre
+     */
     public int getPrateleiraLivre(){
         int result = -1;
         for (Prateleira prateleira : this.prateleiras.values()) {
@@ -165,15 +185,27 @@ public class ArmazemFacade implements IArmazemFacade {
         return result;
     }
 
-    @Override
-    public boolean passwordCerta(String username, String password) {
-        Gestor g = procuraGestor(username);
-        return !g.getPassword().equals(password);
-    }
-
+    /**
+     * Método que devolve todas as prateleiras.
+     *
+     * @return Collection de todas as prateleiras
+     */
     @Override
     public Collection<Prateleira> getPrateleiras() {
         return new ArrayList<>(this.prateleiras.values());
     }
 
+    //LOGIN
+    /**
+     * Método que verifica a validade de uma password.
+     *
+     * @param username do utilizador
+     * @param password do utilizador
+     * @return true se a password for correta
+     */
+    @Override
+    public boolean passwordCerta(String username, String password) {
+        Gestor g = procuraGestor(username);
+        return !g.getPassword().equals(password);
+    }
 }

@@ -19,9 +19,6 @@ public interface IArmazemFacade{
     void adicionaRobot();
     String getAllRobots();
     void removeRobot(int id);
-    void alteraRobot(int id, Boolean estado);
-    void registaRobot(int id, Boolean estado);
-    void registaGestor(String userName, String password,String nome, String email);
     void alteraGestor (String userName,String password, String nome, String email);
     Collection<Gestor> getGestores();
     boolean existeGestor(String username);
