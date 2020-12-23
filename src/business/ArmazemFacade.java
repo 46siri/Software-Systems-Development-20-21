@@ -1,10 +1,12 @@
 package business;
 
+
 import business.gArmazem.Palete;
 import business.gArmazem.Prateleira;
 import business.gConta.Gestor;
 import business.gConta.Robot;
 import data.*;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -15,27 +17,22 @@ public class ArmazemFacade implements IArmazemFacade {
     private Map<String, Robot> robots;
     private Map<String, Gestor> gestores;
     private Map<String, Palete> paletes;
-    private Map<String, Prateleira> prateleiras;
-
 
     public ArmazemFacade(){
         this.robots = RobotDAO.getInstance();
         this.gestores = GestorDAO.getInstance();
         this.paletes = PaleteDAO.getInstance();
-        this.prateleiras = (Map<String, Prateleira>) PrateleiraDAO.getInstance();
     }
+    //ROBOTS
     /**
      * Método que devolve todos os robots registados.
      *
      * @return todos os robots registados
-     * @param id
      */
     @Override
-    public Collection<Robot> getRobots(String id) {
+    public Collection<Robot> getRobots() {
         return new ArrayList<>(this.robots.values());
     }
-    //ROBOTS
-
 
     /**
      * @param rid id do robot a procurar
@@ -44,41 +41,36 @@ public class ArmazemFacade implements IArmazemFacade {
     @Override
     public boolean existeRobot(String rid){return robots.containsKey(rid);}
 
-
     /**
      * @param r robot a dicionar
      */
     public void adicionaRobot(Robot r){this.robots.put(r.getId(),r);}
 
-    /**
-     * Método que remove um robot do armazem
-     *
-     * @param rid id do robot
-     */
     @Override
     public void removeRobot(String rid) {
-        Robot r = this.robots.get(rid);
-        r.removeRobot(rid);
-        this.robots.put(rid, r);  // Necessário fazer put para actualizar a BD.
-    }
 
-    /**
-     * Método que altera um robot do armazem
-     *
-     * @param rid id do robot
-     */
-    @Override
-    public void alteraRobot (String rid, Boolean estado){
-        Robot r = new Robot(rid, estado);
-        this.robots.put(rid,r);
     }
 
     @Override
-    public void registaRobot(String rid, Boolean estado)throws SQLException, ClassNotFoundException{
-        Robot r;
-        r = new Robot(rid, estado);
-        this.robots.put(rid, r);
+    public void alteraRobot(String rid, Boolean estado) {
+
     }
+
+    @Override
+    public void registaRobot(String rid, Boolean estado) {
+
+    }
+
+    @Override
+    public Collection<Gestor> getGestores(String userName) {
+        return null;
+    }
+
+    @Override
+    public void registaGestor(String userName, String password, String nome, String email) {
+
+    }
+
 
     //GESTOR
 
@@ -88,7 +80,7 @@ public class ArmazemFacade implements IArmazemFacade {
      * @return todos os gestores registados
      */
     @Override
-    public Collection<Gestor> getGestores(String userName) {
+    public Collection<Gestor> getGestores() {
         return new ArrayList<>(this.gestores.values());
     }
 
@@ -111,20 +103,7 @@ public class ArmazemFacade implements IArmazemFacade {
      */
     @Override
     public Gestor procuraGestor(String username) { return this.gestores.get(username); }
-    /**
-     * Método para registar um gestor no sistema.
-     * @param nome Nome do gestor.
-     * @param userName user name do gestor.
-     * @param email Email do gestor.
-     * @throws SQLException
-     * @throws ClassNotFoundException
-     */
-    @Override
-    public void registaGestor(String userName, String password,String nome, String email) throws SQLException, ClassNotFoundException{
-        Gestor g ;
-        g = new Gestor(userName, password, nome, email);
-        this.gestores.put(userName, g);
-    }
+
     /**
      * Método que remove um gestor do armazem
      *
@@ -141,7 +120,6 @@ public class ArmazemFacade implements IArmazemFacade {
      *
      * @param userName userName do gestor
      */
-    @Override
     public void alteraGestor (String userName,String password, String nome, String email){
         Gestor g = new Gestor(userName, password ,nome, email);
         this.gestores.put(userName,g);
@@ -175,7 +153,7 @@ public class ArmazemFacade implements IArmazemFacade {
     }
 
     @Override
-    public Collection<Prateleira> listarLocalizacoes() {
-        return new ArrayList<>(this.prateleiras.values());
+    public void listarLocalizacoes() {
+
     }
 }

@@ -15,13 +15,13 @@ public class Palete implements Comparable<Palete> {
      * Construtor com parâmetros para a classe Palete.
      * @param id Id da palete.
      * @param produto Produto que a palete contem.
-     * @param local
+     * @param localizacao
      **/
 
-    public Palete (String id, String produto, String local) {
+    public Palete (String id, String produto, int localizacao) {
         this.id = id;
         this.produto = produto;
-        this.localizacao.toLocalizacao(local);
+        this.localizacao.setId(localizacao);
     }
 
     //getters

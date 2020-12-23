@@ -19,7 +19,7 @@ import java.util.Scanner;
 public class TextUI {
 
     // model tem a 'lógica de negócio'.
-    private ArmazemFacade model;
+    private IArmazemFacade model;
 
     //menus da aplicação
     private Menu menu;
@@ -58,22 +58,13 @@ public class TextUI {
         Menu menu = new Menu(new String[]{
             "Operações sobre Robots",
             "Operações sobre Gestores",
-            "Descarga",
-            "Requisição"
+            "Descarga"
         });
-
-        // Registar pré-condições das transições
-        //menu.setPreCondition(4,()->this.model.haPrateleirasLivres());
-        //menu.setPreCondition(5,()->this.model.haPaletes() && this.model.haPrateleriasOcupadas);
-
 
         // Registar os handlers
         menu.setHandler(1,()->gestaoDeRobots());
         menu.setHandler(2,()->gestaoDeGestores());
         menu.setHandler(3,()->gestaoDeDescargas());
-        //menu.setHandler(4,()->gestaoDeRequisicoes());
-
-        // Falta handler para opção 2 - "Operações sobre Turmas"
 
         menu.run();
     }
@@ -102,7 +93,7 @@ public class TextUI {
             System.out.println("Id do Robot: ");
             String id = scin.nextLine();
             if (!this.model.existeRobot(id)){
-                this.model.adicionaRobot(new RobotManager(id,true));
+                this.model.adicionaRobot(new Robot(id,0));
                 System.out.println("Robot adicionado");
             } else {
                 System.out.println("Esse id de robot já existe!");
@@ -118,7 +109,8 @@ public class TextUI {
      */
     private void listarRobots() {
         try {
-            System.out.println(this.model.getRobots(id).toString());
+            ;
+            System.out.println(this.model.getRobots().toString());
         }
         catch (NullPointerException e) {
             System.out.println(e.getMessage());
@@ -171,12 +163,12 @@ public class TextUI {
                 System.out.println("Username: ");
                 String username = scin.nextLine();
                 if (!this.model.existeGestor(username)) {
+                    System.out.println("Password: ");
+                    String password = scin.nextLine();
                     System.out.println("Nome pŕopiro: ");
                     String nome = scin.nextLine();
                     System.out.println("email: ");
                     String email = scin.nextLine();
-                    System.out.println("Password: ");
-                    String password = scin.nextLine();
                     this.model.adicionaGestor(new Gestor(username, password,nome,email));
                     System.out.println("Gestor adicionado");
                     i=1;
@@ -258,10 +250,7 @@ public class TextUI {
             if (!this.model.existePalete(id)) {
                 System.out.println("Produto da palete: ");
                 String produto = scin.nextLine();
-                char z = 'A';
-                char s = '0';
-                char p = '0';
-                this.model.adicionaPalete(new Palete(id, produto, "A00"));
+                this.model.adicionaPalete(new Palete(id, produto,0));
                 System.out.println("Palete adicionada e colocada a armazenar");
                 this.model.armazenarPalete(id);
             } else {

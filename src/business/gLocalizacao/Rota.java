@@ -8,7 +8,7 @@ public class Rota implements Comparable<Rota> {
     Rota(Localizacao current) {
         this.current = current;
         this.previous = null;
-        this.value = 0d;
+        this.value = 0;
     }
 
     Rota(Localizacao current, Rota previous, double value) {

@@ -9,7 +9,7 @@ public class Prateleira{
 
    public Prateleira(String num, String local, Boolean estado) {
        this.num = num;
-       this.localizacao.toLocalizacao(local);
+       //this.localizacao.toLocalizacao(local);
        this.estadoLivre = estado;
    }
 
