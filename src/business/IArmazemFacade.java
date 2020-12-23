@@ -15,26 +15,22 @@ import java.util.Collection;
  */
 public interface IArmazemFacade{
     Collection<Robot> getRobots();
-
-    Collection<Robot> getRobots(String id);
-        boolean existeRobot(String rid);
-        void adicionaRobot(Robot r);
-        void removeRobot(String rid);
-        void alteraRobot(String rid, Boolean estado);
-        void registaRobot(String rid, Boolean estado);
-        Collection<Gestor> getGestores(String userName);
-        void registaGestor(String userName, String password,String nome, String email);
-        void alteraGestor (String userName,String password, String nome, String email);
-
+    boolean existeRobot(String rid);
+    void adicionaRobot(Robot r);
+    void removeRobot(String rid);
+    void alteraRobot(String rid, Boolean estado);
+    void registaRobot(String rid, Boolean estado);
+    Collection<Gestor> getGestores(String userName);
+    void registaGestor(String userName, String password,String nome, String email);
+    void alteraGestor (String userName,String password, String nome, String email);
     Collection<Gestor> getGestores();
-
     boolean existeGestor(String username);
-        void adicionaGestor(Gestor g);
-        Gestor procuraGestor(String username);
-        void removeGestor(String username);
-        void adicionaPalete(Palete p);
-        boolean existePalete(String id);
-        void  armazenarPalete(String id);
-        boolean passwordCerta(String username, String password);
-        Collection<Prateleira> listarLocalizacoes();
+    void adicionaGestor(Gestor g);
+    Gestor procuraGestor(String username);
+    void removeGestor(String username);
+    void adicionaPalete(Palete p);
+    boolean existePalete(String id);
+    void  armazenarPalete(String id);
+    boolean passwordCerta(String username, String password);
+    Collection<Prateleira> listarLocalizacoes();
 }

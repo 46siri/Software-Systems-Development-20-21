@@ -12,8 +12,9 @@ public class PrateleiraDAO{
             String sql;
             sql = "CREATE TABLE IF NOT EXISTS prateleiras(" +
                     "Num varchar(45) DEFAULT NULL," +
-                    "Localizacao " +
-                    "Estado )";
+                    "Id_Localizacao int NOT NULL, " +
+                    "FOREIGN KEY (Id_Localizacao) REFERENCES localizacao(Id_Localizacao)" +
+                    "Estado bit not null)";
             stm.executeUpdate(sql);
         }catch (SQLException e){
             e.printStackTrace();

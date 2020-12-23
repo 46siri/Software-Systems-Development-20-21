@@ -17,14 +17,11 @@ public class ArmazemFacade implements IArmazemFacade {
     private Map<String, Robot> robots;
     private Map<String, Gestor> gestores;
     private Map<String, Palete> paletes;
-    private Map<String, Prateleira> prateleiras;
-
 
     public ArmazemFacade(){
         this.robots = RobotDAO.getInstance();
         this.gestores = GestorDAO.getInstance();
         this.paletes = PaleteDAO.getInstance();
-        this.prateleiras = (Map<String, Prateleira>) PrateleiraDAO.getInstance();
     }
     //ROBOTS
     /**
@@ -35,12 +32,6 @@ public class ArmazemFacade implements IArmazemFacade {
     @Override
     public Collection<Robot> getRobots() {
         return new ArrayList<>(this.robots.values());
-    }
-
-
-    @Override
-    public Collection<Robot> getRobots(String id) {
-        return null;
     }
 
     /**

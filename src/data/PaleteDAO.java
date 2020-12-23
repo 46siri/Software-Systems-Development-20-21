@@ -20,8 +20,10 @@ public class PaleteDAO implements Map<String, Palete> {
             String sql;
             sql = "CREATE TABLE IF NOT EXISTS paletes(" +
                     "Id varchar (10) NOT NULL PRIMARY KEY,"+
-                    "Produto varchar(45) DEFAULT NULL)" +
-                    "Localizacao varchar(10), foreign key(Localizacao) references localizacoes(Zona,Seccao,Prateleira))";
+                    "Produto varchar(45) DEFAULT NULL," +
+                    "Id_Localizacao int NOT NULL, " +
+                    "FOREIGN KEY (Id_Localizacao) REFERENCES localizacao(Id_Localizacao)" +
+                    ")";
             stm.executeUpdate(sql);
         }catch (SQLException e){
             e.printStackTrace();
