@@ -46,9 +46,9 @@ public class RobotManager {
         this.robotsDisponiveis.put(idRobot, this.robotsOcupados.remove(idRobot));
     }
 
-    public void escolheRobot (Localizacao to) {
+    public void escolheRobot (Localizacao to) throws InterruptedException {
         Rota best = null;
-        int robot;
+        int robot = -1;
         for (Integer integer : this.robotsDisponiveis.keySet()) {
             Rota novo = this.geradorRota.findBestRout(this.robotsDisponiveis.get(integer).getLocalizacao(), to);
             if (best == null || best.compareTo(novo) < 0) {
@@ -56,8 +56,10 @@ public class RobotManager {
                 robot = this.robotsDisponiveis.get(integer).getId();
             }
         }
-        this.geradorRota.getTrajeto(best);
-        // falta dar este trajeto ao robot e ele executar o trajeto
+        // dar este trajeto ao robot e ele executar o trajeto
+        if(robot > -1) {
+            this.robotsDisponiveis.get(robot).deslocacao(this.geradorRota.getTrajeto(best));
+        }
     }
 
     //alterar localização da palete - em robot
