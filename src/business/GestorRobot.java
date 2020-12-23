@@ -1,9 +1,7 @@
 package business;
 
 import business.gConta.Robot;
-import business.gLocalizacao.GeradorRota;
-import business.gLocalizacao.Mapa;
-import business.gLocalizacao.Rota;
+import business.gLocalizacao.*;
 import data.RobotDAO;
 
 import java.util.*;
@@ -15,7 +13,7 @@ public class GestorRobot {
     private GeradorRota geradorRota;
 
     public GestorRobot(Mapa mapa) {
-        this.robotsOcupados = RobotDAO.getInstance();
+        this.robotsOcupados = new HashMap<>();
         this.robotsDisponiveis = new HashMap<>();
         geradorRota = new GeradorRota(mapa);
     }

@@ -50,6 +50,12 @@ public class Palete implements Comparable<Palete> {
      */
     private void setProduto(String produto){this.produto = produto;}
 
+    /**
+     * Método set para a localizacao da palete.
+     * @param localizacao da palete.
+     */
+    private void setLocalizacao(int localizacao){this.localizacao = localizacao;}
+
     @Override
     public int compareTo(Palete p) { return this.id.compareTo(p.getId());}
 

@@ -124,7 +124,7 @@ public class ArmazemFacade implements IArmazemFacade {
         this.gestores.put(userName,g);
     }
 
-
+    // Paletes
     /**
      * @param p palete a dicionar
      */
