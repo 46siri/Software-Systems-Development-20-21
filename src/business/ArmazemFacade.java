@@ -11,21 +11,27 @@ import data.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.Map;
 
 public class ArmazemFacade implements IArmazemFacade {
 
     private GestorRobot robots;
     private Map<String, Gestor> gestores;
-    private Map<String, Palete> paletes;
+    private GestorPaletes paletes;
     private Collection<String> lstGestores;
     private Map<String, Prateleira> prateleiras;
 
     public ArmazemFacade(){
         this.robots = new GestorRobot(new Mapa());
         this.gestores = GestorDAO.getInstance();
-        this.paletes = PaleteDAO.getInstance();
+        this.paletes = new GestorPaletes();
         this.prateleiras = PrateleiraDAO.getInstance();
+    }
+
+    @Override
+    public void closeSystem(){
+        robots.desativaRobots();
     }
     //ROBOTS
     /**
@@ -132,18 +138,34 @@ public class ArmazemFacade implements IArmazemFacade {
      * @param p palete a dicionar
      */
     @Override
-    public void adicionaPalete(Palete p){this.paletes.put(p.getId(),p);}
+    public void adicionaPalete(Palete p){this.paletes.adicionaPalete(p);}
 
     /**
      * @param id username da palete a procurar
      * @return true se a palete existe
      */
     @Override
-    public boolean existePalete(String id){return this.paletes.containsKey(id);}
+    public boolean existePalete(String id){return this.paletes.existePalete(id);}
 
     @Override
-    public void  armazenarPalete(String id){
+    public void armazenarPalete(String id){
+        int to = this.getPrateleiraLivre();
+        int from = this.paletes.getLocalizacaoPalete(id);
+        int robot = this.robots.escolheRobot(from);
+        this.robots.tranportaPatele(from, to, robot);
+        this.paletes.movePalete(id, to);
+    }
 
+    public int getPrateleiraLivre(){
+        int result = -1;
+        for (Prateleira prateleira : this.prateleiras.values()) {
+            if(prateleira.getEstado()){
+                prateleira.setEstadoLivre(false);
+                result = prateleira.getLocalizacao();
+                break;
+            }
+        }
+        return result;
     }
 
     @Override
@@ -153,7 +175,16 @@ public class ArmazemFacade implements IArmazemFacade {
     }
 
     @Override
-    public void listarLocalizacoes() {
+    public Collection<Prateleira> getPrateleiras() {
+        return new ArrayList<>(this.prateleiras.values());
+    }
 
+    @Override
+    public void listarLocalizacoes() {
+        for(Prateleira p : getPrateleiras()){
+            if(p.getEstado()){
+                System.out.println(p);
+            }
+        }
     }
 }

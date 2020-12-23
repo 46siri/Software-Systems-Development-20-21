@@ -14,6 +14,7 @@ import java.util.Collection;
  * @version 202012
  */
 public interface IArmazemFacade{
+    void closeSystem();
     Collection<Robot> getRobots();
     void adicionaRobot();
     String getAllRobots();
@@ -32,4 +33,5 @@ public interface IArmazemFacade{
     void  armazenarPalete(String id);
     boolean passwordCerta(String username, String password);
     void listarLocalizacoes();
+    Collection<Prateleira> getPrateleiras();
 }

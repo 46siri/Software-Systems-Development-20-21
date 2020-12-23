@@ -14,8 +14,12 @@ public class GestorRobot {
 
     public GestorRobot(Mapa mapa) {
         this.robotsOcupados = new HashMap<>();
-        this.robotsDisponiveis = new HashMap<>();
+        this.robotsDisponiveis = RobotDAO.getInstance();
         geradorRota = new GeradorRota(mapa);
+    }
+
+    public void desativaRobots() {
+        this.robotsDisponiveis.putAll(this.robotsOcupados);
     }
 
     public Collection<Robot> getRobots() {
@@ -71,7 +75,7 @@ public class GestorRobot {
     }
 
     // Escolhe o robot mais perto de uma localizacao e envia-o para essa localizacao
-    public boolean escolheRobot (int to) {
+    public int escolheRobot (int to) {
         Rota best = null;
         int robot = -1;
         for (Integer integer : this.robotsDisponiveis.keySet()) {
@@ -84,22 +88,12 @@ public class GestorRobot {
         // dar este trajeto ao robot e ele executar o trajeto
         if(robot > -1) {
             this.robotsDisponiveis.get(robot).deslocacao(this.geradorRota.getTrajeto(best));
-            return true;
         }
-        return false;
+        return robot;
     }
 
-    //alterar localização da palete - em robot
-    public void notificaRecolha(){
-
-    }
-
-    //alterar localização da palete - em preteleira
-    public void notificaEntrega(){
-
-    }
-
-    private void getRobot(int id_robot) {
-
+    public void tranportaPatele (int from, int to, int robot) {
+        Rota rota = this.geradorRota.findBestRout(from, to);
+        this.robotsDisponiveis.get(robot).deslocacao(this.geradorRota.getTrajeto(rota));
     }
 }

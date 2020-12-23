@@ -14,4 +14,16 @@ public class Prateleira{
    public String getNum(){return num;}
    public int getLocalizacao(){return localizacao;}
    public boolean getEstado(){return estadoLivre;}
+
+    public void setNum(String num) {
+        this.num = num;
+    }
+
+    public void setLocalizacao(int localizacao) {
+        this.localizacao = localizacao;
+    }
+
+    public void setEstadoLivre(boolean estadoLivre) {
+        this.estadoLivre = estadoLivre;
+    }
 }

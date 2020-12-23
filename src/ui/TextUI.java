@@ -34,7 +34,7 @@ public class TextUI {
      * Cria os menus e a camada de negócio.
      */
 
-    public TextUI() throws SQLException {
+    public TextUI() {
         this.model = new ArmazemFacade();
         scin = new Scanner(System.in);
     }
@@ -47,6 +47,7 @@ public class TextUI {
         System.out.println("Bem vindo ao Sistema e estão do Armazém!");
         this.menuPrincipal();
         System.out.println("Até breve :P");
+        this.model.closeSystem();
     }
 
     //métodos auxiliares - Estados da UI
@@ -63,9 +64,9 @@ public class TextUI {
         });
 
         // Registar os handlers
-        menu.setHandler(1,()->gestaoDeRobots());
-        menu.setHandler(2,()->gestaoDeGestores());
-        menu.setHandler(3,()->gestaoDeDescargas());
+        menu.setHandler(1, this::gestaoDeRobots);
+        menu.setHandler(2, this::gestaoDeGestores);
+        menu.setHandler(3, this::gestaoDeDescargas);
 
         menu.run();
     }
@@ -80,9 +81,9 @@ public class TextUI {
                 "Remover Robot"
         });
 
-        menu.setHandler(1,()->adicionarRobot());
-        menu.setHandler(2,()->listarRobots());
-        menu.setHandler(3,()->removerRobot());
+        menu.setHandler(1, this::adicionarRobot);
+        menu.setHandler(2, this::listarRobots);
+        menu.setHandler(3, this::removerRobot);
         menu.run();
     }
 
@@ -104,7 +105,6 @@ public class TextUI {
      */
     private void listarRobots() {
         try {
-            ;
             System.out.println(this.model.getRobots().toString());
         }
         catch (NullPointerException e) {
@@ -137,10 +137,10 @@ public class TextUI {
                 "Remover Gestor"
         });
 
-        menu.setHandler(1,()->adicionarGestor());
-        menu.setHandler(2,()->consultarGestor());
-        menu.setHandler(3,()->listarGestores());
-        menu.setHandler(4,()->removerGestor());
+        menu.setHandler(1, this::adicionarGestor);
+        menu.setHandler(2, this::consultarGestor);
+        menu.setHandler(3, this::listarGestores);
+        menu.setHandler(4, this::removerGestor);
 
         menu.run();
     }
@@ -226,8 +226,8 @@ public class TextUI {
         });
 
         // Registar os handlers
-        menu.setHandler(1, () -> adicionarPalete());
-        menu.setHandler(2, () -> consultarLstLocalizacoes());
+        menu.setHandler(1, this::adicionarPalete);
+        menu.setHandler(2, this::consultarLstLocalizacoes);
         menu.run();
     }
 
