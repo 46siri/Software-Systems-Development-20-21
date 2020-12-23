@@ -116,6 +116,7 @@ public class ArmazemFacade implements IArmazemFacade {
         this.gestores.put(username, g);  // Necessário fazer put para actualizar a BD.
     }
 
+
     /**
      * Método que altera um gestor do armazem
      *
