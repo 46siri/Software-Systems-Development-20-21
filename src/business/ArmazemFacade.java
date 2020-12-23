@@ -36,23 +36,28 @@ public class ArmazemFacade implements IArmazemFacade {
         return this.robots.getRobots();
     }
 
+    @Override
+    public String getAllRobots() {
+        return this.robots.getRobots().toString();
+    }
+
     /**
-     * @param r robot a dicionar
+     *  cria robot e diciona
      */
     public void adicionaRobot(){this.robots.addRobot();}
 
     @Override
-    public void removeRobot(String rid) {
+    public void removeRobot(int id) {
+        this.robots.removeRobot(id);
+    }
+
+    @Override
+    public void alteraRobot(int id, Boolean estado) {
 
     }
 
     @Override
-    public void alteraRobot(String rid, Boolean estado) {
-
-    }
-
-    @Override
-    public void registaRobot(String rid, Boolean estado) {
+    public void registaRobot(int id, Boolean estado) {
 
     }
 

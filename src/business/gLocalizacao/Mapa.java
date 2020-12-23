@@ -7,12 +7,16 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Mapa {
-    private final Set<Integer> nodes;
-    private final Map<Integer, Map<Integer, Double>> connections; // Map<ID do node origem, Map<ID do node destino, preço>>
+    private Set<Integer> nodes;
+    private Map<Integer, Map<Integer, Double>> connections; // Map<ID do node origem, Map<ID do node destino, preço>>
 
     public Mapa(Set<Integer> nodes, Map<Integer, Map<Integer, Double>> connections) {
         this.nodes = nodes;
         this.connections = connections;
+    }
+
+    public Mapa() {
+
     }
 
     public int getNode(int id) {

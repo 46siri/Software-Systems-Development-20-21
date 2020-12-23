@@ -16,9 +16,10 @@ import java.util.Collection;
 public interface IArmazemFacade{
     Collection<Robot> getRobots();
     void adicionaRobot();
-    void removeRobot(String rid);
-    void alteraRobot(String rid, Boolean estado);
-    void registaRobot(String rid, Boolean estado);
+    String getAllRobots();
+    void removeRobot(int id);
+    void alteraRobot(int id, Boolean estado);
+    void registaRobot(int id, Boolean estado);
     void registaGestor(String userName, String password,String nome, String email);
     void alteraGestor (String userName,String password, String nome, String email);
     Collection<Gestor> getGestores();
