@@ -123,7 +123,7 @@ public class PaleteDAO implements Map<String, Palete> {
              Statement stm = conn.createStatement();
              ResultSet rs = stm.executeQuery("SELECT * FROM paletes WHERE Id='"+key+"'")) {
             if (rs.next()) {  // A chave existe na tabela
-                p = new Palete(rs.getString("Id"), rs.getString("Produto"), rs.getInt("Localizacao"));
+                p = new Palete(rs.getString("Id"), rs.getString("Produto"), rs.getInt("Id_Localizacao"));
             }
         } catch (SQLException e) {
             // Database error!

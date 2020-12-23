@@ -32,6 +32,5 @@ public interface IArmazemFacade{
     boolean existePalete(String id);
     void  armazenarPalete(String id);
     boolean passwordCerta(String username, String password);
-    void listarLocalizacoes();
     Collection<Prateleira> getPrateleiras();
 }

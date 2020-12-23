@@ -19,7 +19,6 @@ public class ArmazemFacade implements IArmazemFacade {
     private GestorRobot robots;
     private Map<String, Gestor> gestores;
     private GestorPaletes paletes;
-    private Collection<String> lstGestores;
     private Map<String, Prateleira> prateleiras;
 
     public ArmazemFacade(){
@@ -99,7 +98,6 @@ public class ArmazemFacade implements IArmazemFacade {
     @Override
     public void adicionaGestor(Gestor g){
         this.gestores.put(g.getUserName(),g);
-        this.lstGestores.add(g.getUserName());
     }
 
     /**
@@ -118,7 +116,6 @@ public class ArmazemFacade implements IArmazemFacade {
     @Override
     public void removeGestor(String username) {
         Gestor g = this.gestores.get(username);
-        this.lstGestores.remove(username);
         this.gestores.put(username, g);  // Necessário fazer put para actualizar a BD.
     }
 
@@ -179,12 +176,4 @@ public class ArmazemFacade implements IArmazemFacade {
         return new ArrayList<>(this.prateleiras.values());
     }
 
-    @Override
-    public void listarLocalizacoes() {
-        for(Prateleira p : getPrateleiras()){
-            if(p.getEstado()){
-                System.out.println(p);
-            }
-        }
-    }
 }

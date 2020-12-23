@@ -43,10 +43,11 @@ public class GestorRobot {
         Robot robot = new Robot(freeKey(ids),localizacao, this.geradorRota.getMapa());
         this.robotsDisponiveis.put(robot.getId(), robot);
     }
+
     public void addRobot() {
         Set<Integer> ids = this.robotsDisponiveis.keySet();
         ids.addAll(this.robotsOcupados.keySet());
-        Robot robot = new Robot(freeKey(ids), geradorRota.getMapa().getNode(0) , this.geradorRota.getMapa());
+        Robot robot = new Robot(freeKey(ids), 0 , this.geradorRota.getMapa());
         this.robotsDisponiveis.put(robot.getId(), robot);
     }
 

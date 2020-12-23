@@ -2,6 +2,7 @@ package ui;
 
 import business.*;
 import business.gArmazem.Palete;
+import business.gArmazem.Prateleira;
 import business.gConta.Gestor;
 import business.gConta.Robot;
 import business.gLocalizacao.Mapa;
@@ -67,7 +68,6 @@ public class TextUI {
         menu.setHandler(1, this::gestaoDeRobots);
         menu.setHandler(2, this::gestaoDeGestores);
         menu.setHandler(3, this::gestaoDeDescargas);
-
         menu.run();
     }
 
@@ -253,7 +253,7 @@ public class TextUI {
         }
     }
 
-    /**
+    /**System.out.println("Password: ");
      *  Estado - Consultar Gestor
      */
     private void consultarLstLocalizacoes() {
@@ -264,12 +264,17 @@ public class TextUI {
             if (this.model.existeGestor(username)) {
                 int i=1;
                 while(i==1) {
-                    System.out.println("Password: ");
+
                     String password = scin.nextLine();
                     if (this.model.passwordCerta(username,password)) {
-                        this.model.listarLocalizacoes();
+                        System.out.println("Prateleiras vazias: ");
+                        for(Prateleira p : model.getPrateleiras()) {
+                            if (p.getEstado()) {
+                                System.out.println(p);
+                            }
+                        }
                         i = 0;
-                    } else {
+                    }else {
                         System.out.println("Password errada");
                     }
                 }

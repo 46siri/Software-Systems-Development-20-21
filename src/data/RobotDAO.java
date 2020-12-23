@@ -4,10 +4,7 @@ import business.gConta.Robot;
 import business.gLocalizacao.Mapa;
 
 import java.sql.*;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class RobotDAO implements Map<Integer, Robot> {
 
@@ -18,9 +15,8 @@ public class RobotDAO implements Map<Integer, Robot> {
             Statement stm = conn.createStatement()) {
             String sql;
             sql = "CREATE TABLE IF NOT EXISTS robots(" +
-                    "Id varchar (10) NOT NULL PRIMARY KEY,"+
-                    "Id_Localizacao int NOT NULL," +
-                    "FOREIGN KEY (Id_Localizacao) REFERENCES localizacao(Id)" +
+                    "Id int NOT NULL PRIMARY KEY,"+
+                    "Id_Localizacao int NOT NULL" +
                     ")";
             stm.executeUpdate(sql);
         }catch (SQLException e){
@@ -118,7 +114,7 @@ public class RobotDAO implements Map<Integer, Robot> {
              Statement stm = conn.createStatement();
              ResultSet rs = stm.executeQuery("SELECT * FROM robots WHERE Id='"+key+"'")) {
             if (rs.next()) {  // A chave existe na tabela
-                r = new Robot(rs.getInt("Id"), rs.getInt("Localizacao"),new Mapa());
+                r = new Robot(rs.getInt("Id"), rs.getInt("Id_Localizacao"),new Mapa());
             }
         } catch (SQLException e) {
             // Database error!
@@ -207,7 +203,8 @@ public class RobotDAO implements Map<Integer, Robot> {
 
     @Override
     public Set<Integer> keySet() {
-        throw new NullPointerException("Not implemented!");
+        HashMap<Integer, Robot> i = new HashMap<>(RobotDAO.getInstance());
+        return i.keySet();
     }
 
     /**
@@ -220,7 +217,7 @@ public class RobotDAO implements Map<Integer, Robot> {
             Statement stm = conn.createStatement();
             ResultSet rs = stm.executeQuery("SELECT Id FROM robots")) {
             while (rs.next()) {   // Utilizamos o get para construir as robots
-                col.add(this.get(rs.getString("Num")));
+                col.add(this.get(rs.getInt("Id")));
             }
         } catch (Exception e) {
             // Database error!
@@ -232,6 +229,6 @@ public class RobotDAO implements Map<Integer, Robot> {
 
     @Override
     public Set<Entry<Integer, Robot>> entrySet() {
-        throw new NullPointerException("public Set<Map.Entry<String,Robot>> entrySet() not implemented!");
-    }}
-
+        throw new NullPointerException("entrySet() not found");
+    }
+}
