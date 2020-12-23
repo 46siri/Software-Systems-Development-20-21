@@ -8,15 +8,22 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * Versão incompleta de um DAO para Gestor
+ *
+ * Tabelas a criar na BD: ver método getInstance
+ *
+ * @author Grupo0
+ * @version 202012
+ */
 public class GestorDAO implements Map<String, Gestor> {
     private static GestorDAO singleton = null;
 
     private GestorDAO(){
         try(Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
             Statement stm = conn.createStatement()) {
-            String sql;
-            sql = "CREATE TABLE IF NOT EXISTS gestores(" +
-                    "Username varchar (10) NOT NULL PRIMARY KEY,"+
+            String sql= "CREATE TABLE IF NOT EXISTS gestores (" +
+                    "Username varchar (45) NOT NULL PRIMARY KEY," + 
                     "Password varchar(45) DEFAULT NULL," +
                     "Nome varchar(45) DEFAULT NULL," +
                     "Email varchar(45) DEFAULT NULL)";
@@ -71,9 +78,9 @@ public class GestorDAO implements Map<String, Gestor> {
     }
 
     /**
-     * Método que cerifica se um user de gestor existe na base de dados
+     * Método que cerifica se um Username de gestor existe na base de dados
      *
-     * @param key user do Gestor
+     * @param key Username do Gestor
      * @return true se o Gestor existe
      * @throws NullPointerException Em caso de erro - deveriam ser criadas exepções do projecto
      */
@@ -83,7 +90,7 @@ public class GestorDAO implements Map<String, Gestor> {
         try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
              Statement stm = conn.createStatement();
              ResultSet rs =
-                     stm.executeQuery("SELECT user FROM gestores WHERE user='"+key.toString()+"'")) {
+                     stm.executeQuery("SELECT Username FROM gestores WHERE Username='"+key.toString()+"'")) {
             r = rs.next();
         } catch (SQLException e) {
             // Database error!
@@ -96,7 +103,7 @@ public class GestorDAO implements Map<String, Gestor> {
     /**
      * Verifica se uma Gestor existe na base de dados
      *
-     * @param value user da Gestor
+     * @param value Username da Gestor
      * @return true se Gestor existe
      * @throws NullPointerException Em caso de erro - deveriam ser criadas exepções do projecto
      */
@@ -107,9 +114,9 @@ public class GestorDAO implements Map<String, Gestor> {
     }
 
     /**
-     * Obter uma Gestor, dado o seu user
+     * Obter uma Gestor, dado o seu Username
      *
-     * @param key user da Gestor
+     * @param key Username da Gestor
      * @return o Gestor caso exista (null noutro caso)
      * @throws NullPointerException Em caso de erro - deveriam ser criadas exepções do projecto
      */
@@ -133,21 +140,21 @@ public class GestorDAO implements Map<String, Gestor> {
     /**
      * Insere uma Gestor na base de dados
      *
-     * ATENÇÂO: Falta devolver o valor existente (caso exista um)
+     * ATEN&Ccedil;&Acirc;O: Falta devolver o valor existente (caso exista um)
      *
-     * @param key o user da Gestor
+     * @param key o Username da Gestor
      * @param g a Gestor
      * @return devolve o valor existente, caso exista um
-     * @throws NullPointerException Em caso de erro - deveriam ser criadas exepções do projecto
+     * @throws NullPointerException Em caso de erro - deveriam ser criadas exep&ccedil;&otilde;es do projecto
      */
     @Override
     public Gestor put(String key, Gestor g) {
-        Gestor res = g;
+        Gestor res = null;
         try (Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
              Statement stm = conn.createStatement()) {
-            stm.executeUpdate(
-                    "INSERT INTO gestores VALUES ('"+g.getUserName()+"', '"+g.getPassword()+"', '"+g.getNome()+"','"+g.getEmail()+"' NULL) " +
-                            "ON DUPLICATE KEY UPDATE user=VALUES(user)");
+             stm.executeUpdate(
+                    "INSERT INTO gestores VALUES('"+g.getUserName()+"', '"+g.getPassword()+"', '"+g.getNome()+"','"+g.getEmail()+"') " +
+                            "ON DUPLICATE KEY UPDATE Password=VALUES(Password), Nome=VALUES(Nome), Email=VALUES(Email)");
         } catch (SQLException e) {
             // Database error!
             e.printStackTrace();
@@ -157,9 +164,9 @@ public class GestorDAO implements Map<String, Gestor> {
     }
 
     /**
-     * Remover uma Gestor, dado o seu user
+     * Remover uma Gestor, dado o seu Username
      *
-     * @param key user da Gestor a remover
+     * @param key Username da Gestor a remover
      * @return a Gestor removida
      * @throws NullPointerException Em caso de erro - deveriam ser criadas exepções do projecto
      */
@@ -220,9 +227,9 @@ public class GestorDAO implements Map<String, Gestor> {
         Collection<Gestor> col = new HashSet<>();
         try(Connection conn = DriverManager.getConnection(DAOconfig.URL, DAOconfig.USERNAME, DAOconfig.PASSWORD);
             Statement stm = conn.createStatement();
-            ResultSet rs = stm.executeQuery("SELECT user FROM gestores")) {
+            ResultSet rs = stm.executeQuery("SELECT Username FROM gestores")) {
             while (rs.next()) {   // Utilizamos o get para construir as gestores
-                col.add(this.get(rs.getString("Num")));
+                col.add(this.get(rs.getString("Username")));
             }
         } catch (Exception e) {
             // Database error!

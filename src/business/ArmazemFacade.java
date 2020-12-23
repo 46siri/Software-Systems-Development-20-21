@@ -153,7 +153,7 @@ public class ArmazemFacade implements IArmazemFacade {
     }
 
     @Override
-    public Collection<Prateleira> listarLocalizacoes() {
-        return new ArrayList<>(this.prateleiras.values());
+    public void listarLocalizacoes() {
+
     }
-    }
+}
