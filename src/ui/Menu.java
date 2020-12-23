@@ -10,7 +10,7 @@ import java.util.*;
  * @version (202012)
  */
 
-public class enu {
+public class Menu {
 
     //Interfaces auxiliares
 

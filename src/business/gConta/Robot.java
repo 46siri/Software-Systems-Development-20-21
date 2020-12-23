@@ -2,21 +2,23 @@ package business.gConta;
 
 import business.gLocalizacao.Localizacao;
 
-import java.time.LocalDate;
-import java.util.Collection;
-import java.util.TreeSet;
 /*implements Comparable<Robot>*/
 public class Robot {
-    private int id;
+    private String id;
     private Localizacao localizacao;
 
-    public Robot(int id, Localizacao localizacao){
+    public Robot(){
+        this.id = "";
+        this.localizacao = null;
+    }
+
+    public Robot(String id, Localizacao localizacao){
         this.id = id;
         this.localizacao = localizacao;
     }
 
-    public int getId() { return this.id; }
-    public void setId(int id) {
+    public String getId() { return this.id; }
+    public void setId(String id) {
         this.id = id;
     }
 

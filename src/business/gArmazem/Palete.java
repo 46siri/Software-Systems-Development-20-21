@@ -21,7 +21,7 @@ public class Palete implements Comparable<Palete> {
     public Palete (String id, String produto, String local) {
         this.id = id;
         this.produto = produto;
-        this.localizacao.toLocalizacao(local);
+       // this.localizacao = toLocalizacao(local);
     }
 
     //getters

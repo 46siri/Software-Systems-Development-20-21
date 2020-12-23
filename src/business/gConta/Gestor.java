@@ -16,7 +16,7 @@ public class Gestor implements Comparable<Gestor> {
     private Collection<String> lstGestores;
 
     /**
-     * Construtor sem parametros da class Funcionário
+     * Construtor sem parametros da class Gestor
      */
     public Gestor(){
         this.user = "";

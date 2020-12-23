@@ -14,7 +14,9 @@ import java.util.Collection;
  * @version 202012
  */
 public interface IArmazemFacade{
-        Collection<Robot> getRobots(String id);
+    Collection<Robot> getRobots();
+
+    Collection<Robot> getRobots(String id);
         boolean existeRobot(String rid);
         void adicionaRobot(Robot r);
         void removeRobot(String rid);
@@ -23,7 +25,10 @@ public interface IArmazemFacade{
         Collection<Gestor> getGestores(String userName);
         void registaGestor(String userName, String password,String nome, String email);
         void alteraGestor (String userName,String password, String nome, String email);
-        boolean existeGestor(String username);
+
+    Collection<Gestor> getGestores();
+
+    boolean existeGestor(String username);
         void adicionaGestor(Gestor g);
         Gestor procuraGestor(String username);
         void removeGestor(String username);

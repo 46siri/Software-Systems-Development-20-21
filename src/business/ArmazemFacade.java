@@ -38,6 +38,11 @@ public class ArmazemFacade implements IArmazemFacade {
     }
 
 
+    @Override
+    public Collection<Robot> getRobots(String id) {
+        return null;
+    }
+
     /**
      * @param rid id do robot a procurar
      * @return true se o robot existe
@@ -45,41 +50,36 @@ public class ArmazemFacade implements IArmazemFacade {
     @Override
     public boolean existeRobot(String rid){return robots.containsKey(rid);}
 
-
     /**
      * @param r robot a dicionar
      */
     public void adicionaRobot(Robot r){this.robots.put(r.getId(),r);}
 
-    /**
-     * Método que remove um robot do armazem
-     *
-     * @param rid id do robot
-     */
     @Override
     public void removeRobot(String rid) {
-        Robot r = this.robots.get(rid);
-        r.removeRobot(rid);
-        this.robots.put(rid, r);  // Necessário fazer put para actualizar a BD.
+
     }
 
+    @Override
+    public void alteraRobot(String rid, Boolean estado) {
 
-
-    /**
-     * Método que altera um robot do armazem
-     *
-     * @param rid id do robot
-     */
-    public void alteraRobot (String rid, Boolean estado){
-        Robot r = new Robot(rid, estado);
-        this.robots.put(rid,r);
     }
 
-    public void registaRobot(String rid, Boolean estado)throws SQLException, ClassNotFoundException{
-        Robot r;
-        r = new Robot(rid, estado);
-        this.robots.put(rid, r);
+    @Override
+    public void registaRobot(String rid, Boolean estado) {
+
     }
+
+    @Override
+    public Collection<Gestor> getGestores(String userName) {
+        return null;
+    }
+
+    @Override
+    public void registaGestor(String userName, String password, String nome, String email) {
+
+    }
+
 
     //GESTOR
 
@@ -112,19 +112,7 @@ public class ArmazemFacade implements IArmazemFacade {
      */
     @Override
     public Gestor procuraGestor(String username) { return this.gestores.get(username); }
-    /**
-     * Método para registar um gestor no sistema.
-     * @param nome Nome do gestor.
-     * @param userName user name do gestor.
-     * @param email Email do gestor.
-     * @throws SQLException
-     * @throws ClassNotFoundException
-     */
-    public void registaGestor(String userName,String nome, String email) throws SQLException, ClassNotFoundException{
-        Gestor g ;
-        g = new Gestor(userName, nome, email);
-        this.gestores.put(userName, g);
-    }
+
     /**
      * Método que remove um gestor do armazem
      *

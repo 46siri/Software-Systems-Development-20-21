@@ -102,7 +102,7 @@ public class TextUI {
             System.out.println("Id do Robot: ");
             String id = scin.nextLine();
             if (!this.model.existeRobot(id)){
-                this.model.adicionaRobot(new RobotManager(id,true));
+                this.model.adicionaRobot(new Robot());
                 System.out.println("Robot adicionado");
             } else {
                 System.out.println("Esse id de robot já existe!");
